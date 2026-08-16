@@ -1,0 +1,19 @@
+<aside class="c7ph-wizard-sidebar">
+  <header class="c7ph-wizard-brand">
+    <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+    <div>
+      <strong>{{localize 'GINZZZU_C7PH.Creation.Title'}}</strong>
+      <small>{{localize 'GINZZZU_C7PH.Creation.Subtitle'}}</small>
+    </div>
+  </header>
+  <nav class="c7ph-wizard-steps" aria-label="{{localize 'GINZZZU_C7PH.Creation.Navigation'}}">
+    {{#each steps}}
+      <button type="button" class="{{#if active}}is-active{{/if}} {{#if complete}}is-complete{{/if}}" data-action="setStep" data-creation-step="{{id}}" aria-current="{{#if active}}step{{else}}false{{/if}}" {{#if locked}}disabled{{/if}}>
+        <span class="c7ph-wizard-step-number">{{number}}</span>
+        <i class="{{icon}}" aria-hidden="true"></i>
+        <span>{{label}}</span>
+        {{#if complete}}<i class="fa-solid fa-check c7ph-wizard-step-check" aria-hidden="true"></i>{{/if}}
+      </button>
+    {{/each}}
+  </nav>
+</aside>

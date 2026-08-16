@@ -1,0 +1,91 @@
+<div class="c7ph-wizard-stage c7ph-age-stage">
+  <section class="c7ph-age-input-panel">
+    <div>
+      <strong>{{localize 'GINZZZU_C7PH.Creation.Age.Title'}}</strong>
+      <span>{{localize 'GINZZZU_C7PH.Creation.Age.Intro'}}</span>
+    </div>
+    <label>
+      <span>{{localize 'GINZZZU_C7PH.Creation.Age.InputLabel'}}</span>
+      <input type="number" min="{{ageMin}}" max="{{ageMax}}" value="{{age}}" data-age-input aria-label="{{localize 'GINZZZU_C7PH.Creation.Age.InputLabel'}}" />
+    </label>
+    {{#if ageHasPolicy}}
+      <div class="c7ph-age-band">
+        <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+        <span><small>{{localize 'GINZZZU_C7PH.Creation.Age.Group'}}</small><strong>{{ageBandLabel}}</strong></span>
+      </div>
+    {{/if}}
+  </section>
+
+  {{#if ageHasPolicy}}
+    <div class="c7ph-age-scroll">
+      {{#if agePolicy.educationChecks}}
+        <section class="c7ph-age-task-card c7ph-age-education-card {{#if ageEducationComplete}}is-complete{{/if}}">
+          <header>
+            <span class="c7ph-age-task-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+            <div><strong>{{localize 'GINZZZU_C7PH.Creation.Age.Education.Title'}}</strong><small>{{localize 'GINZZZU_C7PH.Creation.Age.Education.Required' count=ageEducationRequired}}</small></div>
+            <span class="c7ph-age-task-status">{{ageEducationAttempts.length}} / {{ageEducationRequired}}</span>
+          </header>
+          <p>{{localize 'GINZZZU_C7PH.Creation.Age.Education.Rule'}}</p>
+          {{#if ageEducationAttempts.length}}
+            <div class="c7ph-age-attempts">
+              {{#each ageEducationAttempts}}
+                <span class="{{#if success}}is-success{{else}}is-failure{{/if}}"><strong>{{index}}.</strong> {{localize 'GINZZZU_C7PH.Creation.Age.Education.Roll'}} {{roll}} — {{resultLabel}}{{#if success}} (+{{gain}}){{/if}}</span>
+              {{/each}}
+            </div>
+          {{/if}}
+          <button type="button" data-action="rollEducationImprovements" {{#unless ageCanRollEducation}}disabled{{/unless}}>
+            <i class="fa-solid fa-dice-d10" aria-hidden="true"></i>
+            <span>{{#if ageEducationComplete}}{{localize 'GINZZZU_C7PH.Creation.Age.Education.Complete'}}{{else}}{{localize 'GINZZZU_C7PH.Creation.Age.Education.RollRemaining' count=ageEducationRemaining}}{{/if}}</span>
+          </button>
+        </section>
+      {{/if}}
+
+      {{#if ageDeductionTotal}}
+        <section class="c7ph-age-task-card c7ph-age-deduction-card {{#unless ageDeductionRemaining}}is-complete{{/unless}}">
+          <header>
+            <span class="c7ph-age-task-icon"><i class="fa-solid fa-arrow-trend-down" aria-hidden="true"></i></span>
+            <div><strong>{{localize 'GINZZZU_C7PH.Creation.Age.Deduction.Title'}}</strong><small>{{localize 'GINZZZU_C7PH.Creation.Age.Deduction.From' names=ageDeductionFrom}}</small></div>
+            <span class="c7ph-age-task-status">{{ageDeductionUsed}} / {{ageDeductionTotal}}</span>
+          </header>
+          <p>{{localize 'GINZZZU_C7PH.Creation.Age.Deduction.Rule' total=ageDeductionTotal}}</p>
+          <div class="c7ph-age-deduction-progress"><span><b style="width: {{ageDeductionPercent}}%"></b></span><small>{{localize 'GINZZZU_C7PH.Creation.Age.Deduction.Remaining' count=ageDeductionRemaining}}</small></div>
+        </section>
+      {{/if}}
+
+      <div class="c7ph-age-adjustment-grid">
+        {{#each ageAdjustmentCards}}
+          <article class="c7ph-age-adjustment-card {{#if fixed}}is-fixed{{/if}} {{#if isDeduction}}is-variable{{/if}}">
+            <header><strong>{{label}}</strong>{{#if fixed}}<span><i class="fa-solid fa-lock" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Creation.Age.Fixed'}}</span>{{/if}}</header>
+            <div class="c7ph-age-value-line"><span>{{base}}</span><i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i><strong>{{finalValue}}</strong><small class="{{#if adjustment}}has-adjustment{{/if}}">{{adjustmentText}}</small></div>
+            {{#if isDeduction}}
+              <div class="c7ph-age-adjustment-controls" role="group" aria-label="{{label}}">
+                <button type="button" data-action="modifyAgeAdjustment" data-characteristic-key="{{key}}" data-by="-5" {{#unless canDeductFive}}disabled{{/unless}}>−5</button>
+                <button type="button" data-action="modifyAgeAdjustment" data-characteristic-key="{{key}}" data-by="-1" {{#unless canDeductOne}}disabled{{/unless}}>−1</button>
+                <button type="button" data-action="modifyAgeAdjustment" data-characteristic-key="{{key}}" data-by="1" {{#unless canRestoreOne}}disabled{{/unless}}>+1</button>
+                <button type="button" data-action="modifyAgeAdjustment" data-characteristic-key="{{key}}" data-by="5" {{#unless canRestoreFive}}disabled{{/unless}}>+5</button>
+              </div>
+            {{/if}}
+          </article>
+        {{/each}}
+      </div>
+
+      {{#if agePolicy.luckSecondRoll}}
+        <section class="c7ph-age-task-card c7ph-age-luck-card {{#if ageLuckHasSecondRoll}}is-complete{{/if}}">
+          <header>
+            <span class="c7ph-age-task-icon"><i class="fa-solid fa-clover" aria-hidden="true"></i></span>
+            <div><strong>{{localize 'GINZZZU_C7PH.Creation.Age.Luck.Title'}}</strong><small>{{localize 'GINZZZU_C7PH.Creation.Age.Luck.Rule'}}</small></div>
+            {{#if ageLuckHasSecondRoll}}<span class="c7ph-age-task-status"><i class="fa-solid fa-check" aria-hidden="true"></i></span>{{/if}}
+          </header>
+          <div class="c7ph-age-luck-values"><span>{{localize 'GINZZZU_C7PH.Creation.Age.Luck.First'}} <strong>{{ageLuckBase}}</strong></span><span>{{localize 'GINZZZU_C7PH.Creation.Age.Luck.Second'}} <strong>{{#if ageLuckHasSecondRoll}}{{ageLuckSecondRoll}}{{else}}—{{/if}}</strong></span><span>{{localize 'GINZZZU_C7PH.Creation.Age.Luck.Final'}} <strong>{{ageLuckFinal}}</strong></span></div>
+          <button type="button" data-action="rollSecondLuck" {{#unless ageCanRollLuck}}disabled{{/unless}}><i class="fa-solid fa-dice" aria-hidden="true"></i><span>{{#if ageLuckHasSecondRoll}}{{localize 'GINZZZU_C7PH.Creation.Age.Luck.Complete'}}{{else}}{{localize 'GINZZZU_C7PH.Creation.Age.Luck.Roll'}}{{/if}}</span></button>
+        </section>
+      {{/if}}
+
+      {{#if ageMovementPenalty}}
+        <div class="c7ph-wizard-notice"><i class="fa-solid fa-person-walking" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Creation.Age.MovementPenalty' count=ageMovementPenalty}}</span></div>
+      {{/if}}
+    </div>
+
+    <div class="c7ph-wizard-notice {{#if ageComplete}}is-success{{/if}}"><i class="fa-solid {{#if ageComplete}}fa-circle-check{{else}}fa-circle-info{{/if}}" aria-hidden="true"></i><span>{{#if ageComplete}}{{localize 'GINZZZU_C7PH.Creation.Age.Complete'}}{{else}}{{localize 'GINZZZU_C7PH.Creation.Age.Incomplete'}}{{/if}}</span></div>
+  {{/if}}
+</div>

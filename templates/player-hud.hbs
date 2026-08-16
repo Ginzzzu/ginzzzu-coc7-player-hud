@@ -1,0 +1,1046 @@
+<div class="c7ph-shell is-compact {{#if hasActor}}has-actor{{/if}} {{#if hasActiveSection}}has-shelf{{/if}}">
+  <header class="c7ph-command-bar">
+    <button
+      type="button"
+      class="c7ph-identity"
+      data-action="{{#if hasActor}}openActorSheet{{else}}openInvestigatorWizard{{/if}}"
+      title="{{#if hasActor}}{{actor.openTitle}}{{else}}{{createInvestigatorTitle}}{{/if}}"
+      aria-label="{{#if hasActor}}{{actor.openTitle}}{{else}}{{createInvestigatorTitle}}{{/if}}"
+    >
+      {{#if hasActor}}
+        <img class="c7ph-portrait" src="{{actor.img}}" alt="{{actor.name}}" />
+        <span class="c7ph-identity-copy">
+          <span class="c7ph-identity-name">
+            <strong>{{actor.name}}</strong>
+            {{#each actor.statuses}}
+              <i class="c7ph-status {{icon}}" title="{{label}}" aria-label="{{label}}"></i>
+            {{/each}}
+          </span>
+        </span>
+      {{else}}
+        <span class="c7ph-identity-icon" aria-hidden="true">
+          <i class="fa-solid fa-user-slash"></i>
+        </span>
+        <span class="c7ph-identity-copy">
+          <strong>{{actorStateTitle}}</strong>
+          <small>{{createInvestigatorTitle}}</small>
+        </span>
+      {{/if}}
+    </button>
+
+    {{#if hasActor}}
+      <div class="c7ph-vitals" aria-label="{{localize 'GINZZZU_C7PH.Vitals.Label'}}">
+        {{#each vitals}}
+          {{#if adjustable}}
+            <div class="c7ph-vital c7ph-vital-adjustable {{stateClass}}">
+              <button
+                type="button"
+                class="c7ph-vital-roll"
+                data-action="{{rollAction}}"
+                data-attribute="{{rollKey}}"
+                data-characteristic="{{characteristicKey}}"
+                title="{{tooltip}}"
+                aria-label="{{tooltip}}"
+              >
+                <span>{{label}}</span>
+                <strong>
+                  {{value}}{{#if hasMax}}<small>/{{max}}</small>{{/if}}
+                </strong>
+              </button>
+              <span class="c7ph-vital-stepper">
+                <button
+                  type="button"
+                  class="c7ph-vital-adjust"
+                  data-action="{{adjustAction}}"
+                  data-direction="1"
+                  title="{{increaseTitle}}"
+                  aria-label="{{increaseTitle}}"
+                  {{#unless canIncrease}}disabled{{/unless}}
+                >
+                  <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+                </button>
+                <button
+                  type="button"
+                  class="c7ph-vital-adjust"
+                  data-action="{{adjustAction}}"
+                  data-direction="-1"
+                  title="{{decreaseTitle}}"
+                  aria-label="{{decreaseTitle}}"
+                  {{#unless canDecrease}}disabled{{/unless}}
+                >
+                  <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                </button>
+              </span>
+            </div>
+          {{else if checkable}}
+            <button
+              type="button"
+              class="c7ph-vital {{stateClass}}"
+              data-action="{{rollAction}}"
+              data-attribute="{{rollKey}}"
+              data-characteristic="{{characteristicKey}}"
+              title="{{tooltip}}"
+              aria-label="{{tooltip}}"
+            >
+              <span>{{label}}</span>
+              <strong>
+                {{value}}{{#if hasMax}}<small>/{{max}}</small>{{/if}}
+              </strong>
+            </button>
+          {{else}}
+            <div class="c7ph-vital {{stateClass}}" title="{{tooltip}}">
+              <span>{{label}}</span>
+              <strong>
+                {{value}}{{#if hasMax}}<small>/{{max}}</small>{{/if}}
+              </strong>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/if}}
+
+    <nav class="c7ph-main-nav" aria-label="{{localize 'GINZZZU_C7PH.App.Navigation'}}">
+        {{#each navigation}}
+          <button
+            type="button"
+            class="{{#if active}}is-active{{/if}} {{#if hasActiveConditions}}c7ph-condition-nav has-active-conditions{{/if}} {{#if requestAttention}}has-request-attention{{/if}}"
+            data-action="toggleSection"
+            data-section="{{id}}"
+            data-click-only="{{#if clickOnly}}true{{else}}false{{/if}}"
+            title="{{title}}"
+            aria-label="{{title}}"
+            aria-expanded="{{#if active}}true{{else}}false{{/if}}"
+            {{#if disabled}}disabled{{/if}}
+          >
+            <i class="{{icon}} c7ph-nav-default-icon"></i>
+            <span>{{label}}</span>
+            {{#if hasActiveConditions}}
+              <span class="c7ph-condition-indicators c7ph-condition-indicators-standard" aria-hidden="true">
+                {{#each conditionIndicators}}
+                  <img class="c7ph-condition-indicator" src="{{img}}" alt="" />
+                {{/each}}
+                {{#if conditionOverflow}}<small>+{{conditionOverflow}}</small>{{/if}}
+              </span>
+              <span class="c7ph-condition-indicators c7ph-condition-indicators-compact" aria-hidden="true">
+                {{#each conditionCompactIndicators}}
+                  <img class="c7ph-condition-indicator" src="{{img}}" alt="" />
+                {{/each}}
+                {{#if conditionCompactOverflow}}<small>+{{conditionCompactOverflow}}</small>{{/if}}
+              </span>
+            {{/if}}
+            {{#if count}}<small class="c7ph-nav-count">{{count}}</small>{{/if}}
+          </button>
+        {{/each}}
+      </nav>
+
+      <div class="c7ph-quick-actions">
+        {{#if showInvestigatorWizardAction}}
+          <button
+            type="button"
+            data-action="openInvestigatorWizard"
+            title="{{createInvestigatorTitle}}"
+            aria-label="{{createInvestigatorTitle}}"
+          >
+            <i class="fa-solid {{createInvestigatorIcon}}"></i>
+          </button>
+        {{/if}}
+
+        <button
+          type="button"
+          class="{{#if chatNavigation.active}}is-active{{/if}}"
+          data-action="toggleSection"
+          data-section="{{chatNavigation.id}}"
+          title="{{chatNavigation.label}}"
+          aria-label="{{chatNavigation.label}}"
+          aria-expanded="{{#if chatNavigation.active}}true{{else}}false{{/if}}"
+        >
+          <i class="{{chatNavigation.icon}}"></i>
+        </button>
+
+
+        <button
+          type="button"
+          class="{{#if diceNavigation.active}}is-active{{/if}}"
+          data-action="toggleSection"
+          data-section="{{diceNavigation.id}}"
+          title="{{diceNavigation.label}}"
+          aria-label="{{diceNavigation.label}}"
+          aria-expanded="{{#if diceNavigation.active}}true{{else}}false{{/if}}"
+        >
+          <i class="{{diceNavigation.icon}}"></i>
+        </button>
+
+        <button
+          type="button"
+          class="{{#if referenceNavigation.active}}is-active{{/if}}"
+          data-action="toggleSection"
+          data-section="{{referenceNavigation.id}}"
+          title="{{referenceNavigation.label}}"
+          aria-label="{{referenceNavigation.label}}"
+          aria-expanded="{{#if referenceNavigation.active}}true{{else}}false{{/if}}"
+        >
+          <i class="{{referenceNavigation.icon}}"></i>
+        </button>
+
+        <button
+          type="button"
+          class="{{#if volumeNavigation.active}}is-active{{/if}}"
+          data-action="toggleSection"
+          data-section="{{volumeNavigation.id}}"
+          title="{{volumeNavigation.label}}"
+          aria-label="{{volumeNavigation.label}}"
+          aria-expanded="{{#if volumeNavigation.active}}true{{else}}false{{/if}}"
+        >
+          <i class="{{volumeNavigation.icon}}"></i>
+        </button>
+
+
+        <button
+          type="button"
+          class="{{#if coreInterfaceVisible}}is-active{{/if}}"
+          data-action="toggleCoreInterface"
+          title="{{localize 'GINZZZU_C7PH.Actions.CoreInterface'}}"
+          aria-label="{{localize 'GINZZZU_C7PH.Actions.CoreInterface'}}"
+          aria-pressed="{{#if coreInterfaceVisible}}true{{else}}false{{/if}}"
+        >
+          <i class="fa-solid fa-table-columns"></i>
+        </button>
+
+      </div>
+  </header>
+
+  {{#if hasActiveSection}}
+    <section class="c7ph-shelf {{#if suppressShelfAnimation}}is-refreshing{{/if}} {{#if showChat}}is-chat-shelf{{/if}} {{#if showDice}}is-dice-shelf{{/if}} {{#if showReference}}is-reference-shelf{{/if}}" aria-label="{{sectionTitle}}">
+        {{#if showChat}}
+          <div class="c7ph-chat-preview">
+            <header class="c7ph-chat-preview-header">
+              <span class="c7ph-chat-preview-title">
+                <i class="fa-solid fa-message" aria-hidden="true"></i>
+                <strong>{{localize 'GINZZZU_C7PH.Sections.Chat.Title'}}</strong>
+              </span>
+              <button
+                type="button"
+                class="c7ph-open-chat"
+                data-action="openChatSidebar"
+                title="{{localize 'GINZZZU_C7PH.Sections.Chat.OpenHint'}}"
+                aria-label="{{localize 'GINZZZU_C7PH.Sections.Chat.OpenHint'}}"
+              >
+                <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i>
+                <span>{{localize 'GINZZZU_C7PH.Sections.Chat.Open'}}</span>
+              </button>
+            </header>
+
+            {{#if hasChatMessages}}
+              <div class="c7ph-chat-list">
+                {{#each chatMessages}}
+                  <article class="c7ph-chat-message chat-message message flexcol" data-message-id="{{id}}">
+                    <header class="c7ph-chat-message-header">
+                      <strong>{{speaker}}</strong>
+                      <time datetime="{{timestampIso}}">{{timeLabel}}</time>
+                    </header>
+                    {{#if hasFlavor}}
+                      <div class="c7ph-chat-message-flavor">{{{flavor}}}</div>
+                    {{/if}}
+                    <div class="c7ph-chat-message-content message-content">{{{content}}}</div>
+                  </article>
+                {{/each}}
+              </div>
+            {{else}}
+              <div class="c7ph-empty-state c7ph-chat-empty">
+                <i class="fa-regular fa-message" aria-hidden="true"></i>
+                <div>
+                  <strong>{{localize 'GINZZZU_C7PH.Sections.Chat.Label'}}</strong>
+                  <p>{{localize 'GINZZZU_C7PH.Sections.Chat.Empty'}}</p>
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        {{else if showDice}}
+          <div class="c7ph-dice-shelf">
+            <header class="c7ph-dice-header">
+              <i class="fa-solid fa-dice-d20" aria-hidden="true"></i>
+              <strong>{{localize 'GINZZZU_C7PH.Sections.Dice.Title'}}</strong>
+            </header>
+            <div class="c7ph-dice-grid">
+              {{#each diceButtons}}
+                <button
+                  type="button"
+                  class="c7ph-die-button"
+                  data-action="rollGenericDie"
+                  data-dice-formula="{{formula}}"
+                  title="{{title}}"
+                  aria-label="{{title}}"
+                >
+                  <i class="c7ph-die-icon {{icon}}" aria-hidden="true"></i>
+                  <small>{{label}}</small>
+                </button>
+              {{/each}}
+            </div>
+            <p class="c7ph-dice-hint">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              <span>{{localize 'GINZZZU_C7PH.Sections.Dice.Hint'}}</span>
+            </p>
+          </div>
+        {{else if showReference}}
+          <div class="c7ph-reference">
+            <header class="c7ph-reference-header">
+              <span><i class="fa-solid fa-circle-question" aria-hidden="true"></i><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Title'}}</strong></span>
+              <small>{{localize 'GINZZZU_C7PH.Sections.Reference.Subtitle'}}</small>
+            </header>
+
+            <div class="c7ph-reference-columns">
+              <div class="c7ph-reference-column">
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Title'}}</h3>
+                  <dl class="c7ph-reference-rules">
+                    <div><dt>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Failure'}}</dt><dd>&gt; {{localize 'GINZZZU_C7PH.Sections.Reference.Skill'}}</dd></div>
+                    <div><dt>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Regular'}}</dt><dd>≤ {{localize 'GINZZZU_C7PH.Sections.Reference.Skill'}}</dd></div>
+                    <div><dt>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Hard'}}</dt><dd>≤ ½ {{localize 'GINZZZU_C7PH.Sections.Reference.Skill'}}</dd></div>
+                    <div><dt>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Extreme'}}</dt><dd>≤ ⅕ {{localize 'GINZZZU_C7PH.Sections.Reference.Skill'}}</dd></div>
+                    <div><dt>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Critical'}}</dt><dd>01</dd></div>
+                    <div><dt>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.Fumble'}}</dt><dd>{{localize 'GINZZZU_C7PH.Sections.Reference.RollLevels.FumbleRule'}}</dd></div>
+                  </dl>
+                </section>
+
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.Opposed.Title'}}</h3>
+                  <p>{{localize 'GINZZZU_C7PH.Sections.Reference.Opposed.Rule'}}</p>
+                </section>
+
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.Pushing.Title'}}</h3>
+                  <p class="c7ph-reference-flow">{{localize 'GINZZZU_C7PH.Sections.Reference.Pushing.Flow'}}</p>
+                </section>
+
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.BonusPenalty.Title'}}</h3>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.BonusPenalty.Bonus'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.BonusPenalty.BonusRule'}}</p>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.BonusPenalty.Penalty'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.BonusPenalty.PenaltyRule'}}</p>
+                </section>
+              </div>
+
+              <div class="c7ph-reference-column">
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.Combat.Title'}}</h3>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Combat.Initiative'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Combat.InitiativeRule'}}</p>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Combat.Melee'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Combat.MeleeRule'}}</p>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Combat.Firearms'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Combat.FirearmsRule'}}</p>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Combat.Cover'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Combat.CoverRule'}}</p>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Combat.Maneuver'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Combat.ManeuverRule'}}</p>
+                </section>
+
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.Damage.Title'}}</h3>
+                  <p>{{localize 'GINZZZU_C7PH.Sections.Reference.Damage.MajorWound'}}</p>
+                  <p>{{localize 'GINZZZU_C7PH.Sections.Reference.Damage.ZeroHp'}}</p>
+                </section>
+
+                <section class="c7ph-reference-card">
+                  <h3>{{localize 'GINZZZU_C7PH.Sections.Reference.Medicine.Title'}}</h3>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Medicine.FirstAid'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Medicine.FirstAidRule'}}</p>
+                  <p><strong>{{localize 'GINZZZU_C7PH.Sections.Reference.Medicine.MedicineSkill'}}</strong> — {{localize 'GINZZZU_C7PH.Sections.Reference.Medicine.MedicineRule'}}</p>
+                </section>
+              </div>
+            </div>
+
+            <p class="c7ph-reference-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Sections.Reference.Note'}}</p>
+          </div>
+        {{else if showRequests}}
+          <div class="c7ph-requests">
+            <header class="c7ph-requests-header">
+              <div>
+                <span class="c7ph-requests-kicker"><i class="fa-solid fa-hand" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Sections.Requests.Label'}}</span>
+                <strong>{{localize 'GINZZZU_C7PH.Sections.Requests.Question'}}</strong>
+              </div>
+              <div class="c7ph-request-mode" role="group" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Mode.Label'}}">
+                <button type="button" class="{{#if requestModeSingle}}is-active{{/if}}" data-action="setRequestMode" data-request-mode="single">{{localize 'GINZZZU_C7PH.Sections.Requests.Mode.Single'}}</button>
+                <button type="button" class="{{#if requestModeCombined}}is-active{{/if}}" data-action="setRequestMode" data-request-mode="combined"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Sections.Requests.Mode.Combined'}}</button>
+              </div>
+            </header>
+
+            {{#if hasIncomingRequests}}
+              <section class="c7ph-incoming-requests">
+                <h3><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Sections.Requests.IncomingTitle'}}</h3>
+                <div class="c7ph-incoming-request-list">
+                  {{#each incomingRequests}}
+                    <article class="c7ph-incoming-request">
+                      <div class="c7ph-incoming-request-copy">
+                        <small>{{localize 'GINZZZU_C7PH.Sections.Requests.KeeperSuggests'}}</small>
+                        {{#if combined}}
+                          <strong>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Title'}}</strong>
+                          <div class="c7ph-incoming-combined-checks">
+                            {{#each checks}}
+                              <label>
+                                <span>{{label}} <b>{{value}}%</b></span>
+                                {{#if ../parameters.locked}}
+                                  <strong>{{modifierLabel}}</strong>
+                                {{else}}
+                                  <select data-incoming-combined-modifier data-check-identity="{{identity}}" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.ModifierForCheck'}}">
+                                    {{#each modifierOptions}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+                                  </select>
+                                {{/if}}
+                              </label>
+                            {{/each}}
+                          </div>
+                          <span>{{operatorLabel}}</span>
+                        {{else}}
+                          <strong>{{action.label}}</strong>
+                          <span>{{action.detail}}{{#if action.valueLabel}} · {{action.valueLabel}}{{/if}}</span>
+                        {{/if}}
+                        <span class="c7ph-incoming-request-parameters">{{parameters.difficultyLabel}}{{#unless combined}} · {{parameters.modifierLabel}}{{/unless}}{{#if parameters.lockedLabel}} · {{parameters.lockedLabel}}{{/if}}</span>
+                      </div>
+                      <div class="c7ph-incoming-request-actions">
+                        {{#if combined}}
+                          <button type="button" class="is-primary" data-action="rollIncomingRequest" data-request-id="{{requestId}}" {{#unless available}}disabled{{/unless}}>
+                            <i class="fa-solid fa-dice-d20" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Sections.Requests.Roll'}}</span>
+                          </button>
+                        {{else if action.needsChoice}}
+                          {{#each action.choices}}
+                            <button type="button" data-action="rollIncomingRequest" data-request-id="{{../requestId}}" data-request-skill-id="{{id}}" title="{{name}}: {{value}}%">
+                              <span>{{name}}</span><strong>{{value}}%</strong>
+                            </button>
+                          {{/each}}
+                        {{else}}
+                          <button type="button" class="is-primary" data-action="rollIncomingRequest" data-request-id="{{requestId}}" {{#unless available}}disabled{{/unless}}>
+                            <i class="fa-solid fa-dice-d20" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Sections.Requests.Roll'}}</span>
+                          </button>
+                        {{/if}}
+                        <button type="button" class="is-dismiss" data-action="dismissIncomingRequest" data-request-id="{{requestId}}" title="{{localize 'GINZZZU_C7PH.Sections.Requests.Dismiss'}}" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Dismiss'}}">
+                          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </article>
+                  {{/each}}
+                </div>
+              </section>
+            {{/if}}
+
+            <div class="c7ph-request-categories" role="group" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.CategoriesLabel'}}">
+              {{#each requestCategories}}
+                <button type="button" class="{{#if active}}is-active{{/if}}" data-action="setRequestCategory" data-request-category="{{id}}">
+                  <i class="{{icon}}" aria-hidden="true"></i><span>{{label}}</span>
+                </button>
+              {{/each}}
+              <label class="c7ph-request-search">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="search" value="{{requestQuery}}" placeholder="{{localize 'GINZZZU_C7PH.Sections.Requests.Search'}}" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Search'}}" data-request-search />
+              </label>
+            </div>
+
+            {{#if requestModeCombined}}
+              <section class="c7ph-combined-characteristics" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Characteristics'}}">
+                <span>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Characteristics'}}</span>
+                <div>
+                  {{#each combinedCharacteristics}}
+                    <button type="button" class="{{#if combinedSelected}}is-selected{{/if}}" data-action="toggleCombinedCharacteristic" data-characteristic="{{key}}" title="{{label}}: {{value}}%" aria-pressed="{{#if combinedSelected}}true{{else}}false{{/if}}">
+                      <span>{{label}}</span><strong>{{value}}%</strong>
+                    </button>
+                  {{/each}}
+                </div>
+              </section>
+            {{/if}}
+
+            {{#if hasRequestEntries}}
+              <div class="c7ph-request-grid">
+                {{#each requestEntries}}
+                  <article class="c7ph-request-card {{#if combinedSelected}}is-selected{{/if}}" data-request-entry data-request-category="{{category}}" data-search-text="{{searchText}}">
+                    <div class="c7ph-request-card-main">
+                      <strong>{{label}}</strong>
+                      <span>{{detail}}{{#if valueLabel}} · <b>{{valueLabel}}</b>{{/if}}</span>
+                    </div>
+                    {{#if needsChoice}}
+                      <div class="c7ph-request-choice-list">
+                        {{#each choices}}
+                          {{#if ../../requestModeCombined}}
+                            <button type="button" class="{{#if combinedSelected}}is-selected{{/if}}" data-action="toggleCombinedRequest" data-request-action-id="{{../id}}" data-request-skill-id="{{id}}" title="{{name}}: {{value}}%" aria-pressed="{{#if combinedSelected}}true{{else}}false{{/if}}">
+                              <span>{{name}}</span><strong>{{value}}%</strong>
+                            </button>
+                          {{else}}
+                            <button type="button" data-action="rollActionRequest" data-request-action-id="{{../id}}" data-request-skill-id="{{id}}" title="{{name}}: {{value}}%">
+                              <span>{{name}}</span><strong>{{value}}%</strong>
+                            </button>
+                          {{/if}}
+                        {{/each}}
+                      </div>
+                    {{else if ../requestModeCombined}}
+                      <button type="button" class="c7ph-request-roll {{#if combinedSelected}}is-selected{{/if}}" data-action="toggleCombinedRequest" data-request-action-id="{{id}}" title="{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Toggle'}}" aria-pressed="{{#if combinedSelected}}true{{else}}false{{/if}}">
+                        <i class="fa-solid {{#if combinedSelected}}fa-check{{else}}fa-plus{{/if}}" aria-hidden="true"></i>
+                      </button>
+                    {{else}}
+                      <button type="button" class="c7ph-request-roll" data-action="rollActionRequest" data-request-action-id="{{id}}" title="{{label}}">
+                        <i class="fa-solid fa-dice-d20" aria-hidden="true"></i>
+                      </button>
+                    {{/if}}
+                  </article>
+                {{/each}}
+                <div class="c7ph-empty-state" data-request-filter-empty hidden>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <div><strong>{{localize 'GINZZZU_C7PH.Sections.Requests.NoResults'}}</strong><p>{{localize 'GINZZZU_C7PH.Sections.Requests.NoResultsHint'}}</p></div>
+                </div>
+              </div>
+            {{else}}
+              <div class="c7ph-empty-state">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div><strong>{{localize 'GINZZZU_C7PH.Sections.Requests.NoResults'}}</strong><p>{{localize 'GINZZZU_C7PH.Sections.Requests.NoResultsHint'}}</p></div>
+              </div>
+            {{/if}}
+
+            {{#if requestModeCombined}}
+              <section class="c7ph-combined-builder">
+                <div class="c7ph-combined-summary">
+                  <strong>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Title'}}</strong>
+                  <span>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Selected'}}: {{combinedSelectionCount}}</span>
+                  {{#if combinedSelections.length}}
+                    <div class="c7ph-combined-selection-list">
+                      {{#each combinedSelections}}
+                        <label>
+                          <span>{{label}} <b>{{value}}%</b></span>
+                          <select data-combined-modifier data-combined-identity="{{identity}}" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.ModifierForCheck'}}">
+                            {{#each modifierOptions}}<option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+                          </select>
+                        </label>
+                      {{/each}}
+                    </div>
+                  {{else}}
+                    <small>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.EmptySelection'}}</small>
+                  {{/if}}
+                </div>
+                <div class="c7ph-combined-operator" role="group" aria-label="{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Condition'}}">
+                  <button type="button" class="{{#if combinedOperatorAll}}is-active{{/if}}" data-action="setCombinedOperator" data-combined-operator="all">{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.All'}}</button>
+                  <button type="button" class="{{#if combinedOperatorAny}}is-active{{/if}}" data-action="setCombinedOperator" data-combined-operator="any">{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Any'}}</button>
+                </div>
+                <div class="c7ph-combined-actions">
+                  <button type="button" data-action="clearCombinedRequest" {{#unless combinedSelectionCount}}disabled{{/unless}}>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Clear'}}</button>
+                  <button type="button" class="is-primary" data-action="rollCombinedRequest" {{#unless combinedCanRoll}}disabled{{/unless}}><i class="fa-solid fa-dice-d20" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Sections.Requests.Combined.Roll'}}</button>
+                </div>
+              </section>
+            {{/if}}
+
+            <p class="c7ph-request-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Sections.Requests.Note'}}</p>
+          </div>
+        {{else}}
+          {{#if showCharacteristics}}
+          <div class="c7ph-characteristics">
+            <div class="c7ph-characteristic-grid">
+              {{#each characteristics}}
+                <button
+                  type="button"
+                  class="c7ph-check-card"
+                  data-action="rollCharacteristic"
+                  data-characteristic="{{key}}"
+                  title="{{label}} — {{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}"
+                  aria-label="{{label}}: {{value}}"
+                >
+                  <span class="c7ph-check-card-label">{{label}}</span>
+                  <strong class="c7ph-check-card-value">{{value}}</strong>
+                </button>
+              {{/each}}
+            </div>
+            <p class="c7ph-roll-hint">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              <span>{{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}</span>
+            </p>
+          </div>
+        {{else}}
+          {{#if showCombat}}
+            {{#if hasCombatOptions}}
+              <div class="c7ph-combat">
+                <header class="c7ph-combat-header">
+                  <div class="c7ph-combat-summary">
+                    <span>
+                      <i class="fa-solid fa-crosshairs" aria-hidden="true"></i>
+                      {{localize 'GINZZZU_C7PH.Sections.Combat.Targets'}}: <strong>{{targetCount}}</strong>
+                    </span>
+                    <span>
+                      <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                      {{localize 'GINZZZU_C7PH.Sections.Combat.AttacksPerRound'}}: <strong>{{attacksPerRound}}</strong>
+                    </span>
+                  </div>
+                  <small>{{localize 'GINZZZU_C7PH.Sections.Combat.TargetHint'}}</small>
+                </header>
+
+                <div class="c7ph-combat-scroll">
+                  {{#if hasCombatSkills}}
+                    <section class="c7ph-combat-group">
+                      <h3>{{localize 'GINZZZU_C7PH.Sections.Combat.Skills'}}</h3>
+                      <div class="c7ph-combat-skill-grid">
+                        {{#each combatSkills}}
+                          <button
+                            type="button"
+                            class="c7ph-combat-skill"
+                            data-action="rollSkill"
+                            data-skill-id="{{id}}"
+                            title="{{name}} — {{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}"
+                            aria-label="{{name}}: {{value}}"
+                          >
+                            <img src="{{img}}" alt="" />
+                            <span class="c7ph-combat-skill-name">
+                              {{#if occupation}}
+                                <i class="fa-solid fa-circle c7ph-occupation-marker" title="{{localize 'CoC7.OccupationSkill'}}" aria-label="{{localize 'CoC7.OccupationSkill'}}"></i>
+                              {{/if}}
+                              <span>{{name}}</span>
+                            </span>
+                            <strong>{{value}}</strong>
+                          </button>
+                        {{/each}}
+                      </div>
+                    </section>
+                  {{/if}}
+
+                  <section class="c7ph-encounter {{combatEncounter.stateClass}}">
+                    <div class="c7ph-encounter-state">
+                      <span class="c7ph-encounter-icon" aria-hidden="true">
+                        <i class="fa-solid fa-swords"></i>
+                      </span>
+                      <span class="c7ph-encounter-copy">
+                        <strong>{{combatEncounter.roundLabel}}</strong>
+                        <small>{{combatEncounter.statusLabel}}</small>
+                      </span>
+                      {{#if combatEncounter.isCurrentTurn}}
+                        <span class="c7ph-turn-badge">
+                          <i class="fa-solid fa-play" aria-hidden="true"></i>
+                          {{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.YourTurn'}}
+                        </span>
+                      {{/if}}
+                    </div>
+
+                    <div class="c7ph-encounter-actions">
+                      {{#if combatEncounter.inCombat}}
+                        <button
+                          type="button"
+                          class="c7ph-encounter-action is-leave"
+                          data-action="leaveCombat"
+                          title="{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.LeaveHint'}}"
+                          {{#unless combatEncounter.canLeave}}disabled{{/unless}}
+                        >
+                          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                          <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.Leave'}}</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          class="c7ph-encounter-action is-initiative {{#if combatEncounter.initiativeMissing}}is-primary{{/if}}"
+                          data-action="rollInitiative"
+                          title="{{#if combatEncounter.initiativeMissing}}{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.RollInitiative'}}{{else}}{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.RerollInitiative'}}{{/if}}"
+                          {{#unless combatEncounter.canRollInitiative}}disabled{{/unless}}
+                        >
+                          <i class="fa-solid fa-dice-d20" aria-hidden="true"></i>
+                          {{#if combatEncounter.initiativeMissing}}
+                            <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.RollInitiative'}}</span>
+                          {{else}}
+                            <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.Initiative'}}</span>
+                            <strong>{{combatEncounter.initiativeDisplay}}</strong>
+                          {{/if}}
+                        </button>
+
+                        <button
+                          type="button"
+                          class="c7ph-encounter-action is-gun-ready {{#if combatEncounter.hasGunReady}}is-active{{/if}}"
+                          data-action="toggleGunReady"
+                          title="{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.GunReadyHint'}}"
+                          aria-pressed="{{combatEncounter.hasGunReady}}"
+                          {{#unless combatEncounter.canToggleGunReady}}disabled{{/unless}}
+                        >
+                          <i class="game-icon game-icon-revolver" aria-hidden="true"></i>
+                          <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.GunReady'}}</span>
+                        </button>
+                      {{else}}
+                        <button
+                          type="button"
+                          class="c7ph-encounter-action is-primary"
+                          data-action="joinCombat"
+                          title="{{combatEncounter.statusLabel}}"
+                          {{#unless combatEncounter.canJoin}}disabled{{/unless}}
+                        >
+                          <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                          <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Encounter.Join'}}</span>
+                        </button>
+                      {{/if}}
+                    </div>
+                  </section>
+
+                  {{#if hasWeapons}}
+                    <section class="c7ph-combat-group">
+                      <h3>{{localize 'GINZZZU_C7PH.Sections.Combat.Weapons'}}</h3>
+                      <div class="c7ph-weapon-grid">
+                        {{#each weapons}}
+                          <article class="c7ph-weapon-card {{#if outOfAmmo}}is-out-of-ammo{{/if}}" data-weapon-id="{{id}}">
+                            <header class="c7ph-weapon-header">
+                              <img src="{{img}}" alt="" />
+                              <span class="c7ph-weapon-copy">
+                                <strong>{{name}}</strong>
+                                <small>{{category}}{{#if mainSkill}} · {{mainSkill.name}}{{/if}}</small>
+                              </span>
+                              {{#if hasAmmoTracker}}
+                                <label
+                                  class="c7ph-ammo-editor {{#if outOfAmmo}}is-empty{{/if}}"
+                                  title="{{#if outOfAmmo}}{{localize 'GINZZZU_C7PH.Sections.Combat.EmptyMagazine'}}{{else}}{{localize 'GINZZZU_C7PH.Sections.Combat.Ammo'}}{{/if}}"
+                                >
+                                  <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Ammo'}}</span>
+                                  {{#if canEditAmmo}}
+                                    <input
+                                      type="number"
+                                      min="0"
+                                      step="1"
+                                      value="{{ammo}}"
+                                      data-weapon-ammo
+                                      data-weapon-id="{{id}}"
+                                      aria-label="{{localize 'GINZZZU_C7PH.Sections.Combat.AmmoCurrent'}}"
+                                    />
+                                  {{else}}
+                                    <strong>{{ammo}}</strong>
+                                  {{/if}}
+                                  <span class="c7ph-ammo-separator">/</span>
+                                  <strong title="{{localize 'GINZZZU_C7PH.Sections.Combat.AmmoCapacity'}}">{{ammoCapacity}}</strong>
+                                </label>
+                              {{/if}}
+                            </header>
+
+                            <div class="c7ph-weapon-actions">
+                              <button
+                                type="button"
+                                class="c7ph-weapon-action is-primary is-attack"
+                                data-action="rollWeapon"
+                                data-weapon-id="{{id}}"
+                                title="{{attackTitle}}"
+                                aria-label="{{localize 'GINZZZU_C7PH.Sections.Combat.Attack'}}: {{name}}"
+                                {{#unless canAttack}}disabled{{/unless}}
+                              >
+                                <i class="fa-solid fa-crosshairs" aria-hidden="true"></i>
+                                <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Attack'}}</span>
+                              </button>
+
+                              {{#if mainSkill}}
+                                <button
+                                  type="button"
+                                  class="c7ph-weapon-action"
+                                  data-action="rollSkill"
+                                  data-skill-id="{{mainSkill.id}}"
+                                  title="{{mainSkill.name}} — {{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}"
+                                  aria-label="{{mainSkill.name}}: {{mainSkill.value}}"
+                                >
+                                  <i class="fa-solid fa-dice-d20" aria-hidden="true"></i>
+                                  <span>{{localize 'GINZZZU_C7PH.Sections.Combat.CheckSkill'}}</span>
+                                  <strong>{{mainSkill.value}}%</strong>
+                                </button>
+                              {{else}}
+                                <span class="c7ph-weapon-action is-disabled">{{localize 'GINZZZU_C7PH.Sections.Combat.NoSkill'}}</span>
+                              {{/if}}
+
+                              <button
+                                type="button"
+                                class="c7ph-weapon-action"
+                                data-action="rollWeaponDamage"
+                                data-weapon-id="{{id}}"
+                                data-damage-range="{{damageRange}}"
+                                title="{{#if canRollDamage}}{{localize 'GINZZZU_C7PH.Sections.Combat.RollDamage'}}: {{damageFormula}}{{else}}{{localize 'GINZZZU_C7PH.Sections.Combat.InvalidDamage'}}{{/if}}"
+                                aria-label="{{localize 'GINZZZU_C7PH.Sections.Combat.RollDamage'}}: {{name}}"
+                                {{#unless canRollDamage}}disabled{{/unless}}
+                              >
+                                <i class="fa-solid fa-burst" aria-hidden="true"></i>
+                                <span>{{localize 'GINZZZU_C7PH.Sections.Combat.RollDamage'}}</span>
+                                <strong>{{damage}}{{#if damageBonus}} · {{damageBonus}}{{/if}}</strong>
+                              </button>
+
+                              {{#if alternativeSkill}}
+                                <button
+                                  type="button"
+                                  class="c7ph-weapon-action"
+                                  data-action="rollSkill"
+                                  data-skill-id="{{alternativeSkill.id}}"
+                                  title="{{alternativeSkill.name}} — {{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}"
+                                  aria-label="{{alternativeSkill.name}}: {{alternativeSkill.value}}"
+                                >
+                                  <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+                                  <span>{{localize 'GINZZZU_C7PH.Sections.Combat.AlternativeSkill'}}</span>
+                                  <strong>{{alternativeSkill.value}}%</strong>
+                                </button>
+                              {{/if}}
+                            </div>
+                          </article>
+                        {{/each}}
+                      </div>
+                    </section>
+                  {{/if}}
+
+                  {{#unless hasCombatLoadout}}
+                    <div class="c7ph-combat-loadout-empty">
+                      <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                      <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Empty'}}</span>
+                    </div>
+                  {{/unless}}
+                </div>
+
+                <p class="c7ph-roll-hint">
+                  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                  <span>{{localize 'GINZZZU_C7PH.Sections.Combat.Placeholder'}}</span>
+                </p>
+              </div>
+            {{else}}
+              <div class="c7ph-empty-state">
+                <i class="fa-solid fa-crosshairs"></i>
+                <div>
+                  <strong>{{localize 'GINZZZU_C7PH.Sections.Combat.Label'}}</strong>
+                  <p>{{localize 'GINZZZU_C7PH.Sections.Combat.Empty'}}</p>
+                </div>
+              </div>
+            {{/if}}
+          {{else}}
+            {{#if showSkills}}
+              {{#if hasSkills}}
+                <div class="c7ph-skills">
+                  <div class="c7ph-skill-toolbar">
+                    <div class="c7ph-skill-views" role="tablist" aria-label="{{localize 'GINZZZU_C7PH.Sections.Skills.Views'}}">
+                      {{#each skillViews}}
+                        <button
+                          type="button"
+                          class="{{#if active}}is-active{{/if}}"
+                          data-action="setSkillView"
+                          data-skill-view="{{id}}"
+                          role="tab"
+                          aria-selected="{{#if active}}true{{else}}false{{/if}}"
+                        >
+                          <span>{{label}}</span>
+                          <small>{{count}}</small>
+                        </button>
+                      {{/each}}
+                    </div>
+
+                    <label class="c7ph-skill-search">
+                      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                      <input
+                        type="search"
+                        value="{{skillQuery}}"
+                        placeholder="{{localize 'GINZZZU_C7PH.Sections.Skills.Search'}}"
+                        aria-label="{{localize 'GINZZZU_C7PH.Sections.Skills.Search'}}"
+                        data-skill-search
+                      />
+                    </label>
+                  </div>
+
+                  {{#if hasVisibleSkills}}
+                    <div class="c7ph-skill-list">
+                      {{#each skills}}
+                        <article class="c7ph-skill-card {{#if favorite}}is-favorite{{/if}}">
+                          <button
+                            type="button"
+                            class="c7ph-skill-check"
+                            data-action="rollSkill"
+                            data-skill-id="{{id}}"
+                            title="{{name}} — {{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}"
+                            aria-label="{{name}}: {{value}}"
+                          >
+                            <span class="c7ph-skill-name">
+                              {{#if occupation}}
+                                <i class="fa-solid fa-circle c7ph-occupation-marker" title="{{localize 'CoC7.OccupationSkill'}}" aria-label="{{localize 'CoC7.OccupationSkill'}}"></i>
+                              {{/if}}
+                              <span>{{name}}</span>
+                            </span>
+                            <strong>{{value}}</strong>
+                          </button>
+                          <button
+                            type="button"
+                            class="c7ph-skill-favorite {{#if favorite}}is-active{{/if}}"
+                            data-action="toggleFavoriteSkill"
+                            data-skill-uuid="{{uuid}}"
+                            title="{{#if favorite}}{{localize 'GINZZZU_C7PH.Sections.Skills.RemoveFavorite'}}{{else}}{{localize 'GINZZZU_C7PH.Sections.Skills.AddFavorite'}}{{/if}}"
+                            aria-label="{{#if favorite}}{{localize 'GINZZZU_C7PH.Sections.Skills.RemoveFavorite'}}{{else}}{{localize 'GINZZZU_C7PH.Sections.Skills.AddFavorite'}}{{/if}}: {{name}}"
+                            aria-pressed="{{#if favorite}}true{{else}}false{{/if}}"
+                          >
+                            <i class="{{#if favorite}}fa-solid{{else}}fa-regular{{/if}} fa-star" aria-hidden="true"></i>
+                          </button>
+                        </article>
+                      {{/each}}
+                    </div>
+                  {{else}}
+                    <div class="c7ph-empty-state c7ph-skill-empty">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                      <div>
+                        <strong>{{localize 'GINZZZU_C7PH.Sections.Skills.NoResults'}}</strong>
+                        <p>{{localize 'GINZZZU_C7PH.Sections.Skills.NoResultsHint'}}</p>
+                      </div>
+                    </div>
+                  {{/if}}
+
+                  <div class="c7ph-skill-footer">
+                    {{#if showClearRecentSkills}}
+                      <button type="button" class="c7ph-clear-recent" data-action="clearRecentSkills">
+                        <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
+                        <span>{{localize 'GINZZZU_C7PH.Sections.Skills.ClearRecent'}}</span>
+                      </button>
+                    {{/if}}
+                    <p class="c7ph-roll-hint">
+                      <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                      <span>{{localize 'GINZZZU_C7PH.Rolls.InteractionHint'}}</span>
+                    </p>
+                  </div>
+                </div>
+              {{else}}
+                <div class="c7ph-empty-state">
+                  <i class="fa-solid fa-book-open"></i>
+                  <div>
+                    <strong>{{localize 'GINZZZU_C7PH.Sections.Skills.Label'}}</strong>
+                    <p>{{localize 'GINZZZU_C7PH.Sections.Skills.Empty'}}</p>
+                  </div>
+                </div>
+              {{/if}}
+            {{else}}
+              {{#if showConsequences}}
+                <div class="c7ph-consequences">
+                  <div class="c7ph-consequence-scroll">
+                    <section class="c7ph-condition-manager">
+                      <header class="c7ph-condition-header">
+                        <span>
+                          <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                          <strong>{{localize 'GINZZZU_C7PH.Sections.Consequences.ConditionsLabel'}}</strong>
+                        </span>
+                        <small>{{conditionsHint}}</small>
+                      </header>
+
+                      {{#each conditionGroups}}
+                        <section class="c7ph-condition-group">
+                          <h3>
+                            <i class="{{icon}}" aria-hidden="true"></i>
+                            <span>{{label}}</span>
+                          </h3>
+                          <div class="c7ph-condition-grid">
+                            {{#each conditions}}
+                              <button
+                                type="button"
+                                class="c7ph-condition-card {{#if active}}is-active{{/if}}"
+                                data-action="toggleCondition"
+                                data-condition-id="{{id}}"
+                                title="{{tooltip}}"
+                                aria-label="{{tooltip}} — {{stateLabel}}"
+                                aria-pressed="{{#if active}}true{{else}}false{{/if}}"
+                                {{#unless canToggle}}disabled{{/unless}}
+                              >
+                                <img src="{{img}}" alt="" />
+                                <span class="c7ph-condition-copy">
+                                  <strong>{{label}}</strong>
+                                  {{#if duration}}<small>{{duration}}</small>{{/if}}
+                                </span>
+                                <span class="c7ph-condition-state" aria-hidden="true">
+                                  <i class="fa-solid {{#if active}}fa-check{{else}}fa-minus{{/if}}"></i>
+                                </span>
+                              </button>
+                            {{/each}}
+                          </div>
+                        </section>
+                      {{/each}}
+
+                      {{#if showDeathCheck}}
+                        <button
+                          type="button"
+                          class="c7ph-death-check"
+                          data-action="rollDeathCheck"
+                          title="{{localize 'GINZZZU_C7PH.Sections.Consequences.DeathCheckHint'}}"
+                          aria-label="{{localize 'GINZZZU_C7PH.Sections.Consequences.DeathCheckHint'}}"
+                        >
+                          <i class="fa-solid fa-dice-d10" aria-hidden="true"></i>
+                          <span>{{localize 'GINZZZU_C7PH.Sections.Consequences.DeathCheck'}}</span>
+                        </button>
+                      {{/if}}
+                    </section>
+
+                    {{#if hasConsequences}}
+                      <section class="c7ph-effects-panel">
+                        <header class="c7ph-effects-header">
+                          <span>
+                            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                            <strong>{{localize 'GINZZZU_C7PH.Sections.Consequences.EffectsTitle'}}</strong>
+                          </span>
+                          <small>{{localize 'GINZZZU_C7PH.Sections.Consequences.EffectsReadOnly'}}</small>
+                        </header>
+
+                        {{#each consequenceCategories}}
+                          <section class="c7ph-consequence-group">
+                            <h3>
+                              <i class="{{icon}}" aria-hidden="true"></i>
+                              <span>{{label}}</span>
+                              <small>{{count}}</small>
+                            </h3>
+                            <div class="c7ph-consequence-grid">
+                              {{#each effects}}
+                                <article class="c7ph-consequence-card" title="{{tooltip}}">
+                                  <img src="{{img}}" alt="" />
+                                  <span class="c7ph-consequence-copy">
+                                    <strong>{{name}}</strong>
+                                    <small>
+                                      <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                      {{source}}
+                                    </small>
+                                  </span>
+                                  <span class="c7ph-consequence-duration" title="{{localize 'GINZZZU_C7PH.Sections.Consequences.Duration'}}">
+                                    <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                                    {{duration}}
+                                  </span>
+                                  {{#if hasChanges}}
+                                    <p>{{changeSummary}}</p>
+                                  {{/if}}
+                                </article>
+                              {{/each}}
+                            </div>
+                          </section>
+                        {{/each}}
+                      </section>
+                    {{/if}}
+                  </div>
+                </div>
+              {{else}}
+                {{#if showVolume}}
+                  <div class="c7ph-volume">
+                    <div class="c7ph-volume-grid">
+                      {{#each volumeControls}}
+                        <article class="c7ph-volume-card {{#if muted}}is-muted{{/if}}" title="{{tooltip}}">
+                          <button
+                            type="button"
+                            class="c7ph-volume-mute"
+                            data-action="toggleVolumeMute"
+                            data-volume-key="{{key}}"
+                            title="{{muteTitle}}"
+                            aria-label="{{muteTitle}}"
+                            aria-pressed="{{#if muted}}true{{else}}false{{/if}}"
+                          >
+                            <i class="{{#if muted}}fa-solid fa-volume-xmark{{else}}{{icon}}{{/if}}" aria-hidden="true"></i>
+                          </button>
+                          <span class="c7ph-volume-copy">
+                            <strong>{{label}}</strong>
+                            <small>{{percent}}%</small>
+                          </span>
+                          <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.05"
+                            value="{{value}}"
+                            data-volume-range
+                            data-volume-key="{{key}}"
+                            aria-label="{{label}}"
+                            aria-valuetext="{{percent}}%"
+                          />
+                        </article>
+                      {{/each}}
+                    </div>
+                    <p class="c7ph-roll-hint">
+                      <i class="fa-solid fa-headphones" aria-hidden="true"></i>
+                      <span>{{localize 'GINZZZU_C7PH.Sections.Volume.Hint'}}</span>
+                    </p>
+                  </div>
+                {{else}}
+                  <div class="c7ph-empty-state">
+                    <i class="{{sectionIcon}}"></i>
+                    <div>
+                      <strong>{{sectionTitle}}</strong>
+                      <p>{{sectionMessage}}</p>
+                    </div>
+                  </div>
+                {{/if}}
+              {{/if}}
+            {{/if}}
+          {{/if}}
+          {{/if}}
+        {{/if}}
+    </section>
+  {{/if}}
+</div>

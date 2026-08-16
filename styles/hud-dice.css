@@ -1,0 +1,101 @@
+#ginzzzu-coc7-player-hud-app .c7ph-shelf.is-dice-shelf {
+  width: min(500px, 100%);
+  margin-inline-start: auto;
+  padding: 10px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-dice-shelf {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-dice-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 2px 7px;
+  border-bottom: 1px solid rgba(169, 146, 93, 0.22);
+  color: var(--c7ph-accent-bright);
+  font-size: 12px;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-dice-header > i {
+  color: var(--c7ph-eldritch);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-dice-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(76px, 1fr));
+  gap: 8px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-die-button {
+  display: grid;
+  grid-template-rows: auto auto;
+  place-items: center;
+  gap: 1px;
+  min-height: 62px;
+  padding: 8px 7px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 9px;
+  background:
+    radial-gradient(circle at 50% 120%, rgba(93, 122, 101, 0.14), transparent 66%),
+    linear-gradient(145deg, rgba(38, 47, 41, 0.9), rgba(16, 23, 20, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(222, 209, 169, 0.04),
+    inset 0 -14px 24px rgba(0, 0, 0, 0.1);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-die-button:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-die-button:focus-visible {
+  border-color: rgba(181, 157, 96, 0.5);
+  background:
+    radial-gradient(circle at 50% 115%, rgba(109, 143, 117, 0.23), transparent 66%),
+    linear-gradient(145deg, rgba(49, 61, 52, 0.96), rgba(22, 31, 27, 0.98));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-die-button > .c7ph-die-icon {
+  color: var(--c7ph-text);
+  font-size: 29px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.45));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-die-button:hover > .c7ph-die-icon,
+#ginzzzu-coc7-player-hud-app .c7ph-die-button:focus-visible > .c7ph-die-icon {
+  color: var(--c7ph-accent-bright);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-die-button > small {
+  color: var(--c7ph-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-dice-hint {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-dice-hint > i {
+  color: var(--c7ph-accent);
+}
+
+@media (max-width: 520px) {
+  #ginzzzu-coc7-player-hud-app .c7ph-shelf.is-dice-shelf {
+    width: 100%;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-dice-grid {
+    grid-template-columns: repeat(2, minmax(76px, 1fr));
+  }
+}

@@ -1,0 +1,69 @@
+<div class="c7ph-wizard-stage c7ph-characteristics-stage">
+  {{#if characteristicMethodPoints}}
+    <div class="c7ph-characteristics-toolbar c7ph-point-toolbar">
+      <div>
+        <strong>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Progress' spent=characteristicPointsSpent total=characteristicPointBudget}}</strong>
+        <span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Intro'}}</span>
+      </div>
+      <div class="c7ph-point-budget {{#if characteristicPointComplete}}is-complete{{else}}{{#if characteristicPointRemaining}}is-pending{{else}}is-exact{{/if}}{{/if}}">
+        <small>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Remaining'}}</small>
+        <strong>{{characteristicPointRemaining}}</strong>
+      </div>
+    </div>
+    <div class="c7ph-point-rules">
+      <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+      <span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Rules' min=15 max=90}}</span>
+    </div>
+    <div class="c7ph-characteristic-grid c7ph-characteristic-point-grid">
+      {{#each characteristicPointRows}}
+        <article class="c7ph-characteristic-roll-card c7ph-characteristic-point-card">
+          <header><strong><span>{{label}}</span></strong><span class="c7ph-characteristic-card-meta"><code>{{minimum}}–{{maximum}}</code></span></header>
+          <div class="c7ph-characteristic-point-editor">
+            <button type="button" data-action="modifyCharacteristicPoints" data-characteristic-key="{{key}}" data-by="-1" title="{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Decrease'}}" {{#unless canDecrease}}disabled{{/unless}}><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <input type="number" min="{{minimum}}" max="{{maximum}}" step="1" value="{{value}}" data-characteristic-point-input data-characteristic-key="{{key}}" aria-label="{{label}}" />
+            <button type="button" data-action="modifyCharacteristicPoints" data-characteristic-key="{{key}}" data-by="1" title="{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Increase'}}" {{#unless canIncrease}}disabled{{/unless}}><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+          </div>
+          <div class="c7ph-characteristic-point-values"><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Half'}} {{halfValue}}</span><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Extreme'}} {{extremeValue}}</span></div>
+        </article>
+      {{/each}}
+      {{#if pointLuck}}
+        <article class="c7ph-characteristic-roll-card c7ph-characteristic-point-card c7ph-characteristic-luck-card {{#if pointLuck.hasValue}}is-rolled{{/if}}">
+          <header><strong><span>{{pointLuck.label}}</span></strong><span class="c7ph-characteristic-card-meta"><code>{{pointLuck.formula}}</code></span></header>
+          <div class="c7ph-characteristic-result">{{#if pointLuck.hasValue}}<strong>{{pointLuck.rolledValue}}</strong><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Half'}} {{pointLuck.halfValue}} · {{localize 'GINZZZU_C7PH.Creation.Characteristics.Extreme'}} {{pointLuck.extremeValue}}</span>{{else}}<strong>—</strong><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.LuckSeparate'}}</span>{{/if}}</div>
+          <button type="button" data-action="rollCharacteristic" data-characteristic-key="luck" {{#unless pointLuck.canRoll}}disabled{{/unless}}><i class="fa-solid fa-dice-d6" aria-hidden="true"></i><span>{{pointLuck.rollLabel}}</span></button>
+        </article>
+      {{/if}}
+    </div>
+    <div class="c7ph-wizard-notice {{#if characteristicPointComplete}}is-success{{/if}}"><i class="fa-solid {{#if characteristicPointComplete}}fa-circle-check{{else}}fa-circle-info{{/if}}" aria-hidden="true"></i><span>{{#if characteristicPointComplete}}{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Complete'}}{{else}}{{localize 'GINZZZU_C7PH.Creation.Characteristics.Points.Required'}}{{/if}}</span></div>
+  {{else}}
+    <div class="c7ph-characteristics-toolbar">
+      <div><strong>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Progress' current=characteristicRolledCount total=characteristicTotalCount}}</strong><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Intro'}}</span></div>
+      <button type="button" data-action="rollAllCharacteristics" {{#unless hasUnrolledCharacteristics}}disabled{{/unless}}><i class="fa-solid fa-dice" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.RollAll'}}</span></button>
+    </div>
+    {{#if characteristicsComplete}}
+      <section class="c7ph-characteristic-swap-panel">
+        <div class="c7ph-characteristic-swap-intro"><i class="fa-solid fa-right-left" aria-hidden="true"></i><span><strong>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Swap.Title'}}</strong><small>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Swap.Intro'}}</small><small>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Swap.LuckExcluded'}}</small></span></div>
+        <div class="c7ph-characteristic-swap-groups">
+          {{#each characteristicSwapGroups}}
+            <div class="c7ph-characteristic-swap-group {{cssClass}} {{#if enabled}}is-enabled{{/if}} {{#if used}}is-used{{/if}}">
+              <button type="button" data-action="toggleCharacteristicSwapGroup" data-swap-group="{{id}}" aria-pressed="{{#if enabled}}true{{else}}false{{/if}}" {{#unless canToggle}}disabled{{/unless}}>
+                <i class="fa-solid {{#if enabled}}fa-toggle-on{{else}}fa-toggle-off{{/if}}" aria-hidden="true"></i><span><strong>{{label}}</strong><small>{{status}}</small></span>
+              </button>
+              {{#if used}}<button type="button" class="c7ph-characteristic-swap-undo" data-action="undoCharacteristicSwap" data-swap-group="{{id}}"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Swap.Undo'}}</span></button>{{/if}}
+            </div>
+          {{/each}}
+        </div>
+      </section>
+    {{/if}}
+    <div class="c7ph-characteristic-grid">
+      {{#each characteristicRolls}}
+        <article class="c7ph-characteristic-roll-card {{swapGroupClass}} {{#if hasValue}}is-rolled{{/if}} {{#if isSwapped}}is-swapped{{/if}} {{#if canDrag}}can-swap{{/if}}" data-characteristic-card data-characteristic-key="{{key}}" data-characteristic-draggable="{{#if canDrag}}true{{else}}false{{/if}}" data-swap-group="{{swapGroup}}" {{#if canDrag}}draggable="true" title="{{dragTitle}}"{{/if}}>
+          <header><strong>{{#if isSwapped}}<span class="c7ph-characteristic-swapped-icon" role="img" aria-label="{{localize 'GINZZZU_C7PH.Creation.Characteristics.Swap.Swapped'}}" title="{{localize 'GINZZZU_C7PH.Creation.Characteristics.Swap.Swapped'}}"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span>{{/if}}<span>{{label}}</span></strong><span class="c7ph-characteristic-card-meta"><code>{{formula}}</code></span></header>
+          <div class="c7ph-characteristic-result">{{#if hasValue}}<strong>{{rolledValue}}</strong><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Half'}} {{halfValue}} · {{localize 'GINZZZU_C7PH.Creation.Characteristics.Extreme'}} {{extremeValue}}</span>{{else}}<strong>—</strong><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.NotRolled'}}</span>{{/if}}</div>
+          <button type="button" draggable="false" data-action="rollCharacteristic" data-characteristic-key="{{key}}" {{#unless canRoll}}disabled{{/unless}}><i class="fa-solid fa-dice-d6" aria-hidden="true"></i><span>{{rollLabel}}</span></button>
+        </article>
+      {{/each}}
+    </div>
+    <div class="c7ph-wizard-notice {{#if characteristicsComplete}}is-success{{/if}}"><i class="fa-solid {{#if characteristicsComplete}}fa-circle-check{{else}}fa-circle-info{{/if}}" aria-hidden="true"></i><span>{{#if characteristicsComplete}}{{localize 'GINZZZU_C7PH.Creation.Characteristics.Complete'}}{{else}}{{localize 'GINZZZU_C7PH.Creation.Characteristics.Required'}}{{/if}}</span></div>
+  {{/if}}
+</div>

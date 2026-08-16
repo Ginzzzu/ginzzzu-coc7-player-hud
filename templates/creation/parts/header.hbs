@@ -1,0 +1,20 @@
+<header class="c7ph-wizard-header{{#if showOccupationSkills}} has-allocation-points{{/if}}{{#if showPersonalInterests}} has-allocation-points{{/if}}">
+  <span class="c7ph-wizard-header-icon"><i class="{{currentStepIcon}}" aria-hidden="true"></i></span>
+  <div class="c7ph-wizard-header-copy">
+    <small>{{localize 'GINZZZU_C7PH.Creation.StepCounter' current=currentStepNumber total=stepCount}}</small>
+    <h2>{{currentStepTitle}}</h2>
+    <p>{{currentStepHint}}</p>
+  </div>
+  {{#if showOccupationSkills}}
+    <aside class="c7ph-allocation-points {{occupationPointStateClass}}">
+      <div class="c7ph-allocation-points-value"><span>{{localize 'GINZZZU_C7PH.Creation.Allocation.PointCounter'}}</span><strong>{{occupationPointsSpent}} / {{occupationPointTotal}}</strong></div>
+      <small><i class="fa-solid {{occupationPointIcon}}" aria-hidden="true"></i>{{occupationPointStatus}}</small>
+    </aside>
+  {{/if}}
+  {{#if showPersonalInterests}}
+    <aside class="c7ph-allocation-points {{personalInterestsPointStateClass}}">
+      <div class="c7ph-allocation-points-value"><span>{{localize 'GINZZZU_C7PH.Creation.Allocation.PointCounter'}}</span><strong>{{personalInterestsPointsSpent}} / {{personalInterestsPointTotal}}</strong></div>
+      <small><i class="fa-solid {{personalInterestsPointIcon}}" aria-hidden="true"></i>{{personalInterestsPointStatus}}</small>
+    </aside>
+  {{/if}}
+</header>

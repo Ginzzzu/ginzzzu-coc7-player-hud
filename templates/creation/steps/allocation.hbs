@@ -1,0 +1,84 @@
+<div class="c7ph-wizard-stage c7ph-allocation-stage">
+  {{#if occupationMode}}
+    {{#unless draftHasOccupation}}
+      <div class="c7ph-allocation-empty"><i class="fa-solid fa-list-check" aria-hidden="true"></i><strong>{{localize 'GINZZZU_C7PH.Creation.Allocation.SelectOccupation'}}</strong></div>
+    {{else if occupationSkillsLoadFailed}}
+      <div class="c7ph-wizard-source-error"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><div><strong>{{localize 'GINZZZU_C7PH.Creation.Allocation.LoadFailed'}}</strong></div></div>
+    {{else}}
+      <div class="c7ph-allocation-workspace">
+        <div class="c7ph-allocation-meta" aria-label="{{localize 'GINZZZU_C7PH.Creation.Allocation.Details'}}">
+          <span><small>{{localize 'GINZZZU_C7PH.Creation.Allocation.Formula'}}</small><strong>{{#if occupationFormulaText}}{{occupationFormulaText}}{{else}}—{{/if}}</strong></span>
+          <span><small>{{localize 'GINZZZU_C7PH.Creation.Allocation.CreditRange'}}</small><strong>{{occupationCreditMin}}–{{occupationCreditMax}}</strong></span>
+        </div>
+
+        {{#if occupationHasDecisions}}
+          <div class="c7ph-allocation-decisions">
+            {{#if occupationHasFormulaChoices}}
+              <section class="c7ph-allocation-choice-card {{#unless occupationFormulaComplete}}is-incomplete{{/unless}}">
+                <header><strong>{{localize 'GINZZZU_C7PH.Creation.Allocation.FormulaChoice'}}</strong><span class="c7ph-allocation-choice-status"><small>{{localize 'GINZZZU_C7PH.Creation.Allocation.FormulaChoiceHint'}}</small>{{#unless occupationFormulaComplete}}<b><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Creation.Allocation.RequiredChoice'}}</b>{{/unless}}</span></header>
+                <div class="c7ph-allocation-choice-buttons">
+                  {{#each occupationFormulaChoices}}
+                    <button type="button" class="{{#if selected}}is-selected{{/if}}" data-action="selectOccupationPointCharacteristic" data-characteristic-key="{{key}}" aria-pressed="{{#if selected}}true{{else}}false{{/if}}">
+                      <span>{{label}}</span><small>×{{multiplier}}</small>
+                    </button>
+                  {{/each}}
+                </div>
+              </section>
+            {{/if}}
+
+            {{#each occupationChoiceGroups}}
+              <section class="c7ph-allocation-choice-card {{#unless complete}}is-incomplete{{/unless}}">
+                <header><strong>{{localize 'GINZZZU_C7PH.Creation.Allocation.GroupTitle' number=number}}</strong><span class="c7ph-allocation-choice-status"><small>{{localize 'GINZZZU_C7PH.Creation.Allocation.GroupProgress' selected=selected required=required}}</small>{{#unless complete}}<b><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Creation.Allocation.RequiredChoice'}}</b>{{/unless}}</span></header>
+                <div class="c7ph-allocation-choice-buttons">
+                  {{#each skills}}
+                    <button type="button" class="{{#if selected}}is-selected{{/if}}" data-action="toggleOccupationGroupSkill" data-group-index="{{../index}}" data-skill-cocid="{{cocid}}" aria-pressed="{{#if selected}}true{{else}}false{{/if}}">
+                      <span>{{name}}</span>{{#if selected}}<i class="fa-solid fa-check" aria-hidden="true"></i>{{/if}}
+                    </button>
+                  {{/each}}
+                </div>
+              </section>
+            {{/each}}
+
+            {{#if occupationPersonalChoices.length}}
+              <section class="c7ph-allocation-choice-card {{#unless occupationPersonalComplete}}is-incomplete{{/unless}}">
+                <header><strong>{{localize 'GINZZZU_C7PH.Creation.Allocation.FreeChoices'}}</strong><span class="c7ph-allocation-choice-status"><small>{{localize 'GINZZZU_C7PH.Creation.Allocation.FreeChoicesHint'}}</small>{{#unless occupationPersonalComplete}}<b><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>{{localize 'GINZZZU_C7PH.Creation.Allocation.RequiredChoice'}}</b>{{/unless}}</span></header>
+                <div class="c7ph-allocation-free-choices">
+                  {{#each occupationPersonalChoices}}
+                    <label class="{{#unless selectedCocid}}is-incomplete{{/unless}}"><span>{{localize 'GINZZZU_C7PH.Creation.Allocation.FreeChoiceNumber' number=number}}</span><select data-occupation-personal-select data-slot-index="{{slotIndex}}"><option value="">{{localize 'GINZZZU_C7PH.Creation.Allocation.SelectSkill'}}</option>{{#each options}}<option value="{{cocid}}" {{#if selected}}selected{{/if}}>{{name}}</option>{{/each}}</select></label>
+                  {{/each}}
+                </div>
+              </section>
+            {{/if}}
+          </div>
+        {{/if}}
+
+        <div class="c7ph-allocation-table-scroll">
+          <section class="c7ph-allocation-table" role="table">
+            <div class="c7ph-allocation-header" role="row">{{#each skillColumns}}<strong role="columnheader">{{this}}</strong>{{/each}}</div>
+            <div class="c7ph-allocation-rows">
+            {{#each occupationSkillRows}}
+              <div class="c7ph-allocation-row {{#if invalid}}is-invalid{{/if}}" role="row">
+                <div class="c7ph-allocation-skill-name" role="cell">
+                  <span class="c7ph-allocation-skill-heading"><span class="c7ph-allocation-skill-title">{{name}}</span><small class="c7ph-allocation-skill-source {{sourceClass}}">{{sourceLabel}}</small></span>
+                  {{#if requiresName}}<label><span>{{specializationLabel}}</span><input type="text" value="{{specialization}}" data-occupation-specialization data-slot-id="{{slotId}}" placeholder="{{specializationPlaceholder}}" /></label>{{/if}}
+                </div>
+                <span role="cell">{{base}}</span>
+                <span class="c7ph-allocation-personal-cell" role="cell">{{personal}}</span>
+                <label class="c7ph-allocation-occupation-cell {{#if totalWarning}}is-total-warning{{/if}}" role="cell" {{#if totalWarning}}title="{{totalWarningTitle}}"{{/if}}><input type="number" min="{{occupationMin}}" max="{{occupationMax}}" value="{{occupation}}" data-occupation-points data-slot-id="{{slotId}}" aria-label="{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Occupation'}}: {{name}}" {{#unless canEditOccupation}}disabled{{/unless}} /></label>
+                <span class="c7ph-allocation-experience-cell" role="cell">0</span>
+                <strong class="c7ph-allocation-total-cell {{#if totalWarning}}is-total-warning{{/if}}" role="cell" {{#if totalWarning}}title="{{totalWarningTitle}}"{{/if}}>{{total}}</strong>
+              </div>
+            {{/each}}
+            </div>
+          </section>
+        </div>
+
+        <p class="c7ph-allocation-footnote">{{localize 'GINZZZU_C7PH.Creation.Allocation.ExperienceZero'}}</p>
+      </div>
+    {{/unless}}
+  {{else}}
+    <div class="c7ph-wizard-notice"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Creation.Allocation.ExperienceZero'}}</span></div>
+    <div class="c7ph-allocation-header" role="row">{{#each skillColumns}}<strong role="columnheader">{{this}}</strong>{{/each}}</div>
+    <div class="c7ph-allocation-empty"><i class="fa-solid fa-star" aria-hidden="true"></i><strong>{{localize 'GINZZZU_C7PH.Creation.Placeholders.PersonalInterests'}}</strong><p>{{localize 'GINZZZU_C7PH.Creation.Allocation.ExperienceZero'}}</p></div>
+  {{/if}}
+</div>

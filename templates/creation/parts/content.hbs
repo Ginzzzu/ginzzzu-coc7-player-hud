@@ -1,0 +1,18 @@
+<div class="c7ph-wizard-content">
+  {{#unless sourceAvailable}}
+    <div class="c7ph-wizard-source-error">
+      <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+      <div><strong>{{localize 'GINZZZU_C7PH.Creation.Source.Unavailable'}}</strong><p>{{sourceError}}</p></div>
+    </div>
+  {{else}}
+    {{#if showSetup}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/setup.hbs"}}{{/if}}
+    {{#if showCharacteristics}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/characteristics.hbs"}}{{/if}}
+    {{#if showAge}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/age.hbs"}}{{/if}}
+    {{#if showDerived}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/derived.hbs"}}{{/if}}
+    {{#if showOccupation}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/occupation.hbs"}}{{/if}}
+    {{#if showOccupationSkills}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/allocation.hbs" occupationMode=true}}{{/if}}
+    {{#if showPersonalInterests}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/personal-interests.hbs"}}{{/if}}
+    {{#if showPersonalData}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/personal-data.hbs"}}{{/if}}
+    {{#if showReview}}{{> "modules/ginzzzu-coc7-player-hud/templates/creation/steps/review.hbs"}}{{/if}}
+  {{/unless}}
+</div>

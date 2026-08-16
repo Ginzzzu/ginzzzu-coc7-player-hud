@@ -1,0 +1,29 @@
+<footer class="c7ph-wizard-footer">
+  <button type="button" class="c7ph-wizard-reset" data-action="resetDraft">
+    <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+    <span>{{localize 'GINZZZU_C7PH.Creation.Actions.Reset'}}</span>
+  </button>
+  <span class="c7ph-wizard-progress">{{currentStepNumber}} / {{stepCount}}</span>
+  <div>
+    <button type="button" data-action="previousStep" {{#unless canPrevious}}disabled{{/unless}}>
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      <span>{{localize 'GINZZZU_C7PH.Creation.Actions.Previous'}}</span>
+    </button>
+    {{#if showReview}}
+      <button type="button" class="c7ph-wizard-create" data-action="createInvestigator" {{#unless reviewCanCreate}}disabled{{/unless}}>
+        {{#if reviewCreating}}
+          <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+          <span>{{localize 'GINZZZU_C7PH.Creation.Actions.Creating'}}</span>
+        {{else}}
+          <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+          <span>{{localize 'GINZZZU_C7PH.Creation.Actions.Open'}}</span>
+        {{/if}}
+      </button>
+    {{else}}
+      <button type="button" data-action="nextStep" {{#unless canNext}}disabled{{/unless}}>
+        <span>{{localize 'GINZZZU_C7PH.Creation.Actions.Next'}}</span>
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    {{/if}}
+  </div>
+</footer>

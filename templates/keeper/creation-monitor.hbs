@@ -1,0 +1,348 @@
+<div class="c7ph-keeper-monitor">
+  <header class="c7ph-keeper-monitor__header">
+    <div>
+      <span class="c7ph-keeper-monitor__eyebrow">{{localize "GINZZZU_C7PH.Keeper.Eyebrow"}}</span>
+      <h1>{{localize "GINZZZU_C7PH.Keeper.Heading"}}</h1>
+      <p>{{localize "GINZZZU_C7PH.Keeper.Hint"}}</p>
+    </div>
+    <button type="button" class="c7ph-keeper-monitor__refresh" data-action="refresh">
+      <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+      <span>{{localize "GINZZZU_C7PH.Keeper.Refresh"}}</span>
+    </button>
+  </header>
+
+  {{#if hasPlayers}}
+    <nav class="c7ph-keeper-monitor__tabs" aria-label="{{localize "GINZZZU_C7PH.Keeper.PlayerTabs"}}">
+      {{#each players}}
+        <button
+          type="button"
+          class="c7ph-keeper-monitor__tab {{statusClass}} {{activeClass}}{{#if isSelected}} is-selected{{/if}}"
+          data-action="selectPlayer"
+          data-user-id="{{userId}}"
+          aria-pressed="{{isSelected}}"
+        >
+          <span class="c7ph-keeper-monitor__tab-row c7ph-keeper-monitor__tab-row--primary">
+            <span class="c7ph-keeper-monitor__tab-name">{{userName}}</span>
+            <span class="c7ph-keeper-monitor__tab-status">
+              <i class="fa-solid {{statusIcon}}" aria-hidden="true"></i>
+              {{statusLabel}}
+            </span>
+          </span>
+          <span class="c7ph-keeper-monitor__tab-row c7ph-keeper-monitor__tab-row--secondary">
+            <span class="c7ph-keeper-monitor__tab-character">{{actorName}}</span>
+            <span class="c7ph-keeper-monitor__tab-progress">{{progressLabel}}</span>
+          </span>
+        </button>
+      {{/each}}
+    </nav>
+
+    {{#if selected}}
+      <section class="c7ph-keeper-monitor__content">
+        <div class="c7ph-keeper-monitor__summary {{selected.statusClass}}">
+          <div class="c7ph-keeper-monitor__summary-main">
+            <span class="c7ph-keeper-monitor__connection {{selected.activeClass}}">
+              <i class="fa-solid fa-circle" aria-hidden="true"></i>
+              {{#if selected.userActive}}
+                {{localize "GINZZZU_C7PH.Keeper.Online"}}
+              {{else}}
+                {{localize "GINZZZU_C7PH.Keeper.Offline"}}
+              {{/if}}
+            </span>
+            <h2>{{selected.userName}}</h2>
+            <p>
+              {{selected.actorName}}
+              {{#if selected.investigatorName}}
+                · {{selected.investigatorName}}
+              {{/if}}
+              {{#if selected.occupationName}}
+                · {{selected.occupationName}}
+              {{/if}}
+            </p>
+          </div>
+
+          <div class="c7ph-keeper-monitor__summary-status">
+            <span>{{localize "GINZZZU_C7PH.Keeper.CurrentState"}}</span>
+            <strong>
+              <i class="fa-solid {{selected.statusIcon}}" aria-hidden="true"></i>
+              {{selected.statusLabel}}
+            </strong>
+            <small>{{selected.currentStepLabel}}</small>
+          </div>
+
+          <div class="c7ph-keeper-monitor__summary-actions">
+            <button type="button" data-action="openActor" data-user-id="{{selected.userId}}">
+              <i class="fa-solid fa-user" aria-hidden="true"></i>
+              <span>{{localize "GINZZZU_C7PH.Keeper.OpenActor"}}</span>
+            </button>
+          </div>
+        </div>
+
+        <section class="c7ph-keeper-monitor__overview" aria-label="{{localize "GINZZZU_C7PH.Keeper.Progress"}}">
+          <div class="c7ph-keeper-monitor__overview-grid">
+            <div class="c7ph-keeper-monitor__overview-current">
+              <span>{{localize "GINZZZU_C7PH.Keeper.Progress"}}</span>
+              <strong>{{selected.currentStepLabel}}</strong>
+              <small>{{selected.progressLabel}}</small>
+            </div>
+
+            <div class="c7ph-keeper-monitor__overview-metric">
+              <span>{{localize "GINZZZU_C7PH.Keeper.OccupationPoints"}}</span>
+              <strong>{{selected.occupationPoints.spent}} / {{selected.occupationPoints.total}}</strong>
+            </div>
+
+            <div class="c7ph-keeper-monitor__overview-metric">
+              <span>{{localize "GINZZZU_C7PH.Keeper.PersonalPoints"}}</span>
+              <strong>{{selected.personalPoints.spent}} / {{selected.personalPoints.total}}</strong>
+            </div>
+
+            <div class="c7ph-keeper-monitor__overview-metric {{#if selected.hasIssues}}has-issues{{else}}is-ready{{/if}}">
+              <span>{{localize "GINZZZU_C7PH.Keeper.Issues"}}</span>
+              <strong>{{selected.issues.length}}</strong>
+              <small>
+                {{#if selected.isNotStarted}}
+                  {{localize "GINZZZU_C7PH.Keeper.Status.notStarted"}}
+                {{else if selected.hasIssues}}
+                  {{selected.currentStepLabel}}
+                {{else}}
+                  {{localize "GINZZZU_C7PH.Keeper.NoIssues"}}
+                {{/if}}
+              </small>
+            </div>
+          </div>
+
+          <ol class="c7ph-keeper-monitor__progress-strip">
+            {{#each selected.steps}}
+              <li class="{{className}}" title="{{number}}. {{label}}">
+                <span>{{number}}</span>
+              </li>
+            {{/each}}
+          </ol>
+        </section>
+
+        {{#if selected.review.available}}
+          <section class="c7ph-keeper-monitor__review">
+            <header class="c7ph-keeper-monitor__review-heading">
+              <div>
+                <span>{{selected.review.reviewEyebrow}}</span>
+                <h3>{{selected.review.reviewTitle}}</h3>
+              </div>
+              <small>
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                {{localize "GINZZZU_C7PH.Keeper.Review.ReadOnly"}}
+              </small>
+            </header>
+
+            {{#if selected.review.reviewIsPartial}}
+              <div class="c7ph-keeper-monitor__review-partial">
+                <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                <span>{{localize "GINZZZU_C7PH.Keeper.Review.PartialHint"}}</span>
+              </div>
+            {{/if}}
+
+            <div class="c7ph-keeper-monitor__review-summary">
+              <section class="c7ph-keeper-monitor__review-card">
+                <header>
+                  <strong>{{localize "GINZZZU_C7PH.Creation.Review.IdentityTitle"}}</strong>
+                </header>
+                <dl class="c7ph-keeper-monitor__review-identity">
+                  {{#each selected.review.reviewIdentity}}
+                    <div><dt>{{label}}</dt><dd>{{value}}</dd></div>
+                  {{/each}}
+                </dl>
+              </section>
+
+              <section class="c7ph-keeper-monitor__review-card">
+                <header>
+                  <div>
+                    <strong>{{localize "GINZZZU_C7PH.Creation.Review.CharacteristicsTitle"}}</strong>
+                    <small>{{localize "GINZZZU_C7PH.Creation.Review.CharacteristicsHint"}}</small>
+                  </div>
+                </header>
+                {{#if selected.review.reviewHasCharacteristics}}
+                  <div class="c7ph-keeper-monitor__review-characteristics">
+                    {{#each selected.review.reviewCharacteristics}}
+                      <article>
+                        <span>{{label}}</span>
+                        <strong>{{value}}</strong>
+                        <small>
+                          {{half}} / {{extreme}}
+                          {{#if ready}}{{#if adjustment}} · {{adjustmentText}}{{/if}}{{/if}}
+                        </small>
+                      </article>
+                    {{/each}}
+                  </div>
+                {{else}}
+                  <p class="c7ph-keeper-monitor__review-empty">
+                    {{selected.review.reviewCharacteristicsEmpty}}
+                  </p>
+                {{/if}}
+              </section>
+            </div>
+
+            <section class="c7ph-keeper-monitor__review-card">
+              <header>
+                <strong>{{localize "GINZZZU_C7PH.Creation.Review.DerivedTitle"}}</strong>
+              </header>
+              {{#if selected.review.reviewDerivedReady}}
+                <div class="c7ph-keeper-monitor__review-derived">
+                  {{#each selected.review.reviewDerivedValues}}
+                    <article title="{{hint}}">
+                      <i class="{{icon}}" aria-hidden="true"></i>
+                      <span>{{label}}</span>
+                      <strong>{{value}}</strong>
+                    </article>
+                  {{/each}}
+                </div>
+              {{else}}
+                <p class="c7ph-keeper-monitor__review-empty">
+                  {{selected.review.reviewDerivedEmpty}}
+                </p>
+              {{/if}}
+            </section>
+
+            <section class="c7ph-keeper-monitor__review-card c7ph-keeper-monitor__review-skills-card">
+              <header>
+                <div>
+                  <strong>{{localize "GINZZZU_C7PH.Creation.Review.SkillsTitle"}}</strong>
+                  <small>
+                    {{localize "GINZZZU_C7PH.Creation.Review.OccupationPoints"}}:
+                    {{selected.review.reviewOccupationPointsSpent}} / {{selected.review.reviewOccupationPointsTotal}}
+                    ·
+                    {{localize "GINZZZU_C7PH.Creation.Review.PersonalPoints"}}:
+                    {{selected.review.reviewPersonalPointsSpent}} / {{selected.review.reviewPersonalPointsTotal}}
+                  </small>
+                </div>
+              </header>
+
+              {{#if selected.review.reviewHasSkills}}
+                <div class="c7ph-keeper-monitor__review-skills-scroll">
+                  <div class="c7ph-keeper-monitor__review-skills-table">
+                    <div class="c7ph-keeper-monitor__review-skills-header">
+                      <strong>{{localize "GINZZZU_C7PH.Creation.SkillColumns.Skill"}}</strong>
+                      <strong>{{localize "GINZZZU_C7PH.Creation.SkillColumns.Base"}}</strong>
+                      <strong>{{localize "GINZZZU_C7PH.Creation.SkillColumns.Personal"}}</strong>
+                      <strong>{{localize "GINZZZU_C7PH.Creation.SkillColumns.Occupation"}}</strong>
+                      <strong>{{localize "GINZZZU_C7PH.Creation.SkillColumns.Total"}}</strong>
+                    </div>
+                    {{#each selected.review.reviewSkillRows}}
+                      <div class="c7ph-keeper-monitor__review-skill-row">
+                        <span class="c7ph-keeper-monitor__review-skill-name">
+                          <span>{{name}}</span>
+                          {{#if sourceLabel}}<small class="{{sourceClass}}">{{sourceLabel}}</small>{{/if}}
+                        </span>
+                        <span>{{base}}</span>
+                        <span>{{personal}}</span>
+                        <span>{{occupation}}</span>
+                        <strong>{{total}}</strong>
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+              {{else}}
+                <p class="c7ph-keeper-monitor__review-empty">
+                  {{selected.review.reviewSkillsEmpty}}
+                </p>
+              {{/if}}
+            </section>
+
+            <section class="c7ph-keeper-monitor__review-card">
+              <header>
+                <strong>{{localize "GINZZZU_C7PH.Creation.Review.BackstoryTitle"}}</strong>
+              </header>
+              {{#if selected.review.reviewHasBackstory}}
+                <div class="c7ph-keeper-monitor__review-backstory">
+                  {{#each selected.review.reviewBackstory}}
+                    <article><strong>{{label}}</strong><p>{{value}}</p></article>
+                  {{/each}}
+                </div>
+              {{else}}
+                <p class="c7ph-keeper-monitor__review-empty">
+                  {{selected.review.reviewBackstoryEmpty}}
+                </p>
+              {{/if}}
+            </section>
+          </section>
+        {{else}}
+          {{#unless selected.isNotStarted}}
+            <section class="c7ph-keeper-monitor__review-unavailable">
+              <i class="fa-solid fa-file-circle-exclamation" aria-hidden="true"></i>
+              <div>
+                <strong>{{localize "GINZZZU_C7PH.Keeper.Review.UnavailableTitle"}}</strong>
+                <p>{{localize "GINZZZU_C7PH.Keeper.Review.UnavailableHint"}}</p>
+              </div>
+            </section>
+          {{/unless}}
+        {{/if}}
+
+        <div class="c7ph-keeper-monitor__diagnostics">
+          <details class="c7ph-keeper-monitor__panel c7ph-keeper-monitor__details c7ph-keeper-monitor__steps">
+            <summary>
+              <span class="c7ph-keeper-monitor__details-title">
+                <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                <span>
+                  <strong>{{localize "GINZZZU_C7PH.Keeper.Progress"}}</strong>
+                  <small>{{selected.currentStepLabel}}</small>
+                </span>
+              </span>
+              <span class="c7ph-keeper-monitor__details-count">{{selected.completedCount}} / {{selected.stepTotal}}</span>
+              <i class="fa-solid fa-chevron-down c7ph-keeper-monitor__details-chevron" aria-hidden="true"></i>
+            </summary>
+            <ol>
+              {{#each selected.steps}}
+                <li class="{{className}}">
+                  <span class="c7ph-keeper-monitor__step-number">{{number}}</span>
+                  <span class="c7ph-keeper-monitor__step-label">{{label}}</span>
+                  <i class="fa-solid {{icon}}" aria-hidden="true"></i>
+                </li>
+              {{/each}}
+            </ol>
+          </details>
+
+          <details class="c7ph-keeper-monitor__panel c7ph-keeper-monitor__details c7ph-keeper-monitor__issues">
+            <summary>
+              <span class="c7ph-keeper-monitor__details-title">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                <span>
+                  <strong>{{localize "GINZZZU_C7PH.Keeper.Issues"}}</strong>
+                  <small>{{selected.currentStepLabel}}</small>
+                </span>
+              </span>
+              <span class="c7ph-keeper-monitor__details-count">{{selected.issues.length}}</span>
+              <i class="fa-solid fa-chevron-down c7ph-keeper-monitor__details-chevron" aria-hidden="true"></i>
+            </summary>
+            {{#if selected.isNotStarted}}
+              <p class="c7ph-keeper-monitor__empty-note">
+                {{localize "GINZZZU_C7PH.Keeper.NotStartedHint"}}
+              </p>
+            {{else if selected.hasIssues}}
+              <ul>
+                {{#each selected.issues}}
+                  <li>
+                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                    <span>{{label}}</span>
+                    <small>{{stepLabel}}</small>
+                  </li>
+                {{/each}}
+              </ul>
+            {{else}}
+              <p class="c7ph-keeper-monitor__ready-note">
+                <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                {{localize "GINZZZU_C7PH.Keeper.NoIssues"}}
+              </p>
+            {{/if}}
+          </details>
+        </div>
+
+        <p class="c7ph-keeper-monitor__updated">
+          {{localize "GINZZZU_C7PH.Keeper.LastUpdated"}}: {{selected.lastUpdated}}
+        </p>
+      </section>
+    {{/if}}
+  {{else}}
+    <div class="c7ph-keeper-monitor__empty">
+      <i class="fa-solid fa-users-slash" aria-hidden="true"></i>
+      <h2>{{localize "GINZZZU_C7PH.Keeper.EmptyTitle"}}</h2>
+      <p>{{localize "GINZZZU_C7PH.Keeper.EmptyHint"}}</p>
+    </div>
+  {{/if}}
+</div>

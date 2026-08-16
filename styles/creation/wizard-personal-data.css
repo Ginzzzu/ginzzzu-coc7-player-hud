@@ -1,0 +1,168 @@
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-stage {
+  overflow: auto;
+  scrollbar-color: var(--c7ph-wizard-accent) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 14px;
+  min-height: 100%;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card {
+  min-width: 0;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 9px;
+  background: var(--c7ph-wizard-surface);
+  padding: 14px 16px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header strong {
+  font-size: 14px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header small,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header > span {
+  flex: 0 0 auto;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(150px, 1fr));
+  align-content: start;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field > span,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field > span > em {
+  color: var(--c7ph-wizard-accent);
+  font-style: normal;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field input,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field select,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field textarea {
+  width: 100%;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 6px;
+  background: #202121;
+  color: var(--c7ph-wizard-text);
+  color-scheme: dark;
+  font: inherit;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field input,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field select {
+  min-height: 36px;
+  padding-inline: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field select option {
+  background: #202121;
+  color: var(--c7ph-wizard-text);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field textarea {
+  min-height: 78px;
+  padding: 8px 10px;
+  line-height: 1.35;
+  resize: vertical;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field input:focus-visible,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field select:focus-visible,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field textarea:focus-visible {
+  border-color: var(--c7ph-wizard-accent);
+  outline: 2px solid var(--c7ph-wizard-accent-soft);
+  outline-offset: 1px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 12px 0 0;
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-note > i {
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field.is-wide {
+  grid-column: 1 / -1;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field.is-wide textarea {
+  min-height: 68px;
+}
+
+@media (max-width: 940px) {
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field.is-name {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-card > header {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field-grid,
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-personal-data-field.is-name,
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-backstory-field.is-wide {
+    grid-column: auto;
+  }
+}

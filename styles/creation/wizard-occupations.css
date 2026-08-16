@@ -1,0 +1,159 @@
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-stage {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-toolbar > label {
+  display: grid;
+  flex: 0 1 360px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-toolbar input {
+  width: 100%;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: var(--c7ph-wizard-text);
+  box-shadow: none;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-toolbar > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-sources {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-sources > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--c7ph-wizard-accent-soft);
+  color: var(--c7ph-wizard-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-sources small {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  align-content: start;
+  gap: 8px;
+  min-height: 0;
+  padding-inline-end: 5px;
+  overflow-y: auto;
+  scrollbar-color: var(--c7ph-wizard-accent) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-card {
+  display: grid;
+  position: relative;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  min-height: 82px;
+  padding: 8px 9px;
+  border-color: var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: var(--c7ph-wizard-surface);
+  text-align: start;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-card:hover {
+  background: var(--c7ph-wizard-accent-soft);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-card.is-selected {
+  padding-inline-end: 30px;
+  border-color: var(--c7ph-wizard-accent);
+  background: var(--c7ph-wizard-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-card > img {
+  width: 44px;
+  height: 44px;
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-copy,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-stats {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-copy > strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-copy > small,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-stats > small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-points {
+  display: flex;
+  gap: 3px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-points > small {
+  flex: 0 0 auto;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--c7ph-wizard-accent);
+  font-size: 9px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-stats {
+  justify-items: end;
+  text-align: end;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-occupation-selected-icon {
+  position: absolute;
+  inset-block-start: 7px;
+  inset-inline-end: 7px;
+  color: var(--c7ph-wizard-accent);
+  font-size: 15px;
+}
+

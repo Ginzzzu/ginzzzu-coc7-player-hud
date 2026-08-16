@@ -1,0 +1,1059 @@
+#ginzzzu-coc7-player-hud-app .c7ph-characteristics,
+#ginzzzu-coc7-player-hud-app .c7ph-combat,
+#ginzzzu-coc7-player-hud-app .c7ph-consequences,
+#ginzzzu-coc7-player-hud-app .c7ph-skills {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-characteristic-grid,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-scroll,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-scroll,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-list {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px 6px 2px 2px;
+  scrollbar-color: var(--c7ph-accent) rgba(9, 15, 13, 0.7);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-characteristic-grid::-webkit-scrollbar,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-scroll::-webkit-scrollbar,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-scroll::-webkit-scrollbar,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-characteristic-grid::-webkit-scrollbar-track,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-scroll::-webkit-scrollbar-track,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-scroll::-webkit-scrollbar-track,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-list::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(8, 14, 12, 0.72);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-characteristic-grid::-webkit-scrollbar-thumb,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-scroll::-webkit-scrollbar-thumb,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-scroll::-webkit-scrollbar-thumb,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(var(--c7ph-accent-bright), var(--c7ph-accent));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-characteristic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  align-content: start;
+  gap: 8px;
+  max-height: min(440px, calc(100dvh - 160px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-check-card,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-card,
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-card,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-card {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 18% -30%, rgba(104, 132, 108, 0.12), transparent 55%),
+    linear-gradient(145deg, rgba(38, 47, 41, 0.88), rgba(18, 25, 22, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(224, 211, 170, 0.035),
+    inset 0 -12px 24px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    transform 120ms ease;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-check-card:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-check-card:focus-visible,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-card:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-card:focus-within,
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-card:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-card:focus-visible,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill:focus-visible {
+  border-color: var(--c7ph-accent);
+  background:
+    radial-gradient(circle at 20% -20%, rgba(112, 143, 117, 0.2), transparent 58%),
+    linear-gradient(145deg, var(--c7ph-surface-hover), rgba(25, 36, 30, 0.96));
+  box-shadow:
+    inset 0 0 0 1px rgba(115, 140, 120, 0.08),
+    inset 0 0 18px rgba(83, 111, 91, 0.08);
+  transform: translateY(-1px);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-check-card:active,
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-card:active,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill:active {
+  transform: translateY(0);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-check-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: stretch;
+  gap: 14px;
+  min-height: 64px;
+  padding: 10px 12px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-check-card-label {
+  overflow: hidden;
+  color: var(--c7ph-text);
+  font-size: 14px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-check-card-value {
+  min-width: 44px;
+  color: var(--c7ph-text);
+  font-size: 26px;
+  line-height: 1;
+  text-align: right;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skills {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: min(580px, calc(100dvh - 116px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-views {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: stretch;
+  gap: 4px;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-views::-webkit-scrollbar {
+  display: none;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-views > button {
+  flex: 0 0 auto;
+  min-height: 34px;
+  padding: 5px 9px;
+  border: 1px solid var(--c7ph-border-dim);
+  background: rgba(17, 25, 22, 0.72);
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-views > button.is-active {
+  border-color: var(--c7ph-accent);
+  background:
+    radial-gradient(circle at 50% 130%, var(--c7ph-eldritch-soft), transparent 72%),
+    rgba(133, 111, 61, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(169, 146, 93, 0.08);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-views > button > small {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  min-height: 20px;
+  padding-inline: 5px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--c7ph-text-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-search {
+  display: grid;
+  flex: 0 1 220px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  width: clamp(130px, 20vw, 220px);
+  min-width: 130px;
+  min-height: 34px;
+  padding: 4px 8px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 7px;
+  background: rgba(7, 13, 11, 0.72);
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.14);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-search:focus-within {
+  border-color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-search > i {
+  color: var(--c7ph-text-muted);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-search > input {
+  width: 100%;
+  height: 26px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-search > input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+  align-content: start;
+  gap: 7px;
+  max-height: min(500px, calc(100dvh - 210px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  min-height: 54px;
+  overflow: hidden;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-card.is-favorite {
+  border-color: var(--c7ph-accent-soft);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-check {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: stretch;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 9px 8px 9px 12px;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-check:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-check:focus-visible,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-favorite:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-skill-favorite:focus-visible {
+  background: rgba(88, 113, 93, 0.12);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-name,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-name > span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--c7ph-text);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-occupation-marker {
+  flex: 0 0 auto;
+  color: var(--c7ph-accent);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-check > strong {
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  min-height: 34px;
+  padding: 3px 7px;
+  border: 1px solid var(--c7ph-accent-soft);
+  border-radius: 7px;
+  background: rgba(169, 143, 98, 0.14);
+  color: var(--c7ph-accent);
+  font-size: 17px;
+  line-height: 1;
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-favorite {
+  align-self: stretch;
+  width: 36px;
+  min-height: 100%;
+  padding: 0;
+  border-inline-start: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  color: var(--c7ph-text-muted);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-favorite.is-active {
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-empty {
+  min-height: 120px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  max-height: min(640px, calc(100dvh - 116px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 30px;
+  color: var(--c7ph-text-muted);
+  font-size: 12px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-summary > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--c7ph-text);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-summary > span > i,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-summary > span > strong {
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  align-items: center;
+  gap: 8px 12px;
+  min-height: 46px;
+  padding: 6px 8px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 5% 50%, rgba(109, 137, 112, 0.12), transparent 38%),
+    linear-gradient(145deg, rgba(28, 37, 32, 0.88), rgba(12, 19, 17, 0.92));
+  box-shadow: inset 0 1px 0 rgba(220, 208, 169, 0.025);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter.is-in-combat {
+  border-color: rgba(169, 146, 93, 0.48);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter.is-current-turn {
+  border-color: var(--c7ph-accent);
+  background:
+    radial-gradient(circle at 5% 50%, rgba(114, 145, 119, 0.22), transparent 42%),
+    linear-gradient(145deg, rgba(71, 67, 43, 0.38), rgba(24, 34, 29, 0.94));
+  box-shadow:
+    inset 0 0 0 1px rgba(193, 170, 114, 0.12),
+    inset 0 0 20px rgba(84, 112, 92, 0.08);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--c7ph-border);
+  border-radius: 7px;
+  background: rgba(5, 11, 9, 0.66);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.18);
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-copy {
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-copy > strong,
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-copy > small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-copy > strong {
+  color: var(--c7ph-text);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-copy > small {
+  margin-top: 2px;
+  color: var(--c7ph-text-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-turn-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  margin-inline-start: auto;
+  padding: 3px 7px;
+  border: 1px solid var(--c7ph-accent-soft);
+  border-radius: 999px;
+  background: rgba(139, 119, 67, 0.2);
+  color: var(--c7ph-accent);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 7px;
+  background: rgba(5, 11, 9, 0.62);
+  color: var(--c7ph-text-muted);
+  font-size: 10px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action:focus-visible {
+  border-color: var(--c7ph-accent);
+  background: var(--c7ph-surface-hover);
+  color: var(--c7ph-text);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action > i {
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action > strong {
+  min-width: 20px;
+  color: var(--c7ph-accent);
+  font-size: 11px;
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action.is-primary,
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action.is-active {
+  border-color: var(--c7ph-accent-soft);
+  background: rgba(139, 119, 67, 0.2);
+  color: var(--c7ph-text);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action.is-leave {
+  border-color: rgba(190, 88, 73, 0.28);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-encounter-action:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-scroll {
+  max-height: min(520px, calc(100dvh - 205px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-loadout-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 50px;
+  padding: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-loadout-empty > i {
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-group + .c7ph-combat-group,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-group + .c7ph-encounter,
+#ginzzzu-coc7-player-hud-app .c7ph-encounter + .c7ph-combat-group {
+  margin-top: 12px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-group > h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 7px;
+  color: var(--c7ph-accent-bright);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-group > h3::before {
+  content: "◆";
+  color: var(--c7ph-eldritch);
+  font-size: 7px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-group > h3::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(169, 146, 93, 0.42), transparent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-grid,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill-grid {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-card {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 8px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-card.is-out-of-ammo {
+  border-color: rgba(165, 95, 88, 0.62);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-header {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-header > img,
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill > img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--c7ph-border);
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-copy {
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-copy > strong,
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-copy > small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-copy > strong {
+  color: var(--c7ph-text);
+  line-height: 1.2;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-copy > small {
+  margin-top: 4px;
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 5px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 4px 7px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 7px;
+  background: rgba(5, 11, 9, 0.58);
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-app button.c7ph-weapon-action:hover,
+#ginzzzu-coc7-player-hud-app button.c7ph-weapon-action:focus-visible {
+  border-color: var(--c7ph-accent);
+  background: var(--c7ph-surface-hover);
+  color: var(--c7ph-text);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action.is-primary {
+  border-color: var(--c7ph-accent-soft);
+  background: linear-gradient(145deg, rgba(133, 111, 61, 0.2), rgba(58, 75, 63, 0.16));
+  color: var(--c7ph-text);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action.is-attack {
+  border-color: rgba(155, 70, 62, 0.78);
+  background: linear-gradient(180deg, rgba(111, 42, 38, 0.94), rgba(67, 25, 24, 0.96));
+  color: #f0d9d2;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+#ginzzzu-coc7-player-hud-app button.c7ph-weapon-action.is-attack:not(:disabled):hover,
+#ginzzzu-coc7-player-hud-app button.c7ph-weapon-action.is-attack:not(:disabled):focus-visible {
+  border-color: rgba(205, 104, 92, 0.92);
+  background: linear-gradient(180deg, rgba(139, 51, 45, 0.98), rgba(84, 29, 27, 0.98));
+  color: #fff0eb;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action.is-attack > i {
+  color: inherit;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action.is-disabled {
+  opacity: 0.55;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action > i {
+  flex: 0 0 auto;
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-action > strong {
+  flex: 0 0 auto;
+  color: var(--c7ph-accent);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-editor {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  min-height: 26px;
+  padding: 2px 6px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 7px;
+  background: rgba(5, 11, 9, 0.62);
+  color: var(--c7ph-text-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-weapon-header > .c7ph-ammo-editor {
+  justify-self: end;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-editor.is-empty {
+  border-color: rgba(165, 95, 88, 0.62);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-editor > span:first-child {
+  color: var(--c7ph-text-muted);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-editor input {
+  width: 38px;
+  height: 22px;
+  min-width: 0;
+  margin: 0;
+  padding: 2px 4px;
+  border: 1px solid var(--c7ph-border);
+  border-radius: 5px;
+  background: rgba(3, 9, 7, 0.72);
+  color: var(--c7ph-text);
+  box-shadow: none;
+  font-size: 11px;
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-editor input:focus {
+  border-color: var(--c7ph-accent);
+  outline: none;
+  box-shadow: none;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-editor > strong {
+  min-width: 18px;
+  color: var(--c7ph-text);
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-ammo-separator {
+  opacity: 0.58;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  justify-content: stretch;
+  gap: 9px;
+  min-height: 52px;
+  padding: 7px 9px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill > img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill-name > span {
+  overflow: hidden;
+  color: var(--c7ph-text);
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-combat-skill > strong {
+  min-width: 36px;
+  color: var(--c7ph-accent);
+  font-size: 17px;
+  text-align: right;
+}
+
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequences {
+  grid-template-rows: minmax(0, 1fr) auto;
+  max-height: min(600px, calc(100dvh - 116px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-scroll {
+  max-height: min(530px, calc(100dvh - 185px));
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-group + .c7ph-consequence-group {
+  margin-top: 14px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-group > h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 7px;
+  color: var(--c7ph-accent-bright);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-group > h3::before {
+  content: "◆";
+  color: var(--c7ph-eldritch);
+  font-size: 7px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-group > h3::after {
+  content: "";
+  order: 1;
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(169, 146, 93, 0.42), transparent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-group > h3 > small {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  min-height: 20px;
+  order: 2;
+  margin-inline-start: 0;
+  padding-inline: 5px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--c7ph-text-muted);
+  font-size: 10px;
+  letter-spacing: normal;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(285px, 100%), 1fr));
+  align-content: start;
+  gap: 8px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-card {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 7px 10px;
+  min-height: 76px;
+  padding: 9px 10px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-card > img {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--c7ph-border);
+  border-radius: 7px;
+  object-fit: cover;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-copy {
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-copy > strong,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-copy > small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-copy > strong {
+  color: var(--c7ph-text);
+  line-height: 1.2;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-copy > small {
+  margin-top: 4px;
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-copy > small > i,
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-duration > i {
+  margin-inline-end: 4px;
+  color: var(--c7ph-accent);
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-duration {
+  display: inline-flex;
+  align-items: center;
+  max-width: 130px;
+  min-height: 26px;
+  padding: 3px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: rgba(5, 11, 9, 0.58);
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-consequence-card > p {
+  grid-column: 1 / -1;
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-roll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+  margin: 0;
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-roll-hint > i {
+  flex: 0 0 auto;
+  color: var(--c7ph-accent);
+}
+
+@media (max-width: 700px) {
+  #ginzzzu-coc7-player-hud-app .c7ph-skill-toolbar {
+    gap: 6px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-skill-search {
+    flex-basis: 170px;
+    width: clamp(110px, 30vw, 170px);
+    min-width: 110px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-combat-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-encounter {
+    grid-template-columns: 1fr;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-encounter-actions {
+    justify-content: flex-start;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-action {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  #ginzzzu-coc7-player-hud-app .c7ph-encounter-state {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-turn-badge {
+    margin-inline-start: 38px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-encounter-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-encounter-action {
+    white-space: normal;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-header {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-header > img {
+    width: 34px;
+    height: 34px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-header > .c7ph-ammo-editor {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ginzzzu-coc7-player-hud-app .c7ph-check-card,
+  #ginzzzu-coc7-player-hud-app .c7ph-skill-card,
+  #ginzzzu-coc7-player-hud-app .c7ph-weapon-card,
+  #ginzzzu-coc7-player-hud-app .c7ph-combat-skill,
+  #ginzzzu-coc7-player-hud-app .c7ph-consequence-card {
+    transition: none;
+  }
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-skill-footer .c7ph-roll-hint {
+  flex: 1 1 auto;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-clear-recent {
+  flex: 0 0 auto;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid rgba(190, 88, 73, 0.36);
+  border-radius: 6px;
+  background: rgba(190, 88, 73, 0.1);
+  color: var(--c7ph-text-muted);
+  font-size: 11px;
+}
+
+#ginzzzu-coc7-player-hud-app .c7ph-clear-recent:hover,
+#ginzzzu-coc7-player-hud-app .c7ph-clear-recent:focus-visible {
+  border-color: rgba(190, 88, 73, 0.68);
+  color: var(--c7ph-text);
+}
+
+@media (max-width: 620px) {
+  #ginzzzu-coc7-player-hud-app .c7ph-skill-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-clear-recent {
+    align-self: flex-start;
+  }
+}

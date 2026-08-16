@@ -1,0 +1,153 @@
+<div class="c7ph-wizard-stage c7ph-review-stage">
+  <section class="c7ph-review-status {{reviewStatusClass}}" aria-live="polite">
+    <div>
+      <i class="fa-solid {{reviewStatusIcon}}" aria-hidden="true"></i>
+      <span>
+        <strong>{{reviewStatusTitle}}</strong>
+        <small>{{reviewStatusHint}}</small>
+      </span>
+    </div>
+
+    {{#if reviewIssues.length}}
+      <div class="c7ph-review-issues">
+        {{#each reviewIssues}}
+          <button type="button" data-action="setStep" data-creation-step="{{step}}">
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            <span>{{label}}</span>
+          </button>
+        {{/each}}
+      </div>
+    {{/if}}
+  </section>
+
+  <div class="c7ph-review-scroll">
+    <div class="c7ph-review-summary-grid">
+      <section class="c7ph-review-card">
+        <header>
+          <strong>{{localize 'GINZZZU_C7PH.Creation.Review.IdentityTitle'}}</strong>
+          <button type="button" data-action="setStep" data-creation-step="{{reviewEditSteps.personalData}}">
+            <i class="fa-solid fa-pen" aria-hidden="true"></i>
+            <span>{{localize 'GINZZZU_C7PH.Creation.Review.Edit'}}</span>
+          </button>
+        </header>
+        <dl class="c7ph-review-identity">
+          {{#each reviewIdentity}}
+            <div><dt>{{label}}</dt><dd>{{value}}</dd></div>
+          {{/each}}
+        </dl>
+      </section>
+
+      <section class="c7ph-review-card">
+        <header>
+          <div>
+            <strong>{{localize 'GINZZZU_C7PH.Creation.Review.CharacteristicsTitle'}}</strong>
+            <small>{{localize 'GINZZZU_C7PH.Creation.Review.CharacteristicsHint'}}</small>
+          </div>
+          <div class="c7ph-review-card-actions">
+            <button type="button" data-action="setStep" data-creation-step="{{reviewEditSteps.characteristics}}">
+              <i class="fa-solid fa-dice" aria-hidden="true"></i>
+              <span>{{localize 'GINZZZU_C7PH.Creation.Review.EditCharacteristics'}}</span>
+            </button>
+            <button type="button" data-action="setStep" data-creation-step="{{reviewEditSteps.age}}">
+              <i class="fa-solid fa-cake-candles" aria-hidden="true"></i>
+              <span>{{localize 'GINZZZU_C7PH.Creation.Review.EditAge'}}</span>
+            </button>
+          </div>
+        </header>
+        <div class="c7ph-review-characteristics">
+          {{#each reviewCharacteristics}}
+            <article>
+              <span>{{label}}</span>
+              <strong>{{value}}</strong>
+              <small>
+                {{half}} / {{extreme}}
+                {{#if adjustment}} · {{adjustmentText}}{{/if}}
+              </small>
+            </article>
+          {{/each}}
+        </div>
+      </section>
+    </div>
+
+    <section class="c7ph-review-card c7ph-review-derived-card">
+      <header><strong>{{localize 'GINZZZU_C7PH.Creation.Review.DerivedTitle'}}</strong></header>
+      <div class="c7ph-review-derived">
+        {{#each reviewDerivedValues}}
+          <article title="{{hint}}">
+            <i class="{{icon}}" aria-hidden="true"></i>
+            <span>{{label}}</span>
+            <strong>{{value}}</strong>
+          </article>
+        {{/each}}
+      </div>
+    </section>
+
+    <section class="c7ph-review-card c7ph-review-skills-card">
+      <header>
+        <div>
+          <strong>{{localize 'GINZZZU_C7PH.Creation.Review.SkillsTitle'}}</strong>
+          <small>
+            {{localize 'GINZZZU_C7PH.Creation.Review.OccupationPoints'}}:
+            {{reviewOccupationPointsSpent}} / {{reviewOccupationPointsTotal}}
+            ·
+            {{localize 'GINZZZU_C7PH.Creation.Review.PersonalPoints'}}:
+            {{reviewPersonalPointsSpent}} / {{reviewPersonalPointsTotal}}
+          </small>
+        </div>
+        <div class="c7ph-review-card-actions">
+          <button type="button" data-action="setStep" data-creation-step="{{reviewEditSteps.occupationSkills}}">
+            <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+            <span>{{localize 'GINZZZU_C7PH.Creation.Review.EditOccupationSkills'}}</span>
+          </button>
+          <button type="button" data-action="setStep" data-creation-step="{{reviewEditSteps.personalInterests}}">
+            <i class="fa-solid fa-star" aria-hidden="true"></i>
+            <span>{{localize 'GINZZZU_C7PH.Creation.Review.EditPersonalSkills'}}</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="c7ph-review-skills-scroll">
+        <div class="c7ph-review-skills-table">
+          <div class="c7ph-review-skills-header">
+            <strong>{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Skill'}}</strong>
+            <strong>{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Base'}}</strong>
+            <strong>{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Personal'}}</strong>
+            <strong>{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Occupation'}}</strong>
+            <strong>{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Total'}}</strong>
+          </div>
+          {{#each reviewSkillRows}}
+            <div class="c7ph-review-skill-row">
+              <span class="c7ph-review-skill-name">
+                <span>{{name}}</span>
+                {{#if sourceLabel}}<small class="{{sourceClass}}">{{sourceLabel}}</small>{{/if}}
+              </span>
+              <span>{{base}}</span>
+              <span>{{personal}}</span>
+              <span>{{occupation}}</span>
+              <strong>{{total}}</strong>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <section class="c7ph-review-card c7ph-review-backstory-card">
+      <header>
+        <strong>{{localize 'GINZZZU_C7PH.Creation.Review.BackstoryTitle'}}</strong>
+        <button type="button" data-action="setStep" data-creation-step="{{reviewEditSteps.personalData}}">
+          <i class="fa-solid fa-pen" aria-hidden="true"></i>
+          <span>{{localize 'GINZZZU_C7PH.Creation.Review.Edit'}}</span>
+        </button>
+      </header>
+      {{#if reviewHasBackstory}}
+        <div class="c7ph-review-backstory">
+          {{#each reviewBackstory}}
+            <article><strong>{{label}}</strong><p>{{value}}</p></article>
+          {{/each}}
+        </div>
+      {{else}}
+        <p class="c7ph-review-empty">{{localize 'GINZZZU_C7PH.Creation.Review.BackstoryEmpty'}}</p>
+      {{/if}}
+    </section>
+  </div>
+</div>

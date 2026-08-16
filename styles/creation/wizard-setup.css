@@ -1,0 +1,80 @@
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-card {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 22px;
+  grid-template-areas:
+    "image copy icon"
+    "image meta icon";
+  align-content: center;
+  align-items: center;
+  gap: 8px 12px;
+  width: 100%;
+  height: auto;
+  min-height: 118px;
+  max-height: none;
+  padding: 12px;
+  border-color: var(--c7ph-wizard-border);
+  border-radius: 10px;
+  background: var(--c7ph-wizard-surface);
+  overflow: hidden;
+  text-align: start;
+  white-space: normal;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-card:hover,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-card.is-selected {
+  background: var(--c7ph-wizard-accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(185, 154, 98, 0.28);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-card > img {
+  grid-area: image;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 9px;
+  object-fit: cover;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-copy,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-meta {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-copy {
+  grid-area: copy;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-meta {
+  grid-area: meta;
+  grid-template-columns: repeat(2, minmax(0, auto));
+  justify-content: start;
+  column-gap: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-copy strong {
+  font-size: 17px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-copy small,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-meta small {
+  color: var(--c7ph-wizard-muted);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-copy > span {
+  color: var(--c7ph-wizard-accent);
+  font-size: 12px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-setup-card > i {
+  grid-area: icon;
+  color: var(--c7ph-wizard-accent);
+  font-size: 19px;
+}

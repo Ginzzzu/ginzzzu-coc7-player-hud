@@ -1,0 +1,17 @@
+<div class="c7ph-wizard-stage c7ph-wizard-setup-stage">
+  <p class="c7ph-wizard-intro">{{localize 'GINZZZU_C7PH.Creation.Setup.Intro'}}</p>
+  <div class="c7ph-setup-grid">
+    {{#each setups}}
+      <button type="button" class="c7ph-setup-card {{#if selected}}is-selected{{/if}}" data-action="selectSetup" data-setup-uuid="{{uuid}}" aria-pressed="{{#if selected}}true{{else}}false{{/if}}">
+        <img src="{{img}}" alt="" />
+        <span class="c7ph-setup-copy"><strong>{{name}}</strong><small>{{source}}</small><span>{{methodLabel}}</span></span>
+        <span class="c7ph-setup-meta">
+          {{#if pointEnabled}}<small>{{localize 'GINZZZU_C7PH.Creation.Setup.PointBudget' points=pointBudget}}</small>{{/if}}
+          <small>{{localize 'GINZZZU_C7PH.Creation.Setup.Skills' count=itemCount}}</small>
+          <small>{{localize 'GINZZZU_C7PH.Creation.Setup.BioSections' count=bioSections.length}}</small>
+        </span>
+        <i class="fa-solid {{#if selected}}fa-circle-check{{else}}fa-circle{{/if}}" aria-hidden="true"></i>
+      </button>
+    {{/each}}
+  </div>
+</div>

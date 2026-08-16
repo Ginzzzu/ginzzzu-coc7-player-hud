@@ -1,0 +1,38 @@
+<div class="c7ph-wizard-stage c7ph-occupation-stage">
+  <div class="c7ph-occupation-toolbar">
+    <label>
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="search" value="{{occupationQuery}}" placeholder="{{localize 'GINZZZU_C7PH.Creation.Occupation.Search'}}" aria-label="{{localize 'GINZZZU_C7PH.Creation.Occupation.Search'}}" data-occupation-search />
+    </label>
+    <span>{{localize 'GINZZZU_C7PH.Creation.Occupation.Visible' visible=occupationVisibleCount total=occupationTotal}}</span>
+  </div>
+  <div class="c7ph-occupation-sources">
+    {{#each occupationSources}}
+      <span><i class="fa-solid fa-book" aria-hidden="true"></i>{{name}} <small>{{count}}</small></span>
+    {{/each}}
+  </div>
+  <div class="c7ph-occupation-grid" data-occupation-grid>
+    {{#each occupations}}
+      <button type="button" class="c7ph-occupation-card {{#if selected}}is-selected{{/if}}" data-action="selectOccupation" data-occupation-uuid="{{uuid}}" aria-pressed="{{#if selected}}true{{else}}false{{/if}}">
+        <img src="{{img}}" alt="" />
+        <span class="c7ph-occupation-copy">
+          <strong>{{name}}</strong>
+          <small>{{source}}</small>
+          <span class="c7ph-occupation-points">
+            {{#each pointTerms}}
+              <small title="{{#if optional}}{{localize 'GINZZZU_C7PH.Creation.Occupation.OptionalTerm'}}{{/if}}">{{label}} ×{{multiplier}}{{#if optional}}*{{/if}}</small>
+            {{/each}}
+          </span>
+        </span>
+        <span class="c7ph-occupation-stats">
+          <small>{{localize 'GINZZZU_C7PH.Creation.Occupation.Credit'}}: {{creditMin}}–{{creditMax}}</small>
+          <small>{{localize 'GINZZZU_C7PH.Creation.Occupation.SkillCount' count=skillCount}}</small>
+          <small>{{localize 'GINZZZU_C7PH.Creation.Occupation.GroupCount' count=groupCount}}</small>
+        </span>
+        {{#if selected}}<i class="fa-solid fa-circle-check c7ph-occupation-selected-icon" aria-hidden="true"></i>{{/if}}
+      </button>
+    {{else}}
+      <div class="c7ph-wizard-empty"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><strong>{{localize 'GINZZZU_C7PH.Creation.Occupation.Empty'}}</strong></div>
+    {{/each}}
+  </div>
+</div>

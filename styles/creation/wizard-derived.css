@@ -1,0 +1,155 @@
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-stage {
+  grid-template-rows: auto auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 8px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-values-grid > article {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  min-height: 84px;
+  padding: 10px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(185, 154, 98, 0.12), var(--c7ph-wizard-surface));
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 9px;
+  background: var(--c7ph-wizard-accent-soft);
+  color: var(--c7ph-wizard-accent);
+  font-size: 15px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-values-grid > article > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 8px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-values-grid small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-values-grid strong {
+  color: var(--c7ph-wizard-text);
+  font-size: 26px;
+  line-height: 1;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-values-grid p {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristics {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  min-height: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristics > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristics > header > strong {
+  font-size: 14px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristics > header > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+  text-align: end;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  align-content: start;
+  gap: 7px;
+  min-height: 0;
+  padding-inline-end: 4px;
+  overflow-y: auto;
+  scrollbar-color: var(--c7ph-wizard-accent) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid > article {
+  display: grid;
+  gap: 7px;
+  padding: 9px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 7px;
+  background: var(--c7ph-wizard-surface);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > header > strong {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > header > small {
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > header > small.is-positive {
+  background: rgba(74, 126, 82, 0.2);
+  color: #a9d7b1;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > header > small.is-negative {
+  background: rgba(190, 88, 73, 0.17);
+  color: #d8a099;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > div > strong {
+  font-size: 25px;
+  line-height: 1;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-derived-characteristic-grid article > div > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+  text-align: end;
+}

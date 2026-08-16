@@ -1,0 +1,67 @@
+{
+  "id": "ginzzzu-coc7-player-hud",
+  "title": "Ginzzzu's CoC7 Player HUD",
+  "description": "A compact player HUD for Call of Cthulhu 7th Edition with a distraction-free Foundry VTT interface.",
+  "version": "0.33.5",
+  "authors": [
+    {
+      "name": "Ginzzzu"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.365"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "CoC7",
+        "type": "system",
+        "compatibility": {
+          "minimum": "8.15"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/hud-shell.css",
+    "styles/hud-character.css",
+    "styles/hud-compact.css",
+    "styles/hud-rolls.css",
+    "styles/hud-conditions.css",
+    "styles/hud-volume.css",
+    "styles/hud-chat.css",
+    "styles/hud-dice.css",
+    "styles/hud-requests.css",
+    "styles/hud-reference.css",
+    "styles/coc7-roll-dialog.css",
+    "styles/coc7-pause-overlay.css",
+    "styles/hud-responsive.css",
+    "styles/creation/wizard-shell.css",
+    "styles/creation/wizard-setup.css",
+    "styles/creation/wizard-characteristics.css",
+    "styles/creation/wizard-age.css",
+    "styles/creation/wizard-derived.css",
+    "styles/creation/wizard-occupations.css",
+    "styles/creation/wizard-allocation.css",
+    "styles/creation/wizard-personal-data.css",
+    "styles/creation/wizard-review.css",
+    "styles/creation/wizard-responsive.css",
+    "styles/keeper/creation-monitor.css"
+  ],
+  "languages": [
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}

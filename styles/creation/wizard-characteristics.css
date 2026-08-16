@@ -1,0 +1,450 @@
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-stage {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-toolbar > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-toolbar > div > strong {
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-toolbar > div > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-toolbar > button,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border-color: var(--c7ph-wizard-border);
+  border-radius: 7px;
+  background: var(--c7ph-wizard-accent-soft);
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristics-toolbar > button:disabled,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(320px, 1.25fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-intro {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-intro > i {
+  margin-top: 2px;
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-intro > span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-intro strong {
+  color: var(--c7ph-wizard-text);
+  font-size: 12px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-intro small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 5px 8px;
+  border-color: var(--c7ph-wizard-border);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.025);
+  text-align: start;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > button:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > button > i {
+  color: var(--c7ph-swap-color, var(--c7ph-wizard-accent));
+  font-size: 17px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > button > span {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group strong {
+  overflow: hidden;
+  color: var(--c7ph-wizard-text);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > .c7ph-characteristic-swap-undo {
+  display: inline-flex;
+  grid-template-columns: none;
+  justify-content: center;
+  min-height: 28px;
+  color: var(--c7ph-swap-color, var(--c7ph-wizard-accent));
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  align-content: start;
+  gap: 9px;
+  min-height: 0;
+  padding-inline-end: 5px;
+  overflow-y: auto;
+  scrollbar-color: var(--c7ph-wizard-accent) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card {
+  display: grid;
+  grid-template-rows: auto minmax(58px, 1fr) auto;
+  gap: 10px;
+  min-height: 164px;
+  padding: 11px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 9px;
+  background: var(--c7ph-wizard-surface);
+  transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease, opacity 120ms ease, transform 120ms ease;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-rolled {
+  background: linear-gradient(145deg, rgba(185, 154, 98, 0.13), var(--c7ph-wizard-surface));
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group.is-group-threeD6 {
+  --c7ph-swap-color: var(--c7ph-wizard-swap-three);
+  --c7ph-swap-soft: var(--c7ph-wizard-swap-three-soft);
+  --c7ph-swap-medium: var(--c7ph-wizard-swap-three-medium);
+  --c7ph-swap-glow: var(--c7ph-wizard-swap-three-glow);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group.is-group-twoD6PlusSix {
+  --c7ph-swap-color: var(--c7ph-wizard-swap-two);
+  --c7ph-swap-soft: var(--c7ph-wizard-swap-two-soft);
+  --c7ph-swap-medium: var(--c7ph-wizard-swap-two-medium);
+  --c7ph-swap-glow: var(--c7ph-wizard-swap-two-glow);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group.is-enabled > button:first-child,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group.is-used > button:first-child {
+  border-color: var(--c7ph-swap-medium);
+  background: var(--c7ph-swap-soft);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > button > i,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swap-group > .c7ph-characteristic-swap-undo {
+  color: var(--c7ph-swap-color, var(--c7ph-wizard-accent));
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-group-threeD6 {
+  --c7ph-swap-color: var(--c7ph-wizard-swap-three);
+  --c7ph-swap-soft: var(--c7ph-wizard-swap-three-soft);
+  --c7ph-swap-medium: var(--c7ph-wizard-swap-three-medium);
+  --c7ph-swap-glow: var(--c7ph-wizard-swap-three-glow);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-group-twoD6PlusSix {
+  --c7ph-swap-color: var(--c7ph-wizard-swap-two);
+  --c7ph-swap-soft: var(--c7ph-wizard-swap-two-soft);
+  --c7ph-swap-medium: var(--c7ph-wizard-swap-two-medium);
+  --c7ph-swap-glow: var(--c7ph-wizard-swap-two-glow);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.can-swap {
+  cursor: grab;
+  border-color: var(--c7ph-swap-color);
+  background: linear-gradient(145deg, var(--c7ph-swap-soft), var(--c7ph-wizard-surface));
+  box-shadow: inset 0 0 0 1px var(--c7ph-swap-glow);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.can-swap:active,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-drag-source { cursor: grabbing; }
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-drag-source {
+  opacity: 0.68;
+  box-shadow: inset 0 0 0 2px var(--c7ph-swap-medium);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-swap-target-available {
+  border-color: var(--c7ph-swap-color);
+  background: linear-gradient(145deg, var(--c7ph-swap-glow), var(--c7ph-wizard-surface));
+  box-shadow: 0 0 0 2px var(--c7ph-swap-glow), 0 0 18px var(--c7ph-swap-soft);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-swap-target-hover {
+  border-color: var(--c7ph-swap-color);
+  background: linear-gradient(145deg, var(--c7ph-swap-medium), var(--c7ph-wizard-surface));
+  box-shadow: 0 0 0 3px var(--c7ph-swap-medium), 0 0 26px var(--c7ph-swap-glow);
+  transform: translateY(-1px);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-swap-target-unavailable {
+  opacity: 0.38;
+  border-color: var(--c7ph-wizard-border);
+  background: var(--c7ph-wizard-surface);
+  box-shadow: none;
+  filter: saturate(0.55);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-swapped {
+  border: 2px dashed var(--c7ph-swap-color);
+  background: linear-gradient(145deg, var(--c7ph-swap-soft), var(--c7ph-wizard-surface));
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card.is-swapped .c7ph-characteristic-swapped-icon {
+  border-color: var(--c7ph-swap-color);
+  background: var(--c7ph-swap-soft);
+  color: var(--c7ph-swap-color);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card > header > strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: var(--c7ph-wizard-text);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card > header > strong > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-swapped-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(185, 154, 98, 0.58);
+  border-radius: 50%;
+  background: var(--c7ph-wizard-accent-soft);
+  color: var(--c7ph-wizard-accent);
+  font-size: 9px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-roll-card code {
+  flex: 0 0 auto;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.24);
+  color: var(--c7ph-wizard-accent);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-result {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  gap: 3px;
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-result > strong {
+  color: var(--c7ph-wizard-text);
+  font-size: 34px;
+  line-height: 1;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-result > span {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-toolbar {
+  padding: 10px 12px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-budget {
+  display: grid;
+  justify-items: center;
+  min-width: 84px;
+  padding: 7px 12px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: var(--c7ph-wizard-surface);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-budget small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-budget strong {
+  color: var(--c7ph-wizard-accent);
+  font-size: 22px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-budget.is-complete {
+  border-color: rgba(105, 160, 113, 0.72);
+  background: rgba(69, 118, 77, 0.18);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-rules {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-left: 2px solid var(--c7ph-wizard-accent);
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-point-rules > i {
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-grid {
+  grid-template-columns: repeat(3, minmax(min(190px, 100%), 1fr));
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-card {
+  grid-template-rows: auto minmax(54px, 1fr) auto;
+  min-height: 142px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-editor {
+  display: grid;
+  grid-template-columns: 34px minmax(68px, 96px) 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-editor > button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  border-color: var(--c7ph-wizard-border);
+  border-radius: 7px;
+  background: var(--c7ph-wizard-accent-soft);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-editor > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-editor > input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--c7ph-wizard-text);
+  font-size: 25px;
+  font-weight: 800;
+  text-align: center;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-point-values {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-characteristic-luck-card {
+  border-color: rgba(185, 154, 98, 0.58);
+}

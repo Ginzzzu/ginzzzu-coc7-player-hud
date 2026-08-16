@@ -1,0 +1,363 @@
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-stage {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: rgba(28, 29, 29, 0.94);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status > div:first-child > i {
+  font-size: 20px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status > div:first-child > span {
+  display: grid;
+  gap: 2px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status.is-ready {
+  border-color: rgba(111, 166, 112, 0.66);
+  background: rgba(37, 67, 42, 0.34);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status.is-ready > div:first-child > i {
+  color: #a7d3a2;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status.is-invalid {
+  border-color: rgba(180, 89, 78, 0.68);
+  background: rgba(77, 34, 30, 0.34);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status.is-invalid > div:first-child > i {
+  color: #d99386;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status.is-waiting {
+  border-color: rgba(185, 154, 98, 0.68);
+  background: rgba(88, 65, 30, 0.34);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-status.is-waiting > div:first-child > i {
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-issues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-issues button,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: auto;
+  min-height: 26px;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-issues button:hover,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card header button:hover {
+  border-color: var(--c7ph-wizard-accent);
+  color: var(--c7ph-wizard-text);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-scroll {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-height: 0;
+  padding-right: 4px;
+  overflow: auto;
+  scrollbar-color: var(--c7ph-wizard-accent) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(420px, 1.6fr);
+  gap: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 8px;
+  background: rgba(28, 29, 29, 0.94);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card > header > div {
+  display: grid;
+  gap: 2px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card > header .c7ph-review-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-card > header small {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-identity {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  background: var(--c7ph-wizard-border);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-identity > div {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.7fr) minmax(0, 1fr);
+  gap: 8px;
+  padding: 5px 7px;
+  background: rgba(25, 26, 26, 0.99);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-identity dt {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-identity dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-characteristics {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(72px, 1fr));
+  gap: 5px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-characteristics article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2px 6px;
+  padding: 6px 7px;
+  border: 1px solid rgba(185, 154, 98, 0.24);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-characteristics article > span {
+  overflow: hidden;
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-characteristics article > strong {
+  grid-row: span 2;
+  font-size: 17px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-characteristics article > small {
+  color: rgba(185, 180, 169, 0.68);
+  font-size: 8px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-derived {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(90px, 1fr));
+  gap: 6px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-derived article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid rgba(185, 154, 98, 0.22);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-derived article > i {
+  color: var(--c7ph-wizard-accent);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-derived article > span {
+  overflow: hidden;
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-derived article > strong {
+  font-size: 14px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-scroll {
+  max-height: 300px;
+  overflow: auto;
+  border: 1px solid var(--c7ph-wizard-border);
+  border-radius: 6px;
+  scrollbar-color: var(--c7ph-wizard-accent) rgba(255, 255, 255, 0.05);
+  scrollbar-width: thin;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-table {
+  display: grid;
+  gap: 1px;
+  min-width: 620px;
+  background: var(--c7ph-wizard-border);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-header,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-row {
+  display: grid;
+  grid-template-columns: minmax(280px, 2.4fr) repeat(4, minmax(68px, 0.55fr));
+  gap: 1px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-header > *,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-row > * {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 28px;
+  padding: 4px 7px;
+  background: rgba(25, 26, 26, 0.99);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-header > * {
+  color: var(--c7ph-wizard-muted);
+  font-size: 9px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skills-header > *:first-child,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-name {
+  place-items: stretch;
+  text-align: left;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-name {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-name > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-name > small {
+  flex: 0 0 auto;
+  color: var(--c7ph-wizard-accent);
+  font-size: 8px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-skill-name > small.is-personal {
+  color: #a7d3a2;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-backstory {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-backstory article {
+  padding: 7px 8px;
+  border: 1px solid rgba(185, 154, 98, 0.18);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-backstory article > strong {
+  color: var(--c7ph-wizard-accent);
+  font-size: 10px;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-backstory article > p,
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-empty {
+  margin: 4px 0 0;
+  color: var(--c7ph-wizard-muted);
+  font-size: 10px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+#ginzzzu-coc7-player-hud-investigator-wizard .c7ph-wizard-create:not(:disabled) {
+  border-color: rgba(111, 166, 112, 0.68);
+  background: rgba(45, 82, 49, 0.46);
+}
+
+@media (max-width: 850px) {
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-characteristics {
+    grid-template-columns: repeat(3, minmax(72px, 1fr));
+  }
+
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-derived {
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  #ginzzzu-coc7-player-hud-investigator-wizard .c7ph-review-backstory {
+    grid-template-columns: 1fr;
+  }
+}

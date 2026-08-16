@@ -1,0 +1,78 @@
+@media (max-width: 760px) {
+  #ginzzzu-coc7-player-hud-app .c7ph-shell,
+  #ginzzzu-coc7-player-hud-app .c7ph-shell.is-compact {
+    width: calc(100vw - 16px);
+    min-width: 0;
+    max-width: none;
+    margin-top: 8px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-command-bar,
+  #ginzzzu-coc7-player-hud-app .c7ph-shell.is-compact .c7ph-command-bar {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-shell.is-compact .c7ph-shelf {
+    width: 100%;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-shell.has-actor .c7ph-command-bar,
+  #ginzzzu-coc7-player-hud-app .c7ph-shell.is-compact.has-actor .c7ph-command-bar {
+    grid-template-columns: 44px auto minmax(0, 1fr) auto;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-identity,
+  #ginzzzu-coc7-player-hud-app .c7ph-shell.is-compact .c7ph-identity {
+    display: block;
+    padding: 3px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-identity-copy {
+    display: none;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-vitals {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-vitals::-webkit-scrollbar {
+    display: none;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-main-nav button > span {
+    display: none;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-main-nav button {
+    flex: 0 0 36px;
+    width: 36px;
+    padding: 5px;
+  }
+
+}
+
+@media (max-width: 760px) {
+  #ginzzzu-coc7-player-hud-app .c7ph-condition-nav.has-active-conditions {
+    flex-basis: auto;
+    width: auto;
+    min-width: 36px;
+    padding-inline: 5px;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-condition-nav.has-active-conditions > .c7ph-nav-default-icon,
+  #ginzzzu-coc7-player-hud-app .c7ph-condition-nav.has-active-conditions > span:not(.c7ph-condition-indicators) {
+    display: none;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-main-nav .c7ph-condition-nav > .c7ph-condition-indicators-standard {
+    display: none;
+  }
+
+  #ginzzzu-coc7-player-hud-app .c7ph-main-nav .c7ph-condition-nav > .c7ph-condition-indicators-compact {
+    display: inline-flex;
+  }
+}

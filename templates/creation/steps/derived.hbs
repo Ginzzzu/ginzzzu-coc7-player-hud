@@ -1,0 +1,20 @@
+<div class="c7ph-wizard-stage c7ph-derived-stage">
+  {{#if derivedReady}}
+    <div class="c7ph-wizard-notice is-success"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>{{localize 'GINZZZU_C7PH.Creation.Derived.Intro' age=derivedAge}}</span></div>
+    <section class="c7ph-derived-values-grid">
+      {{#each derivedValues}}
+        <article><span class="c7ph-derived-icon"><i class="{{icon}}" aria-hidden="true"></i></span><div><small>{{label}}</small><strong>{{value}}</strong><p>{{hint}}</p></div></article>
+      {{/each}}
+    </section>
+    <section class="c7ph-derived-characteristics">
+      <header><strong>{{localize 'GINZZZU_C7PH.Creation.Derived.CharacteristicsTitle'}}</strong><span>{{localize 'GINZZZU_C7PH.Creation.Derived.CharacteristicsHint'}}</span></header>
+      <div class="c7ph-derived-characteristic-grid">
+        {{#each derivedCharacteristics}}
+          <article><header><strong>{{label}}</strong>{{#if adjustment}}<small class="{{#if (gt adjustment 0)}}is-positive{{else}}is-negative{{/if}}">{{adjustmentText}}</small>{{/if}}</header><div><strong>{{value}}</strong><span>{{localize 'GINZZZU_C7PH.Creation.Characteristics.Half'}} {{half}} · {{localize 'GINZZZU_C7PH.Creation.Characteristics.Extreme'}} {{extreme}}</span></div></article>
+        {{/each}}
+      </div>
+    </section>
+  {{else}}
+    <div class="c7ph-wizard-placeholder"><i class="fa-solid fa-calculator" aria-hidden="true"></i><strong>{{localize 'GINZZZU_C7PH.Creation.Derived.NotReady'}}</strong><p>{{localize 'GINZZZU_C7PH.Creation.Warnings.CompleteAge'}}</p></div>
+  {{/if}}
+</div>

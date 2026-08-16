@@ -1,0 +1,95 @@
+<div class="c7ph-wizard-stage c7ph-personal-data-stage">
+  <div class="c7ph-personal-data-layout">
+    <section class="c7ph-personal-data-card c7ph-personal-data-fields" aria-labelledby="c7ph-personal-data-fields-title">
+      <header>
+        <div>
+          <strong id="c7ph-personal-data-fields-title">{{localize 'GINZZZU_C7PH.Creation.PersonalData.IdentityTitle'}}</strong>
+          <small>{{localize 'GINZZZU_C7PH.Creation.PersonalData.IdentityHint'}}</small>
+        </div>
+        <span>{{localize 'GINZZZU_C7PH.Creation.PersonalData.RequiredLegend'}}</span>
+      </header>
+
+      <div class="c7ph-personal-data-field-grid">
+        <label class="c7ph-personal-data-field is-name">
+          <span>{{localize 'GINZZZU_C7PH.Creation.PersonalData.Name'}} <em aria-hidden="true">*</em></span>
+          <input type="text" value="{{personalData.name}}" autocomplete="off" data-personal-data-field="name" required>
+        </label>
+
+        <label class="c7ph-personal-data-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.PersonalData.Gender'}} <em aria-hidden="true">*</em></span>
+          <select data-personal-data-field="gender" required>
+            {{#each personalDataGenderOptions}}
+              <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
+            {{/each}}
+          </select>
+        </label>
+
+        <label class="c7ph-personal-data-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.PersonalData.Birthplace'}}</span>
+          <input type="text" value="{{personalData.birthplace}}" autocomplete="off" data-personal-data-field="birthplace">
+        </label>
+
+        <label class="c7ph-personal-data-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.PersonalData.Residence'}}</span>
+          <input type="text" value="{{personalData.residence}}" autocomplete="off" data-personal-data-field="residence">
+        </label>
+      </div>
+
+      <p class="c7ph-personal-data-note">
+        <i class="fa-solid {{#if personalDataComplete}}fa-circle-check{{else}}fa-circle-info{{/if}}" aria-hidden="true"></i>
+        {{#if personalDataComplete}}
+          {{localize 'GINZZZU_C7PH.Creation.PersonalData.Complete'}}
+        {{else}}
+          {{localize 'GINZZZU_C7PH.Creation.PersonalData.Incomplete'}}
+        {{/if}}
+      </p>
+    </section>
+
+    <section class="c7ph-personal-data-card c7ph-backstory-fields" aria-labelledby="c7ph-backstory-title">
+      <header>
+        <div>
+          <strong id="c7ph-backstory-title">{{localize 'GINZZZU_C7PH.Creation.Backstory.Title'}}</strong>
+          <small>{{localize 'GINZZZU_C7PH.Creation.Backstory.Hint'}}</small>
+        </div>
+        <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.Optional'}}</span>
+      </header>
+
+      <div class="c7ph-backstory-grid">
+        <label class="c7ph-backstory-field is-wide">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.Description'}}</span>
+          <textarea data-backstory-field="description">{{backstory.description}}</textarea>
+        </label>
+
+        <label class="c7ph-backstory-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.Ideology'}}</span>
+          <textarea data-backstory-field="ideology">{{backstory.ideology}}</textarea>
+        </label>
+
+        <label class="c7ph-backstory-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.SignificantPeople'}}</span>
+          <textarea data-backstory-field="significantPeople">{{backstory.significantPeople}}</textarea>
+        </label>
+
+        <label class="c7ph-backstory-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.MeaningfulLocations'}}</span>
+          <textarea data-backstory-field="meaningfulLocations">{{backstory.meaningfulLocations}}</textarea>
+        </label>
+
+        <label class="c7ph-backstory-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.TreasuredPossessions'}}</span>
+          <textarea data-backstory-field="treasuredPossessions">{{backstory.treasuredPossessions}}</textarea>
+        </label>
+
+        <label class="c7ph-backstory-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.Traits'}}</span>
+          <textarea data-backstory-field="traits">{{backstory.traits}}</textarea>
+        </label>
+
+        <label class="c7ph-backstory-field">
+          <span>{{localize 'GINZZZU_C7PH.Creation.Backstory.Injuries'}}</span>
+          <textarea data-backstory-field="injuries">{{backstory.injuries}}</textarea>
+        </label>
+      </div>
+    </section>
+  </div>
+</div>

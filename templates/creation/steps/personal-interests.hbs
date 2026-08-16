@@ -1,0 +1,37 @@
+<div class="c7ph-wizard-stage c7ph-allocation-stage c7ph-personal-interests-stage">
+  <div class="c7ph-allocation-workspace c7ph-personal-interests-workspace">
+    <div class="c7ph-allocation-meta" aria-label="{{localize 'GINZZZU_C7PH.Creation.PersonalInterests.Details'}}">
+      <span><small>{{localize 'GINZZZU_C7PH.Creation.PersonalInterests.FormulaLabel'}}</small><strong>{{personalInterestsFormulaText}}</strong></span>
+      {{#if personalOwnLanguage}}
+        <label class="c7ph-personal-language-field {{#unless personalOwnLanguage.valid}}is-invalid{{/unless}}">
+          <span>{{localize 'GINZZZU_C7PH.Creation.PersonalInterests.OwnLanguage'}}</span>
+          <input type="text" value="{{personalOwnLanguage.specialization}}" data-personal-interest-specialization data-slot-id="{{personalOwnLanguage.slotId}}" placeholder="{{localize 'GINZZZU_C7PH.Creation.PersonalInterests.OwnLanguagePlaceholder'}}" />
+          <small>{{localize 'GINZZZU_C7PH.Creation.PersonalInterests.OwnLanguageHint'}}</small>
+        </label>
+      {{/if}}
+    </div>
+
+    <div class="c7ph-allocation-table-scroll">
+      <section class="c7ph-allocation-table" role="table">
+        <div class="c7ph-allocation-header" role="row">{{#each skillColumns}}<strong role="columnheader">{{this}}</strong>{{/each}}</div>
+        <div class="c7ph-allocation-rows">
+        {{#each personalInterestRows}}
+          <div class="c7ph-allocation-row {{#if invalid}}is-invalid{{/if}}" role="row">
+            <div class="c7ph-allocation-skill-name" role="cell">
+              <span class="c7ph-allocation-skill-heading"><span class="c7ph-allocation-skill-title">{{name}}</span>{{#if sourceLabel}}<small class="c7ph-allocation-skill-source {{sourceClass}}">{{sourceLabel}}</small>{{/if}}</span>
+              {{#if canEditSpecialization}}<label><span>{{specializationLabel}}</span><input type="text" value="{{specialization}}" data-personal-interest-specialization data-slot-id="{{slotId}}" placeholder="{{specializationPlaceholder}}" /></label>{{/if}}
+            </div>
+            <span role="cell">{{base}}</span>
+            <label class="c7ph-allocation-personal-cell is-editable {{#if totalWarning}}is-total-warning{{/if}}" role="cell" {{#if totalWarning}}title="{{totalWarningTitle}}"{{/if}}><input type="number" min="{{personalMin}}" max="{{personalMax}}" value="{{personal}}" data-personal-interest-points data-slot-id="{{slotId}}" aria-label="{{localize 'GINZZZU_C7PH.Creation.SkillColumns.Personal'}}: {{name}}" {{#unless canEditPersonal}}disabled{{/unless}} /></label>
+            <span class="c7ph-allocation-occupation-cell is-readonly" role="cell">{{occupation}}</span>
+            <span class="c7ph-allocation-experience-cell" role="cell">0</span>
+            <strong class="c7ph-allocation-total-cell {{#if totalWarning}}is-total-warning{{/if}}" role="cell" {{#if totalWarning}}title="{{totalWarningTitle}}"{{/if}}>{{total}}</strong>
+          </div>
+        {{/each}}
+        </div>
+      </section>
+    </div>
+
+    <p class="c7ph-allocation-footnote">{{localize 'GINZZZU_C7PH.Creation.Allocation.ExperienceZero'}}</p>
+  </div>
+</div>

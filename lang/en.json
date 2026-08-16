@@ -1,0 +1,802 @@
+{
+  "GINZZZU_C7PH": {
+    "Actions": {
+      "CoreInterface": "Show the standard Foundry interface"
+    },
+    "Actor": {
+      "OpenSheet": "Open the sheet for {name}",
+      "State": {
+        "MultipleOwned": {
+          "Hint": "Assign the intended character to the current user in the player settings.",
+          "Title": "Multiple investigators are available"
+        },
+        "NoPermission": {
+          "Hint": "The current user does not have owner permission for the assigned character.",
+          "Title": "No access to the investigator"
+        },
+        "Unassigned": {
+          "Hint": "Assign a character to the user or grant ownership of a single investigator.",
+          "Title": "No investigator assigned"
+        }
+      }
+    },
+    "App": {
+      "Navigation": "Investigator HUD sections",
+      "Stage": "Investigator data and vital statistics",
+      "Title": "Investigator HUD"
+    },
+    "Creation": {
+      "Actions": {
+        "Continue": "Continue creation",
+        "Creating": "Saving…",
+        "Next": "Next",
+        "Open": "Finish creation",
+        "Previous": "Previous",
+        "Reset": "Start over",
+        "Start": "Create investigator"
+      },
+      "Age": {
+        "Bands": {
+          "15to19": "Age 15–19",
+          "20to39": "Age 20–39",
+          "40s": "Age 40–49",
+          "50s": "Age 50–59",
+          "60s": "Age 60–69",
+          "70s": "Age 70–79",
+          "80s": "Age 80–89"
+        },
+        "Chat": {
+          "EducationFailure": "Check {index}: rolled {roll}; no improvement.",
+          "EducationSuccess": "Check {index}: rolled {roll}; Education increased by {gain}.",
+          "EducationTitle": "Age-related Education improvement checks",
+          "LuckTitle": "Second Luck roll for age"
+        },
+        "Complete": "All age adjustments are complete. You can review derived values.",
+        "Deduction": {
+          "From": "Distribute among: {names}",
+          "Remaining": "Points still to deduct: {count}",
+          "Rule": "Distribute exactly {total} points of reduction among the permitted characteristics.",
+          "Title": "Characteristic reductions"
+        },
+        "Education": {
+          "Complete": "Checks complete",
+          "Failure": "no improvement",
+          "Required": "Required checks: {count}",
+          "Roll": "Roll",
+          "RollRemaining": "Make remaining checks: {count}",
+          "Rule": "Each check is 1D100. If the result is above current Education, Education increases by 1D10.",
+          "Success": "success",
+          "Title": "Education improvement checks"
+        },
+        "EnterAge": "Enter the investigator age",
+        "Fixed": "Age adjustment",
+        "Group": "Age group",
+        "Incomplete": "Complete every required age action before continuing.",
+        "InputLabel": "Age",
+        "Intro": "Age determines characteristic changes, Education checks, and movement rate.",
+        "Luck": {
+          "Complete": "Second roll complete",
+          "Final": "Final",
+          "First": "First roll",
+          "Roll": "Roll Luck a second time",
+          "Rule": "For an investigator aged 15–19, roll Luck again and keep the higher value.",
+          "Second": "Second roll",
+          "Title": "Additional Luck roll"
+        },
+        "MovementPenalty": "Age reduces movement rate by {count}.",
+        "Range": "Allowed age: {min} to {max}.",
+        "Title": "Investigator age"
+      },
+      "Allocation": {
+        "ArtCraftName": "Art or craft",
+        "ArtCraftPlaceholder": "For example: Photography",
+        "Complete": "All required choices are complete and occupation points are allocated correctly.",
+        "CompleteShort": "Allocation complete",
+        "CreditRange": "Credit Rating range",
+        "CreditSkill": "Credit Rating",
+        "Details": "Occupation details",
+        "ExperienceZero": "The Experience column is reserved for later advancement. It is zero and read-only during creation.",
+        "Formula": "Points formula",
+        "FormulaChoice": "Formula characteristic",
+        "FormulaChoiceHint": "Choose one of the occupation’s optional characteristic terms.",
+        "FreeChoiceNumber": "Free skill {number}",
+        "FreeChoices": "Occupation free choices",
+        "FreeChoicesHint": "Choose the investigator's personal specialization skills.",
+        "FreeSkill": "free choice",
+        "GroupProgress": "Selected: {selected} of {required}",
+        "GroupSkill": "group {number}",
+        "GroupTitle": "Choice group {number}",
+        "Incomplete": "Complete all choices, specializations, Credit Rating, and point allocation.",
+        "IncompleteShort": "Allocation incomplete",
+        "LanguageName": "Language",
+        "LanguagePlaceholder": "For example: Latin",
+        "LoadFailed": "The full selected occupation data could not be loaded.",
+        "Occupation": "Occupation",
+        "OccupationSkill": "occupation skill",
+        "OwnLanguageName": "Own language",
+        "OwnLanguagePlaceholder": "For example: English",
+        "PointComplete": "Fully allocated",
+        "PointCounter": "Points:",
+        "PointNeedsAttention": "Errors need attention",
+        "PointOverflow": "Overspent: {count}",
+        "PointRemaining": "Remaining: {count}",
+        "Points": "Points spent",
+        "Remaining": "Remaining",
+        "RequiredChoice": "Required choice",
+        "RequiredSkill": "Required skill",
+        "RequiredSkillShort": "required",
+        "SelectOccupation": "Select an occupation first",
+        "SelectSkill": "Select a skill",
+        "SkillTotalWarning": "Skill total exceeds {threshold}",
+        "Specialization": "Specialization",
+        "SpecializationPlaceholder": "Enter a specialization",
+        "StepTitle": "Occupation Skills: {occupation}",
+        "SurvivalName": "Survival environment",
+        "SurvivalPlaceholder": "For example: Desert"
+      },
+      "Backstory": {
+        "Description": "Personal Description",
+        "Hint": "Optional details for the native CoC7 investigator backstory sections.",
+        "Ideology": "Ideology and Beliefs",
+        "Injuries": "Injuries and Scars",
+        "MeaningfulLocations": "Meaningful Locations",
+        "Optional": "optional fields",
+        "SignificantPeople": "Significant People",
+        "Title": "Backstory",
+        "Traits": "Traits",
+        "TreasuredPossessions": "Treasured Possessions"
+      },
+      "Characteristics": {
+        "Complete": "All values are ready. You can continue to age selection.",
+        "Extreme": "1/5",
+        "Half": "1/2",
+        "Intro": "Rolls use the selected setup formulas and are stored in the draft. The Keeper can see the results.",
+        "NotRolled": "Not rolled yet",
+        "Points": {
+          "Complete": "All 460 points are allocated and Luck is determined.",
+          "Decrease": "Decrease the value. Shift: by 5",
+          "Increase": "Increase the value. Shift: by 5",
+          "Intro": "Allocate the budget among the eight characteristics. Luck is rolled separately.",
+          "LuckSeparate": "Luck is not part of the characteristic pool.",
+          "Progress": "Allocated: {spent} / {total}",
+          "Remaining": "Remaining",
+          "Required": "Allocate exactly 460 points and determine Luck.",
+          "Rules": "Values must be from {min} to {max}; INT and SIZ cannot be lower than 40."
+        },
+        "Progress": "Values rolled: {current} of {total}",
+        "Required": "Complete all characteristic values and Luck before continuing to age adjustments.",
+        "Reroll": "Reroll",
+        "Roll": "Roll",
+        "RollAll": "Roll remaining",
+        "Swap": {
+          "DragHint": "Drag this card onto another characteristic in the same group.",
+          "Groups": {
+            "threeD6": "3D6 × 5",
+            "twoD6PlusSix": "(2D6 + 6) × 5"
+          },
+          "Intro": "Enable only the group allowed by the Keeper, then drag one card onto another. Each group allows one swap.",
+          "LuckExcluded": "Luck is not part of either swap group and always keeps its own result.",
+          "Status": {
+            "Disabled": "Not allowed",
+            "Enabled": "Allowed — drag a card",
+            "Used": "Swap used"
+          },
+          "Swapped": "Swapped",
+          "Title": "Swap rolled values",
+          "Undo": "Undo swap"
+        }
+      },
+      "Derived": {
+        "CharacteristicsHint": "Half and one-fifth values use the final characteristics after age adjustments.",
+        "CharacteristicsTitle": "Final characteristics",
+        "Hints": {
+          "Build": "Determined by the sum of Strength and Size.",
+          "DB": "Determined by the sum of Strength and Size.",
+          "HP": "(Constitution + Size) ÷ 10.",
+          "MOV": "Strength and Dexterity compared with Size, adjusted for age.",
+          "MP": "One-fifth of Power.",
+          "SAN": "Equal to Power at creation."
+        },
+        "Intro": "Age adjustments for age {age} are applied. These values will be used to create the investigator.",
+        "NotReady": "Complete age adjustments first",
+        "Values": {
+          "Build": "Build",
+          "DB": "Damage Bonus",
+          "HP": "Hit Points",
+          "MOV": "Movement",
+          "MP": "Magic Points",
+          "SAN": "Sanity"
+        }
+      },
+      "Errors": {
+        "ActorCreate": "The investigator data could not be written to the assigned Actor.",
+        "AgeRoll": "Failed to perform an age-related roll.",
+        "AssignedActorMissing": "No investigator Actor is assigned to the player.",
+        "AssignedActorPermission": "The player does not own the assigned investigator Actor.",
+        "AssignedActorWrongType": "The Actor assigned to the player is not a CoC7 investigator.",
+        "CharacteristicRoll": "Failed to roll a characteristic.",
+        "DraftClear": "The assigned Actor was filled, but the draft could not be cleared.",
+        "DraftSave": "Failed to save the investigator draft.",
+        "Open": "Failed to open the investigator creation wizard.",
+        "SourceLoad": "Failed to refresh investigator creation data.",
+        "Validation": "The investigator data changed and no longer passes final validation."
+      },
+      "Navigation": "Investigator creation steps",
+      "Occupation": {
+        "Credit": "Credit Rating",
+        "Empty": "No occupations found",
+        "GroupCount": "Choice groups: {count}",
+        "OptionalTerm": "Optional characteristic in the points formula",
+        "Search": "Search occupations",
+        "Selection": "selection",
+        "SkillCount": "Required skills: {count}",
+        "StepTitle": "Occupation: {occupation}",
+        "Visible": "Showing {visible} of {total}"
+      },
+      "PersonalData": {
+        "Birthplace": "Birthplace",
+        "Complete": "The required details are complete. Backstory fields may be filled in as desired.",
+        "Gender": "Gender",
+        "GenderOptions": {
+          "female": "Female",
+          "male": "Male",
+          "other": "Other"
+        },
+        "GenderSelect": "Select gender",
+        "IdentityHint": "Core details that will be transferred to the native CoC7 sheet.",
+        "IdentityTitle": "Core Details",
+        "Incomplete": "Enter the investigator name and select a gender to continue.",
+        "Name": "Investigator Name",
+        "RequiredLegend": "* required fields",
+        "Residence": "Residence"
+      },
+      "PersonalInterests": {
+        "Details": "Personal interest details",
+        "Formula": "Intelligence × 2",
+        "FormulaLabel": "Points formula",
+        "OwnLanguage": "Own language",
+        "OwnLanguageHint": "Enter one native language. Its base value equals final Education.",
+        "OwnLanguagePlaceholder": "For example: English"
+      },
+      "Placeholders": {
+        "PersonalInterests": "Personal interest points"
+      },
+      "Repair": {
+        "DuplicatesRemoved": "Duplicate skills on the assigned investigator were repaired: {count} removed."
+      },
+      "Review": {
+        "AssignedActorMissingHint": "The Keeper must assign a blank investigator Actor to the player in User Configuration before finalization.",
+        "AssignedActorMissingTitle": "No Actor assigned",
+        "AssignedActorPermissionHint": "The Keeper must grant the player Owner permission for the assigned investigator Actor.",
+        "AssignedActorPermissionTitle": "No access to assigned Actor",
+        "AssignedActorReadyHint": "The data will be written to the assigned Actor “{actor}”. Its portrait and token image will not be changed.",
+        "AssignedActorReadyTitle": "Assigned Actor ready",
+        "AssignedActorWrongTypeHint": "The Keeper must assign a CoC7 character-type investigator Actor to the player.",
+        "AssignedActorWrongTypeTitle": "Wrong Actor type assigned",
+        "BackstoryEmpty": "No backstory fields have been filled in.",
+        "BackstoryTitle": "Backstory",
+        "CharacteristicsHint": "Half / fifth · age adjustment",
+        "CharacteristicsTitle": "Characteristics",
+        "Created": "The investigator data was written to the assigned Actor.",
+        "DerivedTitle": "Derived values",
+        "Edit": "Edit",
+        "EditAge": "Age",
+        "EditCharacteristics": "Characteristics",
+        "EditOccupationSkills": "Occupation",
+        "EditPersonalSkills": "Personal",
+        "Identity": {
+          "Age": "Age",
+          "Birthplace": "Birthplace",
+          "Gender": "Gender",
+          "Name": "Name",
+          "Occupation": "Occupation",
+          "Residence": "Residence"
+        },
+        "IdentityTitle": "Investigator details",
+        "InvalidHint": "Open the marked sections and complete the missing data.",
+        "InvalidTitle": "Review incomplete",
+        "Issues": {
+          "Age": "Complete the age adjustments",
+          "Characteristics": "Complete the characteristics",
+          "Occupation": "Select an occupation",
+          "OccupationSkills": "Spend all occupation points",
+          "PersonalData": "Enter a name and gender",
+          "PersonalInterests": "Spend all personal-interest points",
+          "Setup": "Select a creation setup"
+        },
+        "OccupationPoints": "Occupation points",
+        "PersonalPoints": "Personal points",
+        "PersonalSkill": "personal",
+        "SkillsTitle": "Skills"
+      },
+      "Setup": {
+        "BioSections": "Backstory sections: {count}",
+        "Intro": "Choose how characteristics are determined. Both setups use the 1920s materials from the Amygdal module and differ only in the characteristic generation method.",
+        "Methods": {
+          "points": "Point allocation",
+          "roll": "Characteristic rolls"
+        },
+        "PointBudget": "Characteristic pool: {points}",
+        "RollMethod": "Individual characteristic rolls",
+        "Skills": "Linked entries: {count}"
+      },
+      "SkillColumns": {
+        "Base": "Base",
+        "Experience": "Experience",
+        "Occupation": "Occupation",
+        "Personal": "Personal",
+        "Skill": "Skill",
+        "Total": "Total"
+      },
+      "Source": {
+        "LoadFailed": "The Amygdal compendiums could not be read. Check the Foundry console.",
+        "ModuleInactive": "Activate the “Сундук Хранителя для CoC7e” module in this world.",
+        "PacksMissing": "The Amygdal setup, occupation, or skill compendium is missing.",
+        "SetupMissing": "The required 1920s creation setups were not found in the Amygdal module.",
+        "Unavailable": "Creation source unavailable"
+      },
+      "StepCounter": "Step {current} of {total}",
+      "StepHints": {
+        "age": "Choose age and apply the adjustments required by the rules.",
+        "characteristics": "Determine characteristics using the selected method and roll Luck separately.",
+        "derived": "Calculate HP, MP, SAN, MOV, Build, and Damage Bonus.",
+        "occupation": "Choose an occupation from the Investigator Handbook and Keeper Rulebook collections.",
+        "occupationSkills": "Choose occupation skills and allocate occupation points.",
+        "personalData": "Name, gender, birthplace, residence, and optional investigator backstory.",
+        "personalInterests": "Allocate personal interest points with a final skill cap of 80.",
+        "review": "Review all data before the Actor is created.",
+        "setup": "Choose the setup that provides the creation rules and source data."
+      },
+      "Steps": {
+        "Age": "Age",
+        "Characteristics": "Characteristics",
+        "Derived": "Attributes",
+        "Occupation": "Occupation",
+        "OccupationSkills": "Occupation Skills",
+        "PersonalData": "Investigator Data",
+        "PersonalInterests": "Personal Interests",
+        "Review": "Review",
+        "Setup": "Creation Setup"
+      },
+      "Subtitle": "Step-by-step CoC7 process",
+      "Title": "Create Investigator",
+      "Warnings": {
+        "AgeRange": "Enter an age from 15 to 89.",
+        "AlreadyCompleted": "Creation of this investigator is already complete.",
+        "CompleteAge": "Complete all age adjustments first.",
+        "CompleteOccupationSkills": "Complete the occupation skill choices and allocation first.",
+        "CompletePersonalData": "Enter the investigator name and gender first.",
+        "CompletePersonalInterests": "Allocate all personal interest points first.",
+        "OccupationSkillsLoad": "The full selected occupation data could not be loaded.",
+        "ReviewDerived": "Review the derived values first.",
+        "RollCharacteristics": "Complete the characteristic rolls or point allocation and determine Luck first.",
+        "SelectOccupation": "Select an occupation first.",
+        "SelectSetup": "Select a creation setup first."
+      }
+    },
+    "Errors": {
+      "ActorSheet": "The investigator sheet could not be opened.",
+      "ActorUpdate": "Failed to update investigator Luck.",
+      "AmmoUpdate": "Failed to update weapon ammunition.",
+      "Combat": "Failed to update the investigator combat state.",
+      "ConditionUpdate": "Failed to update the investigator condition.",
+      "GenericRoll": "The free dice roll could not be completed.",
+      "Interface": "The standard Foundry interface could not be toggled.",
+      "Open": "The investigator HUD could not be opened. The standard Foundry interface has been restored.",
+      "Preference": "The investigator HUD state could not be saved.",
+      "Roll": "The CoC7 check could not be performed.",
+      "SanityActorUpdate": "Failed to update investigator Sanity.",
+      "Volume": "Failed to change Foundry volume.",
+      "WrongSystem": "Ginzzzu's CoC7 Player HUD only works with the Call of Cthulhu 7th Edition system."
+    },
+    "Keeper": {
+      "CompletedProgress": "Creation completed",
+      "ControlTitle": "Investigator creation progress",
+      "CurrentState": "Current state",
+      "EmptyHint": "Assign a character Actor to each player to monitor their work in the creation wizard.",
+      "EmptyTitle": "No assigned investigators",
+      "Errors": {
+        "Open": "Failed to open the creation progress monitor.",
+        "OpenActor": "Failed to open the investigator sheet."
+      },
+      "Eyebrow": "Session zero",
+      "Heading": "Investigator creation",
+      "Hint": "Observe each player’s current step and readiness without editing their data.",
+      "Issues": "Incomplete sections",
+      "LastUpdated": "Last change",
+      "NoIssues": "All required sections are complete.",
+      "NotStartedHint": "The player has not opened the investigator creation wizard yet.",
+      "NotStartedStep": "Wizard not opened",
+      "OccupationPoints": "Occupation points",
+      "Offline": "Offline",
+      "Online": "Online",
+      "OpenActor": "Open sheet",
+      "PersonalPoints": "Personal points",
+      "PlayerTabs": "Players",
+      "Points": "Point allocation",
+      "Progress": "Creation steps",
+      "Refresh": "Refresh",
+      "Review": {
+        "ActorBackstoryEmpty": "The investigator sheet has no completed backstory.",
+        "ActorCharacteristicsEmpty": "No characteristic values are available in the investigator sheet.",
+        "ActorDerivedEmpty": "No derived values are available in the investigator sheet.",
+        "ActorEyebrow": "Sheet summary",
+        "ActorSkillsEmpty": "No skills are available in the investigator sheet.",
+        "ActorTitle": "Completed investigator data",
+        "BackstoryLabel": "Backstory",
+        "CharacteristicsEmpty": "Characteristics will appear after the player makes the first rolls.",
+        "DerivedEmpty": "Derived values will appear after the age step is complete.",
+        "DraftEyebrow": "Draft summary",
+        "DraftTitle": "Investigator in creation",
+        "Eyebrow": "Draft summary",
+        "PartialHint": "Some creation data is unavailable in this sheet. The monitor shows everything it could read from the Actor.",
+        "ReadOnly": "Read only",
+        "SkillsEmpty": "Skills will appear after an occupation is selected and allocation begins.",
+        "Title": "Investigator in creation",
+        "UnavailableHint": "The detailed summary is unavailable because no suitable saved draft or assigned Actor could be read.",
+        "UnavailableTitle": "Summary unavailable",
+        "UnknownSkill": "Unnamed skill"
+      },
+      "Status": {
+        "completed": "Completed",
+        "inProgress": "In progress",
+        "notStarted": "Not started",
+        "ready": "Ready"
+      },
+      "StepProgress": "Step {current} of {total}",
+      "Title": "Investigator creation — Keeper"
+    },
+    "Keybindings": {
+      "ToggleCoreInterface": {
+        "Hint": "Emergency toggle for the standard Foundry interface.",
+        "Name": "Show the Foundry interface"
+      }
+    },
+    "PauseOverlay": {
+      "Text": "The moment stands still"
+    },
+    "Rolls": {
+      "AttributeTitle": "{name}: click to check; Shift + click for a fast roll",
+      "InteractionHint": "Click to open the native CoC7 check dialog. Shift + click performs a fast roll."
+    },
+    "Sections": {
+      "Characteristics": {
+        "Label": "Characteristics",
+        "Placeholder": "Click to open the native CoC7 check dialog. Shift + click performs a fast roll."
+      },
+      "Chat": {
+        "Empty": "There are no visible chat messages yet.",
+        "Label": "Recent messages",
+        "Open": "Open chat",
+        "OpenHint": "Show the standard Foundry chat tab.",
+        "Title": "Recent messages",
+        "UnknownSpeaker": "Unknown speaker"
+      },
+      "Combat": {
+        "AlternativeSkill": "Alternative skill",
+        "Ammo": "Ammo",
+        "AmmoCapacity": "Magazine capacity",
+        "AmmoCurrent": "Current ammunition",
+        "Attack": "Attack",
+        "AttacksPerRound": "Attacks per round",
+        "CheckSkill": "Skill check",
+        "Damage": "Damage",
+        "DamageRollMessage": "Damage: {weapon}",
+        "Empty": "The investigator has no weapons or combat skills.",
+        "EmptyMagazine": "Empty",
+        "Encounter": {
+          "GunReady": "Gun ready",
+          "GunReadyHint": "Count a readied firearm when CoC7 calculates initiative.",
+          "InCombat": "The investigator is in the standard combat tracker.",
+          "Initiative": "Initiative",
+          "Join": "Join combat",
+          "Leave": "Leave combat",
+          "LeaveHint": "Remove the investigator token from the current combat.",
+          "NoActor": "No investigator is assigned.",
+          "NoEncounter": "The Keeper has not created a combat for this scene yet.",
+          "NoPermission": "You do not have permission to change this combatant.",
+          "NoToken": "The investigator token is not placed on the current scene.",
+          "NotStarted": "Combat not started",
+          "ReadyToJoin": "The token is ready to join the standard combat tracker.",
+          "RerollInitiative": "Determine initiative again",
+          "RollInitiative": "Determine initiative",
+          "Round": "Round {round}",
+          "SelectToken": "Select one investigator token on the scene.",
+          "Unavailable": "The current combatant is unavailable.",
+          "WaitingStart": "Waiting for combat to start",
+          "WaitingTurn": "Waiting for turn",
+          "YourTurn": "Your turn"
+        },
+        "InvalidDamage": "The damage formula is missing or invalid",
+        "InvalidDamageFormula": "Weapon “{weapon}” does not have a valid damage formula.",
+        "Label": "Combat",
+        "Melee": "Melee",
+        "NoAmmo": "No ammunition",
+        "NoAmmoWarning": "Weapon “{weapon}” has no ammunition.",
+        "NoSkill": "No skill is assigned to this weapon",
+        "Placeholder": "Attack opens the native CoC7 combat card. Skill checks and damage rolls do not spend ammunition.",
+        "Ranged": "Ranged",
+        "RollDamage": "Roll damage",
+        "Skills": "Combat skills",
+        "TargetHint": "Targets selected on the canvas are used by the system automatically.",
+        "Targets": "Targets",
+        "WeaponHint": "Launch an attack through the native CoC7 combat card",
+        "Weapons": "Weapons"
+      },
+      "Consequences": {
+        "BonusDice": "Bonus and penalty dice",
+        "Categories": {
+          "Inactive": "Inactive",
+          "Passive": "Passive",
+          "Status": "Statuses",
+          "Suppressed": "Suppressed",
+          "Temporary": "Temporary"
+        },
+        "ChangeTypes": {
+          "Add": "change by",
+          "Custom": "custom change",
+          "Downgrade": "downgrade to",
+          "Multiply": "multiply by",
+          "Override": "replace with",
+          "Upgrade": "upgrade to"
+        },
+        "ConditionActive": "Active",
+        "ConditionEditableHint": "Click a condition to apply or remove it.",
+        "ConditionGroups": {
+          "Mental": "Mental conditions",
+          "Physical": "Physical conditions"
+        },
+        "ConditionInactive": "Inactive",
+        "ConditionReadOnlyHint": "Player condition editing is disabled in the system settings.",
+        "ConditionsLabel": "Conditions",
+        "DeathCheck": "Death check",
+        "DeathCheckHint": "Perform the native CoC7 death check.",
+        "Duration": "Duration",
+        "EffectsReadOnly": "Effects are read-only in this HUD.",
+        "EffectsTitle": "Other consequences",
+        "Empty": "The Keeper has not added any consequences to this investigator yet.",
+        "Label": "Consequences",
+        "Maximum": "Maximum",
+        "Permanent": "Permanent",
+        "ReadOnly": "Consequences are added and changed by the Keeper. They are read-only in this HUD.",
+        "Source": "Source",
+        "UnknownChange": "Change",
+        "UnknownSource": "Unknown source"
+      },
+      "Dice": {
+        "Hint": "A public free roll equivalent to the Foundry chat /r command.",
+        "Label": "Dice",
+        "Placeholder": "Quick free rolls with standard dice.",
+        "RollFlavor": "Free roll: {formula}",
+        "RollHint": "Roll {formula}",
+        "Title": "Dice"
+      },
+      "Reference": {
+        "Label": "Rules reference",
+        "Placeholder": "A concise player reference for core CoC7 rules.",
+        "Title": "Rules reference",
+        "Subtitle": "Quick CoC7 reference",
+        "Skill": "skill",
+        "Note": "Concise reference only. The Keeper's ruling and the full rules take precedence.",
+        "RollLevels": {
+          "Title": "Roll level",
+          "Failure": "Failure",
+          "Regular": "Regular",
+          "Hard": "Hard",
+          "Extreme": "Extreme",
+          "Critical": "Critical",
+          "Fumble": "Fumble",
+          "FumbleRule": "96–100 when skill < 50; 100 when skill ≥ 50"
+        },
+        "Opposed": {
+          "Title": "Opposed roll",
+          "Rule": "Compare levels of success. The better level wins; on the same level, the participant with the higher skill value wins."
+        },
+        "Pushing": {
+          "Title": "Pushing a roll",
+          "Flow": "Failure → describe a new risky approach → roll again. A second failure brings consequences set by the Keeper."
+        },
+        "BonusPenalty": {
+          "Title": "Bonus and penalty dice",
+          "Bonus": "Bonus",
+          "Penalty": "Penalty",
+          "BonusRule": "add a tens die and keep the lower tens result.",
+          "PenaltyRule": "add a tens die and keep the higher tens result."
+        },
+        "Combat": {
+          "Title": "Combat",
+          "Initiative": "Initiative",
+          "InitiativeRule": "in DEX order; a readied firearm uses DEX +50.",
+          "Melee": "Melee",
+          "MeleeRule": "the defender chooses Dodge or Fight Back; compare levels of success using the combat check rules.",
+          "Firearms": "Firearms",
+          "FirearmsRule": "a standard shot uses the normal difficulty; multiple shots and rate of fire depend on the weapon and may impose a penalty die.",
+          "Cover": "Dive for cover",
+          "CoverRule": "costs the next attack; a successful Dodge imposes a penalty die on the attack against that target.",
+          "Maneuver": "Maneuver",
+          "ManeuverRule": "take one penalty die for each point the target exceeds your Build; a difference of 3 or more makes the maneuver impossible."
+        },
+        "Damage": {
+          "Title": "Damage and major wounds",
+          "MajorWound": "Damage from one attack ≥ ½ maximum HP → major wound and a CON roll to remain conscious.",
+          "ZeroHp": "At 0 HP with a major wound the character is dying; end-of-round CON rolls determine survival until stabilized."
+        },
+        "Medicine": {
+          "Title": "First Aid and Medicine",
+          "FirstAid": "First Aid",
+          "FirstAidRule": "a success restores 1 HP; on a dying character it stabilizes them until Medicine can be provided.",
+          "MedicineSkill": "Medicine",
+          "MedicineRule": "successful treatment of a major wound starts normal recovery; further healing follows the system rules."
+        }
+      },
+      "Skills": {
+        "AddFavorite": "Pin skill",
+        "All": "All",
+        "ClearRecent": "Clear recent skills",
+        "Empty": "The investigator has no available skills.",
+        "Favorites": "Pinned",
+        "Label": "Skills",
+        "NoResults": "No skills found",
+        "NoResultsHint": "Change the search query or select another list view.",
+        "Occupation": "Occupation Skills",
+        "Placeholder": "Click a skill for its native CoC7 check. Shift + click performs a fast roll.",
+        "Recent": "Recent",
+        "RemoveFavorite": "Remove skill from pinned",
+        "Search": "Search skills",
+        "Views": "Skill list filters"
+      },
+      "Volume": {
+        "Ambience": "Ambience",
+        "Hint": "Volume is stored locally for this Foundry client. Click an icon to mute a channel and click again to restore its previous level.",
+        "Interface": "Interface",
+        "Label": "Volume",
+        "Music": "Music",
+        "Mute": "Mute {channel}",
+        "Placeholder": "Local music, ambience, and interface volume.",
+        "Unmute": "Restore {channel}",
+        "Value": "{channel}: {percent}%"
+      },
+      "Requests": {
+        "Label": "Request",
+        "Placeholder": "Choose what the investigator is trying to do.",
+        "ProviderLabel": "Call of Cthulhu 7",
+        "Question": "What are you trying to do?",
+        "Search": "What do you want to do?..",
+        "CategoriesLabel": "Action categories",
+        "Combined": {
+          "All": "All",
+          "AllCondition": "Condition: all checks must succeed",
+          "Any": "At least one",
+          "AnyCondition": "Condition: at least one check must succeed",
+          "Characteristics": "Characteristics",
+          "Clear": "Clear",
+          "Condition": "Success condition",
+          "EmptySelection": "Select at least two skills or characteristics.",
+          "MinimumWarning": "A combined check requires at least two selected checks.",
+          "ModifierForCheck": "Bonus or penalty dice for this check",
+          "Roll": "Roll one d100",
+          "Selected": "Selected",
+          "Title": "Combined check",
+          "Toggle": "Add or remove from the combined check"
+        },
+        "IncomingTitle": "Keeper requests",
+        "KeeperSuggests": "The Keeper suggests a check",
+        "Roll": "Roll",
+        "Dismiss": "Dismiss",
+        "Unavailable": "No matching skill found",
+        "Specializations": "Choose specialization · {count}",
+        "NoResults": "No matching actions",
+        "NoResultsHint": "Change the category or search query.",
+        "Note": "Requests help map an approach to a suitable check. The Keeper still decides whether a roll is required and under what conditions.",
+        "Difficulty": "Difficulty",
+        "Mode": {
+          "Combined": "Combined",
+          "Label": "Request mode",
+          "Single": "Single"
+        },
+        "Modifier": "Bonus / penalty dice",
+        "Difficulties": {
+          "Regular": "Regular",
+          "Hard": "Hard",
+          "Extreme": "Extreme"
+        },
+        "Categories": {
+          "All": "All",
+          "Investigation": "Investigation",
+          "Social": "Social",
+          "Physical": "Physical actions",
+          "Technical": "Technology & transport",
+          "Medicine": "Medicine",
+          "Knowledge": "Knowledge & craft"
+        },
+        "Actions": {
+          "InspectArea": "Inspect an area for a hidden detail",
+          "Listen": "Listen for or make out a sound",
+          "Track": "Follow tracks",
+          "LibrarySearch": "Find information in books or archives",
+          "Appraise": "Assess value, quality, or authenticity",
+          "Accounting": "Examine financial records",
+          "Archaeology": "Determine the origin or age of an ancient object",
+          "Anthropology": "Understand culture, customs, or way of life",
+          "History": "Recall a historical fact or context",
+          "Law": "Recall a law, procedure, or precedent",
+          "Charm": "Win someone over with personal charm",
+          "FastTalk": "Quickly deceive, distract, or baffle",
+          "Persuade": "Convince through argument and discussion",
+          "Intimidate": "Force compliance through threats",
+          "Psychology": "Understand motives, character, or possible deception",
+          "CreditRating": "Rely on social standing or wealth",
+          "Disguise": "Pass yourself off as someone else",
+          "Stealth": "Sneak, hide, or avoid detection",
+          "SleightOfHand": "Secretly hide, switch, or take a small object",
+          "Climb": "Climb a wall, cliff, or rigging",
+          "Jump": "Clear an obstacle or soften a fall",
+          "Swim": "Swim in dangerous conditions",
+          "Ride": "Ride in difficult conditions",
+          "Throw": "Throw an object at a target",
+          "Drive": "Drive an automobile in a dangerous situation",
+          "Pilot": "Control a ship, aircraft, or other complex vehicle",
+          "HeavyMachinery": "Operate heavy land machinery",
+          "Navigate": "Plot a route or determine direction",
+          "Locksmith": "Open a lock or locking mechanism",
+          "MechanicalRepair": "Repair or build a mechanical device",
+          "ElectricalRepair": "Repair or reconfigure electrical equipment",
+          "FirstAid": "Give immediate aid to an injured person",
+          "Medicine": "Diagnose or treat disease, injury, or poisoning",
+          "Psychoanalysis": "Provide psychotherapy",
+          "NaturalWorld": "Identify a plant, animal, track, or natural feature",
+          "Science": "Apply scientific knowledge",
+          "Occult": "Recognize an occult sign, ritual, or tradition",
+          "CthulhuMythos": "Understand the true Mythos nature of a phenomenon",
+          "OwnLanguage": "Read, write, or translate in the investigator’s own language",
+          "OtherLanguage": "Read, speak, or translate another language",
+          "Survival": "Survive in a dangerous natural environment",
+          "ArtCraft": "Create, perform, or repair through a craft",
+          "Force": "Lift, hold, break, force, or move something",
+          "Endure": "Endure cold, poison, disease, or exhaustion",
+          "React": "React quickly or coordinate movement",
+          "Idea": "Make an intuitive or logical leap",
+          "GeneralKnowledge": "Recall general knowledge or life experience",
+          "Appearance": "Make the desired impression through appearance",
+          "Willpower": "Resist psychic or magical influence",
+          "Luck": "See whether outside circumstances happen to be favorable"
+        },
+        "LockParameters": "Roll immediately with the specified parameters",
+        "Modifiers": {
+          "TwoPenalty": "2 penalty dice",
+          "OnePenalty": "1 penalty die",
+          "None": "No extra dice",
+          "OneBonus": "1 bonus die",
+          "TwoBonus": "2 bonus dice"
+        },
+        "ParametersLocked": "roll immediately"
+      }
+    },
+    "Settings": {
+      "PauseOverlayStyle": {
+        "Hint": "Replaces the wide system pause strip with a compact centered panel matching the HUD and displays “The moment stands still.” Foundry pause behavior is unchanged.",
+        "Name": "Style the pause overlay"
+      },
+      "Preferences": {
+        "Hint": "Stores the HUD state for the current client.",
+        "Name": "Investigator HUD state"
+      },
+      "RollDialogStyle": {
+        "Hint": "Applies the HUD theme to the native dialog for check type, difficulty, and bonus or penalty dice. Disabling restores the system appearance without changing roll behavior.",
+        "Name": "Style CoC7 roll dialogs"
+      }
+    },
+    "Vitals": {
+      "HPShort": "HP",
+      "Label": "Investigator vital statistics",
+      "LuckDecrease": "Decrease Luck by 1 (Shift: by 5)",
+      "LuckIncrease": "Increase Luck by 1 (Shift: by 5)",
+      "LuckShort": "LCK",
+      "MPShort": "MP",
+      "POWShort": "POW",
+      "SANShort": "SAN",
+      "SanityDecrease": "Decrease Sanity by 1 (Shift: by 5)",
+      "SanityIncrease": "Increase Sanity by 1 (Shift: by 5)"
+    }
+  }
+}
