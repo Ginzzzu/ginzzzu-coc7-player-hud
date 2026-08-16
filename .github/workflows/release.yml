@@ -6,7 +6,6 @@ on:
       version:
         description: Version from module.json, for example 0.33.5
         required: true
-        default: "0.33.5"
         type: string
 
       publish_to_foundry:
