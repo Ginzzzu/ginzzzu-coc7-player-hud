@@ -1,13 +1,16 @@
 {
   "id": "ginzzzu-coc7-player-hud",
   "title": "Ginzzzu's CoC7 Player HUD",
-  "description": "A compact player HUD for Call of Cthulhu 7th Edition with a distraction-free Foundry VTT interface.",
+  "description": "A compact player HUD for Call of Cthulhu 7th Edition with a distraction-free Foundry VTT interface.<br><a href=\"https://discord.gg/bHA7JhVUCX\">Discord</a> · <a href=\"https://boosty.to/ginzzzu\">Boosty</a>",
   "version": "0.33.5",
   "authors": [
     {
       "name": "Ginzzzu"
     }
   ],
+  "url": "https://github.com/Ginzzzu/ginzzzu-coc7-player-hud",
+  "manifest": "https://github.com/Ginzzzu/ginzzzu-coc7-player-hud/releases/latest/download/module.json",
+  "download": "https://github.com/Ginzzzu/ginzzzu-coc7-player-hud/releases/download/v0.33.5/ginzzzu-coc7-player-hud.zip",
   "compatibility": {
     "minimum": "14",
     "verified": "14.365"

@@ -1,8 +1,12 @@
 # Ginzzzu's CoC7 Player HUD
 
+![GitHub Release](https://img.shields.io/github/v/release/Ginzzzu/ginzzzu-coc7-player-hud?label=Version)
+![Total Downloads](https://img.shields.io/github/downloads/Ginzzzu/ginzzzu-coc7-player-hud/ginzzzu-coc7-player-hud.zip?label=Total%20Downloads)
+![Latest Release Downloads](https://img.shields.io/github/downloads/Ginzzzu/ginzzzu-coc7-player-hud/latest/ginzzzu-coc7-player-hud.zip?label=Latest%20Release)
+
 A standalone player HUD for Call of Cthulhu 7th Edition on Foundry VTT v14.
 
-## Version 0.32.7
+## Version 0.33.5
 
 The Action Request shelf supports native CoC7 combined checks. The current adapter uses the installed CoC7 8.15 runtime bridge, preserves native combined-result logic, and repairs the system's missing Combined ChatMessage roll attachment for Dice So Nice. The already-resolved CoC7 percentile dice are attached as one evaluated visualization `Roll`, so Dice So Nice can use its normal chat hide/animate/reveal lifecycle without a second random roll.
 
