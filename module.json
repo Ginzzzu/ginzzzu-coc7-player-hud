@@ -2,7 +2,7 @@
   "id": "ginzzzu-coc7-player-hud",
   "title": "Ginzzzu's CoC7 Player HUD",
   "description": "A compact player HUD for Call of Cthulhu 7th Edition with a distraction-free Foundry VTT interface.<br><a href=\"https://discord.gg/bHA7JhVUCX\">Discord</a> · <a href=\"https://boosty.to/ginzzzu\">Boosty</a>",
-  "version": "0.33.5",
+  "version": "0.7",
   "authors": [
     {
       "name": "Ginzzzu"
@@ -42,6 +42,7 @@
     "styles/hud-reference.css",
     "styles/coc7-roll-dialog.css",
     "styles/coc7-pause-overlay.css",
+    "styles/coc7-chat-messages.css",
     "styles/hud-responsive.css",
     "styles/creation/wizard-shell.css",
     "styles/creation/wizard-setup.css",

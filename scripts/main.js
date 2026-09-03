@@ -20,6 +20,7 @@ import { AmmoService } from "./services/ammo-service.js";
 import { PreferencesService } from "./services/preferences-service.js";
 import { PauseOverlayStyleService } from "./services/pause-overlay-style-service.js";
 import { RollDialogStyleService } from "./services/roll-dialog-style-service.js";
+import { ChatStyleService } from "./services/chat-style-service.js";
 import { registerSmallTimeCompatibilityHooks } from "./services/smalltime-compatibility-service.js";
 import { UiVisibilityService } from "./services/ui-visibility-service.js";
 import { Coc7InteractionProvider, connectCoc7InteractionProvider, registerCoc7InteractionProvider } from "./interactions/coc7-interaction-provider.js";
@@ -82,6 +83,7 @@ Hooks.once("init", async () => {
     PreferencesService.register();
     RollDialogStyleService.register();
     PauseOverlayStyleService.register();
+    ChatStyleService.register();
     registerKeybindings({getApplication});
   } catch (error) {
     console.error(`${MODULE_ID} | Initialization failed`, error);
@@ -92,6 +94,7 @@ Hooks.once("ready", async () => {
   try {
     RollDialogStyleService.apply();
     PauseOverlayStyleService.apply();
+    ChatStyleService.apply();
     connectCoc7InteractionProvider();
     const module = game.modules.get(MODULE_ID);
     if (module) {

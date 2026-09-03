@@ -35,11 +35,11 @@ const HOVER_OPEN_DELAY = 100;
 const HOVER_CLOSE_DELAY = 220;
 const SKILL_SEARCH_DELAY = 120;
 const COMBINED_MODIFIER_OPTIONS = Object.freeze([
-  {value: 2, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.TwoBonus"},
-  {value: 1, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.OneBonus"},
-  {value: 0, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.None"},
-  {value: -1, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.OnePenalty"},
-  {value: -2, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.TwoPenalty"}
+  { value: 2, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.TwoBonus" },
+  { value: 1, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.OneBonus" },
+  { value: 0, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.None" },
+  { value: -1, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.OnePenalty" },
+  { value: -2, label: "GINZZZU_C7PH.Sections.Requests.Modifiers.TwoPenalty" }
 ]);
 
 function combinedModifierOptions(poolModifier = 0) {
@@ -93,6 +93,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
       adjustLuck: this._adjustLuck,
       adjustSanity: this._adjustSanity,
       clearRecentSkills: this._clearRecentSkills,
+      expandRoll: this._expandChatRoll,
       joinCombat: this._joinCombat,
       leaveCombat: this._leaveCombat,
       openActorSheet: this._openActorSheet,
@@ -374,7 +375,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     await super._onRender(context, options);
     const preferences = PreferencesService.get();
     if (preferences.autoHideInterface) {
-      UiVisibilityService.activate({hideCameras: preferences.hideCameras});
+      UiVisibilityService.activate({ hideCameras: preferences.hideCameras });
       requestSmallTimeCompatibility();
     } else {
       UiVisibilityService.deactivate();
@@ -387,6 +388,8 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     this._activateRequestSearch(root);
     this._activateRequestCombinedModifiers(root);
     this._activateVolumeControls(root);
+    await this._renderNativeChatMessages(root);
+    this._activateChatCardListeners(root);
     this._scrollChatToLatest(root);
     if (this._activeSection === SECTIONS.REQUESTS) {
       void Coc7InteractionProvider.markIncomingOpened().catch((error) => {
@@ -431,6 +434,18 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     }
   }
 
+  static _expandChatRoll(event, target) {
+    const chatLog = ui.chat;
+    const handler = chatLog?.options?.actions?.expandRoll
+      || foundry.applications?.sidebar?.tabs?.ChatLog?.DEFAULT_OPTIONS?.actions?.expandRoll;
+
+    if (typeof handler === "function") {
+      return handler.call(chatLog, event, target);
+    }
+
+    console.warn(`${MODULE_ID} | Native ChatLog action "expandRoll" is not available`);
+  }
+
   static async _openChatSidebar() {
     try {
       this._activeSection = null;
@@ -444,7 +459,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
       if (typeof ui.chat?.activate === "function") {
         ui.chat.activate();
       } else if (typeof ui.sidebar?.changeTab === "function") {
-        ui.sidebar.changeTab("chat", "primary", {force: true});
+        ui.sidebar.changeTab("chat", "primary", { force: true });
       }
 
       await this._renderMain();
@@ -476,7 +491,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     const direction = Number(target.dataset.direction);
 
     try {
-      await LuckService.adjust(this.actor, direction, {largeStep: event.shiftKey});
+      await LuckService.adjust(this.actor, direction, { largeStep: event.shiftKey });
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.ActorUpdate", error);
     }
@@ -486,7 +501,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     const direction = Number(target.dataset.direction);
 
     try {
-      await SanityService.adjust(this.actor, direction, {largeStep: event.shiftKey});
+      await SanityService.adjust(this.actor, direction, { largeStep: event.shiftKey });
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.SanityActorUpdate", error);
     }
@@ -497,7 +512,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
 
     try {
       await this._closeShelfForRoll();
-      await Coc7RollService.attribute(this.actor, key, {fastForward: event.shiftKey});
+      await Coc7RollService.attribute(this.actor, key, { fastForward: event.shiftKey });
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.Roll", error);
     }
@@ -508,7 +523,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
 
     try {
       await this._closeShelfForRoll();
-      await Coc7RollService.characteristic(this.actor, key, {fastForward: event.shiftKey});
+      await Coc7RollService.characteristic(this.actor, key, { fastForward: event.shiftKey });
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.Roll", error);
     }
@@ -585,7 +600,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     try {
       const checks = [...this._requestCombinedSelections.values()];
       await this._closeShelfForRoll();
-      await ActionRequestService.executeCombined(this.actor, checks, {operator: this._requestCombinedOperator});
+      await ActionRequestService.executeCombined(this.actor, checks, { operator: this._requestCombinedOperator });
       this._requestCombinedSelections.clear();
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.Roll", error);
@@ -623,7 +638,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
 
     try {
       await this._closeShelfForRoll();
-      await Coc7InteractionProvider.executeIncoming(requestId, {skillId, combinedModifiers});
+      await Coc7InteractionProvider.executeIncoming(requestId, { skillId, combinedModifiers });
       await this._renderMain();
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.Roll", error);
@@ -653,7 +668,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
 
     try {
       await this._closeShelfForRoll();
-      await Coc7RollService.skill(actor, itemId, {fastForward: event.shiftKey});
+      await Coc7RollService.skill(actor, itemId, { fastForward: event.shiftKey });
       if (skill?.uuid) await PreferencesService.rememberRecentSkill(skill.uuid);
       await this._renderMain();
     } catch (error) {
@@ -671,14 +686,14 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
       if (!AmmoService.canAttack(weapon)) {
         ui.notifications.warn(game.i18n.format(
           "GINZZZU_C7PH.Sections.Combat.NoAmmoWarning",
-          {weapon: weapon.name}
+          { weapon: weapon.name }
         ));
         return;
       }
 
       AmmoService.trackRangedWeaponUse(weapon);
       await this._closeShelfForRoll();
-      await Coc7RollService.weapon(actor, itemId, {fastForward: event.shiftKey});
+      await Coc7RollService.weapon(actor, itemId, { fastForward: event.shiftKey });
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.Roll", error);
     }
@@ -777,7 +792,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     try {
-      await this._setActiveSection(activeSection, {persist: !this._supportsHover});
+      await this._setActiveSection(activeSection, { persist: !this._supportsHover });
     } catch (error) {
       this._notifyError("GINZZZU_C7PH.Errors.Preference", error);
     }
@@ -857,7 +872,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
   _activateCombatControls(root) {
     for (const input of root?.querySelectorAll("[data-weapon-ammo][data-weapon-id]") ?? []) {
       input.addEventListener("click", (event) => event.stopPropagation());
-      input.addEventListener("wheel", (event) => event.currentTarget.blur(), {passive: true});
+      input.addEventListener("wheel", (event) => event.currentTarget.blur(), { passive: true });
       input.addEventListener("keydown", (event) => {
         if (event.key === "Enter") event.currentTarget.blur();
       });
@@ -960,6 +975,91 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     }
   }
 
+  async _renderNativeChatMessages(root) {
+    if (this._activeSection !== SECTIONS.CHAT) return;
+    const chatList = root?.querySelector(".c7ph-chat-list");
+    if (!chatList) return;
+
+    const slots = Array.from(chatList.querySelectorAll(".c7ph-chat-message-slot[data-chat-message-slot]"));
+    if (slots.length === 0) return;
+
+    for (const slot of slots) {
+      const messageId = slot.dataset.chatMessageSlot;
+      const message = game.messages?.get(messageId);
+
+      if (!message || !message.visible) {
+        slot.remove();
+        continue;
+      }
+
+      try {
+        const messageElement = await message.renderHTML({
+          canClose: false,
+          canDelete: false
+        });
+
+        if (messageElement instanceof HTMLElement) {
+          messageElement.classList.add("c7ph-chat-message");
+          if (!messageElement.dataset.messageId) {
+            messageElement.dataset.messageId = messageId;
+          }
+          slot.replaceWith(messageElement);
+        } else {
+          console.warn(`${MODULE_ID} | Rendered message is not an HTMLElement for message ${messageId}`, messageElement);
+          slot.remove();
+        }
+      } catch (error) {
+        console.warn(`${MODULE_ID} | Failed to render native chat message ${messageId}:`, error);
+        slot.remove();
+      }
+    }
+  }
+
+  _activateChatCardListeners(root) {
+    if (this._activeSection !== SECTIONS.CHAT) return;
+    const chatList = root?.querySelector(".c7ph-chat-list");
+    if (!chatList) return;
+
+    chatList.addEventListener("click", async (event) => {
+      const target = event.target;
+
+      const deleteBtn = target.closest(".message-delete, [data-action='deleteMessage']");
+      if (deleteBtn) {
+        event.preventDefault();
+        event.stopPropagation();
+        const messageArticle = deleteBtn.closest(".c7ph-chat-message[data-message-id]");
+        const messageId = messageArticle?.dataset.messageId;
+        const message = game.messages?.get(messageId);
+        if (message?.isAuthor || game.user?.isGM) {
+          await message.delete();
+        }
+        return;
+      }
+
+      const contentLink = target.closest(".content-link");
+      if (contentLink) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (typeof TextEditor?._onClickContentLink === "function") {
+          TextEditor._onClickContentLink.call(TextEditor, event);
+        } else if (contentLink.dataset.uuid) {
+          const doc = await fromUuid(contentLink.dataset.uuid);
+          doc?.sheet?.render(true);
+        }
+        return;
+      }
+
+      const inlineRoll = target.closest(".inline-roll");
+      if (inlineRoll) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (typeof TextEditor?._onClickInlineRoll === "function") {
+          TextEditor._onClickInlineRoll.call(TextEditor, event);
+        }
+      }
+    });
+  }
+
   _scrollChatToLatest(root) {
     if (this._activeSection !== SECTIONS.CHAT) return;
 
@@ -1003,7 +1103,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
     if (this._activeSection) this._suppressShelfAnimation = true;
     this._hoverRenderInProgress = true;
     try {
-      await this.render({parts: ["main"]});
+      await this.render({ parts: ["main"] });
       this._restoreShelfUiState(shelfState);
     } finally {
       globalThis.queueMicrotask(() => {
@@ -1018,28 +1118,28 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
 
     const scroll = SHELF_SCROLL_SELECTORS.map((selector) => {
       const element = root.querySelector(selector);
-      return element ? {selector, top: element.scrollTop, left: element.scrollLeft} : null;
+      return element ? { selector, top: element.scrollTop, left: element.scrollLeft } : null;
     }).filter(Boolean);
 
     const active = root.ownerDocument?.activeElement;
     const focus = active && root.contains(active)
       ? {
-          action: active.dataset?.action ?? "",
-          skillView: active.dataset?.skillView ?? "",
-          skillUuid: active.dataset?.skillUuid ?? "",
-          volumeKey: active.dataset?.volumeKey ?? "",
-          requestCategory: active.dataset?.requestCategory ?? "",
-          requestActionId: active.dataset?.requestActionId ?? "",
-          requestSkillId: active.dataset?.requestSkillId ?? "",
-          characteristic: active.dataset?.characteristic ?? "",
-          combinedOperator: active.dataset?.combinedOperator ?? "",
-          requestMode: active.dataset?.requestMode ?? "",
-          isSkillSearch: active.matches?.("[data-skill-search]") ?? false,
-          isRequestSearch: active.matches?.("[data-request-search]") ?? false
-        }
+        action: active.dataset?.action ?? "",
+        skillView: active.dataset?.skillView ?? "",
+        skillUuid: active.dataset?.skillUuid ?? "",
+        volumeKey: active.dataset?.volumeKey ?? "",
+        requestCategory: active.dataset?.requestCategory ?? "",
+        requestActionId: active.dataset?.requestActionId ?? "",
+        requestSkillId: active.dataset?.requestSkillId ?? "",
+        characteristic: active.dataset?.characteristic ?? "",
+        combinedOperator: active.dataset?.combinedOperator ?? "",
+        requestMode: active.dataset?.requestMode ?? "",
+        isSkillSearch: active.matches?.("[data-skill-search]") ?? false,
+        isRequestSearch: active.matches?.("[data-request-search]") ?? false
+      }
       : null;
 
-    return {section: this._activeSection, scroll, focus};
+    return { section: this._activeSection, scroll, focus };
   }
 
   _restoreShelfUiState(state) {
@@ -1074,7 +1174,7 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
       } else if (focus.combinedOperator) target = root.querySelector(`[data-combined-operator="${CSS.escape(focus.combinedOperator)}"]`);
       else if (focus.requestMode) target = root.querySelector(`[data-request-mode="${CSS.escape(focus.requestMode)}"]`);
       else if (focus.action) target = root.querySelector(`[data-action="${CSS.escape(focus.action)}"]`);
-      target?.focus?.({preventScroll: true});
+      target?.focus?.({ preventScroll: true });
     });
   }
 
@@ -1083,15 +1183,15 @@ export class PlayerHud extends HandlebarsApplicationMixin(ApplicationV2) {
 
     this._pinnedSection = null;
     this._stopHoverMode();
-    await this._setActiveSection(null, {persist: !this._supportsHover});
+    await this._setActiveSection(null, { persist: !this._supportsHover });
   }
 
-  async _setActiveSection(activeSection, {persist = false} = {}) {
+  async _setActiveSection(activeSection, { persist = false } = {}) {
     if (this._activeSection === activeSection) return;
 
     this._pinnedSection = null;
     this._activeSection = activeSection;
-    if (persist) await PreferencesService.update({activeSection});
+    if (persist) await PreferencesService.update({ activeSection });
 
     await this._renderMain();
   }

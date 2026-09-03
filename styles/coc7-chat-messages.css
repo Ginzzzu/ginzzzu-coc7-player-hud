@@ -1,0 +1,842 @@
+body.ginzzzu-coc7-player-hud-style-chat-messages {
+  --c7ph-chat-accent: #a9925d;
+  --c7ph-chat-accent-bright: #c1aa72;
+  --c7ph-chat-accent-soft: rgba(169, 146, 93, 0.24);
+  --c7ph-chat-border: rgba(159, 143, 98, 0.44);
+  --c7ph-chat-border-dim: rgba(125, 116, 83, 0.25);
+  --c7ph-chat-eldritch: #738c78;
+  --c7ph-chat-eldritch-soft: rgba(83, 111, 91, 0.2);
+  --c7ph-chat-panel: rgba(13, 19, 18, 0.98);
+  --c7ph-chat-panel-deep: rgba(7, 12, 12, 0.99);
+  --c7ph-chat-surface: rgba(31, 39, 35, 0.92);
+  --c7ph-chat-surface-hover: rgba(46, 58, 50, 0.98);
+  --c7ph-chat-text: #ded7c1;
+  --c7ph-chat-text-muted: rgba(211, 204, 183, 0.7);
+  --c7ph-chat-success-crit: #c1aa72;
+  --c7ph-chat-success-extreme: #4ea66d;
+  --c7ph-chat-success-hard: #5f8d75;
+  --c7ph-chat-success-regular: #a9925d;
+  --c7ph-chat-failure: #a55f58;
+  --c7ph-chat-fumble: #be3b34;
+}
+
+/* ==========================================================================
+   Chat Log Container & Scrollbars
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-log,
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-popout .chat-log,
+body.ginzzzu-coc7-player-hud-style-chat-messages ol#chat-log {
+  scrollbar-color: var(--c7ph-chat-accent) rgba(8, 14, 12, 0.75);
+  scrollbar-width: thin;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-log::-webkit-scrollbar,
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-popout .chat-log::-webkit-scrollbar,
+body.ginzzzu-coc7-player-hud-style-chat-messages ol#chat-log::-webkit-scrollbar {
+  width: 7px;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-log::-webkit-scrollbar-track,
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-popout .chat-log::-webkit-scrollbar-track,
+body.ginzzzu-coc7-player-hud-style-chat-messages ol#chat-log::-webkit-scrollbar-track {
+  background: rgba(8, 14, 12, 0.75);
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-log::-webkit-scrollbar-thumb,
+body.ginzzzu-coc7-player-hud-style-chat-messages #chat-popout .chat-log::-webkit-scrollbar-thumb,
+body.ginzzzu-coc7-player-hud-style-chat-messages ol#chat-log::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(var(--c7ph-chat-accent-bright), var(--c7ph-chat-accent));
+}
+
+/* ==========================================================================
+   Chat Message Cards - Full Background & Framing
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages :is(#sidebar #chat-log, #chat-log, #chat, #chat-popout, ol#chat-log) :is(.chat-message, .message, li.chat-message, article.chat-message),
+body.ginzzzu-coc7-player-hud-style-chat-messages :is(.chat-message, .message) {
+  position: relative !important;
+  isolation: isolate !important;
+  margin: 8px 4px 10px !important;
+  padding: 10px 12px 12px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 10px !important;
+  background:
+    radial-gradient(circle at 18% -25%, rgba(104, 132, 108, 0.16), transparent 52%),
+    radial-gradient(circle at 88% 125%, rgba(151, 127, 74, 0.12), transparent 42%),
+    linear-gradient(155deg, rgba(26, 34, 30, 0.98), var(--c7ph-chat-panel) 48%, var(--c7ph-chat-panel-deep)) !important;
+  background-image:
+    radial-gradient(circle at 18% -25%, rgba(104, 132, 108, 0.16), transparent 52%),
+    radial-gradient(circle at 88% 125%, rgba(151, 127, 74, 0.12), transparent 42%),
+    linear-gradient(155deg, rgba(26, 34, 30, 0.98), var(--c7ph-chat-panel) 48%, var(--c7ph-chat-panel-deep)) !important;
+  background-color: #0d1312 !important;
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(5, 8, 8, 0.9),
+    inset 0 1px 0 rgba(222, 208, 166, 0.08),
+    inset 0 -14px 28px rgba(0, 0, 0, 0.16) !important;
+  transition: border-color 140ms ease, box-shadow 140ms ease !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages :is(#sidebar #chat-log, #chat-log, #chat, #chat-popout, ol#chat-log) :is(.chat-message, .message, li.chat-message, article.chat-message):hover,
+body.ginzzzu-coc7-player-hud-style-chat-messages :is(.chat-message, .message):hover {
+  border-color: var(--c7ph-chat-accent-bright) !important;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(5, 8, 8, 0.95),
+    inset 0 1px 0 rgba(222, 208, 166, 0.12),
+    inset 0 -14px 28px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Inner decorative framing */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+  opacity: 0.28 !important;
+  background:
+    repeating-linear-gradient(118deg, transparent 0 7px, rgba(226, 216, 181, 0.015) 7px 8px),
+    repeating-linear-gradient(32deg, transparent 0 19px, rgba(0, 0, 0, 0.035) 19px 20px) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* ==========================================================================
+   Message Header & Metadata - Larger, High-Contrast Typography
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .message-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 7px !important;
+  border-bottom: 1px solid rgba(169, 146, 93, 0.25) !important;
+  background: transparent !important;
+  color: var(--c7ph-chat-text-muted) !important;
+}
+
+/* Speaker Name (Голди Роуз) */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.message-sender, .message-header strong, .message-header h4, .sender) {
+  overflow: hidden !important;
+  color: var(--c7ph-chat-accent-bright) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1.25 !important;
+  text-overflow: ellipsis !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 8px rgba(193, 170, 114, 0.25) !important;
+  white-space: nowrap !important;
+}
+
+/* Avatar */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .message-header .avatar {
+  flex: 0 0 26px !important;
+  width: 26px !important;
+  height: 26px !important;
+  margin-right: 6px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 5px !important;
+  object-fit: cover !important;
+}
+
+/* Timestamp (только что) */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.message-metadata, .message-header time, .message-timestamp, time) {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 0 0 auto !important;
+  color: var(--c7ph-chat-text-muted) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* Delete / Close icon */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.message-delete, a.message-delete, button.message-delete) {
+  color: var(--c7ph-chat-text-muted) !important;
+  font-size: 14px !important;
+  opacity: 0.75 !important;
+  transition: opacity 120ms ease, color 120ms ease, transform 120ms ease !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.message-delete, a.message-delete, button.message-delete):hover {
+  opacity: 1 !important;
+  color: var(--c7ph-chat-failure) !important;
+  transform: scale(1.15) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .whisper-to {
+  display: block !important;
+  margin-bottom: 6px !important;
+  color: var(--c7ph-chat-eldritch) !important;
+  font-size: 11px !important;
+  font-style: italic !important;
+}
+
+/* ==========================================================================
+   Message Variations: Whisper, Blind, Emote
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message.whisper {
+  border-color: rgba(99, 133, 116, 0.55) !important;
+  background:
+    radial-gradient(circle at 18% -25%, rgba(68, 105, 87, 0.25), transparent 55%),
+    linear-gradient(155deg, rgba(22, 33, 29, 0.98), rgba(12, 19, 17, 0.98) 50%, rgba(6, 11, 10, 0.99)) !important;
+  background-image:
+    radial-gradient(circle at 18% -25%, rgba(68, 105, 87, 0.25), transparent 55%),
+    linear-gradient(155deg, rgba(22, 33, 29, 0.98), rgba(12, 19, 17, 0.98) 50%, rgba(6, 11, 10, 0.99)) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message.blind {
+  border-color: rgba(169, 110, 60, 0.55) !important;
+  background:
+    radial-gradient(circle at 18% -25%, rgba(135, 82, 41, 0.22), transparent 55%),
+    linear-gradient(155deg, rgba(32, 25, 20, 0.98), rgba(16, 13, 11, 0.98) 50%, rgba(9, 7, 6, 0.99)) !important;
+  background-image:
+    radial-gradient(circle at 18% -25%, rgba(135, 82, 41, 0.22), transparent 55%),
+    linear-gradient(155deg, rgba(32, 25, 20, 0.98), rgba(16, 13, 11, 0.98) 50%, rgba(9, 7, 6, 0.99)) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message.emote {
+  font-style: italic !important;
+}
+
+/* ==========================================================================
+   Flavor Text & Description ("Проверка Мощь (55%) - трудная сложность")
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .flavor-text,
+  .message-flavor,
+  .title,
+  .coc7-title,
+  .check-title,
+  .card-title
+) {
+  display: block !important;
+  margin: 2px 0 10px !important;
+  padding: 6px 10px !important;
+  border-left: 3px solid var(--c7ph-chat-accent) !important;
+  border-radius: 0 6px 6px 0 !important;
+  background: rgba(169, 146, 93, 0.12) !important;
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .message-content {
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .message-content p {
+  margin: 0 0 6px !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .message-content p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   Outcome Banners ("Чрезвычайный успех", "Провал", etc.)
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .coc7-result-banner,
+  .coc7-check-result,
+  .coc7-success-level,
+  .coc7-result,
+  .coc7-outcome,
+  .chat-card .result,
+  .result
+) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 44px !important;
+  margin: 6px 0 !important;
+  padding: 8px 14px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 8px !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 3px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 1. Critical Success */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.critical, .critical-success, [data-level="critical"]) {
+  border-color: var(--c7ph-chat-success-crit) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(193, 170, 114, 0.35), transparent 75%),
+    linear-gradient(145deg, rgba(50, 42, 22, 0.97), rgba(24, 20, 10, 0.99)) !important;
+  color: #ffe69c !important;
+  text-shadow: 0 0 12px rgba(255, 230, 156, 0.6) !important;
+  box-shadow:
+    0 0 16px rgba(193, 170, 114, 0.45),
+    inset 0 0 14px rgba(193, 170, 114, 0.2) !important;
+}
+
+/* 2. Extreme Success */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.extreme, .extreme-success, [data-level="extreme"]) {
+  border-color: var(--c7ph-chat-success-extreme) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(78, 166, 109, 0.32), transparent 75%),
+    linear-gradient(145deg, rgba(22, 48, 33, 0.97), rgba(10, 26, 17, 0.99)) !important;
+  color: #79e39e !important;
+  text-shadow: 0 0 12px rgba(121, 227, 158, 0.5) !important;
+  box-shadow:
+    0 0 14px rgba(78, 166, 109, 0.4),
+    inset 0 0 12px rgba(78, 166, 109, 0.15) !important;
+}
+
+/* 3. Hard Success */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.hard, .hard-success, [data-level="hard"]) {
+  border-color: var(--c7ph-chat-success-hard) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(95, 141, 117, 0.28), transparent 75%),
+    linear-gradient(145deg, rgba(25, 42, 35, 0.97), rgba(12, 23, 19, 0.99)) !important;
+  color: #92d1b0 !important;
+  text-shadow: 0 0 10px rgba(146, 209, 176, 0.45) !important;
+  box-shadow:
+    0 0 12px rgba(95, 141, 117, 0.3),
+    inset 0 0 10px rgba(95, 141, 117, 0.1) !important;
+}
+
+/* 4. Regular Success */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.regular, .regular-success, .success, [data-level="regular"], [data-level="success"]) {
+  border-color: var(--c7ph-chat-success-regular) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(169, 146, 93, 0.25), transparent 75%),
+    linear-gradient(145deg, rgba(38, 35, 24, 0.97), rgba(18, 17, 12, 0.99)) !important;
+  color: var(--c7ph-chat-accent-bright) !important;
+  text-shadow: 0 0 10px rgba(193, 170, 114, 0.35) !important;
+  box-shadow:
+    0 0 10px rgba(169, 146, 93, 0.25),
+    inset 0 0 8px rgba(169, 146, 93, 0.08) !important;
+}
+
+/* 5. Failure */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.failure, [data-level="failure"]) {
+  border-color: var(--c7ph-chat-failure) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(165, 95, 88, 0.25), transparent 75%),
+    linear-gradient(145deg, rgba(42, 24, 24, 0.97), rgba(20, 11, 11, 0.99)) !important;
+  color: #e5938d !important;
+  text-shadow: 0 0 10px rgba(229, 147, 141, 0.35) !important;
+  box-shadow:
+    0 0 10px rgba(165, 95, 88, 0.25),
+    inset 0 0 8px rgba(165, 95, 88, 0.08) !important;
+}
+
+/* 6. Fumble */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.fumble, [data-level="fumble"]) {
+  border-color: var(--c7ph-chat-fumble) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(190, 59, 52, 0.4), transparent 75%),
+    linear-gradient(145deg, rgba(54, 15, 15, 0.98), rgba(26, 7, 7, 0.99)) !important;
+  color: #ff7873 !important;
+  text-shadow: 0 0 14px rgba(255, 120, 115, 0.6) !important;
+  box-shadow:
+    0 0 18px rgba(190, 59, 52, 0.5),
+    inset 0 0 16px rgba(190, 59, 52, 0.25) !important;
+}
+
+/* ==========================================================================
+   Roll Total Box ("70", "37", "12", etc.)
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .dice-total,
+  .coc7-dice-total,
+  .roll-total,
+  .total,
+  .coc7-total
+) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 52px !important;
+  margin: 6px 0 !important;
+  padding: 8px 18px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 8px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(104, 132, 108, 0.25), transparent 70%),
+    linear-gradient(145deg, rgba(34, 43, 38, 0.98), rgba(16, 23, 20, 0.99)) !important;
+  color: #ffe08a !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.1 !important;
+  text-shadow:
+    0 0 16px rgba(169, 146, 93, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.9) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(222, 208, 166, 0.1),
+    inset 0 0 16px rgba(0, 0, 0, 0.4),
+    0 3px 8px rgba(0, 0, 0, 0.35) !important;
+  cursor: pointer !important;
+  transition: all 120ms ease !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .dice-total,
+  .coc7-dice-total,
+  .roll-total,
+  .total,
+  .coc7-total
+):hover {
+  border-color: var(--c7ph-chat-accent-bright) !important;
+  box-shadow:
+    0 0 14px rgba(169, 146, 93, 0.45),
+    inset 0 1px 0 rgba(222, 208, 166, 0.15),
+    inset 0 0 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.dice-total, .coc7-dice-total, .roll-total).critical {
+  border-color: var(--c7ph-chat-success-crit) !important;
+  color: #ffdf85 !important;
+  text-shadow: 0 0 18px rgba(255, 223, 133, 0.75) !important;
+  box-shadow: 0 0 14px rgba(193, 170, 114, 0.4), inset 0 0 16px rgba(193, 170, 114, 0.2) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(.dice-total, .coc7-dice-total, .roll-total).fumble {
+  border-color: var(--c7ph-chat-fumble) !important;
+  color: #ff7069 !important;
+  text-shadow: 0 0 18px rgba(190, 59, 52, 0.75) !important;
+  box-shadow: 0 0 14px rgba(190, 59, 52, 0.45), inset 0 0 16px rgba(190, 59, 52, 0.25) !important;
+}
+
+/* Ensure outcome banners and title never get pseudo-element content */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .flavor-text,
+  .title,
+  .check-title,
+  .card-title,
+  .message-flavor,
+  .result,
+  .coc7-result-banner,
+  .coc7-check-result,
+  .coc7-success-level,
+  .coc7-outcome,
+  .chat-card .result,
+  .dice-total,
+  .coc7-dice-total,
+  .roll-total,
+  .total
+)::before,
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .flavor-text,
+  .title,
+  .check-title,
+  .card-title,
+  .message-flavor,
+  .result,
+  .coc7-result-banner,
+  .coc7-check-result,
+  .coc7-success-level,
+  .coc7-outcome,
+  .chat-card .result,
+  .dice-total,
+  .coc7-dice-total,
+  .roll-total,
+  .total
+)::after {
+  content: none !important;
+}
+
+/* ==========================================================================
+   Dice Breakdown & Actions Panel (.dice-tooltip)
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  align-self: stretch !important;
+  position: relative !important;
+  margin: 26px 0 6px !important;
+  padding: 10px 12px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 8px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(104, 132, 108, 0.12), transparent 75%),
+    linear-gradient(155deg, rgba(19, 26, 23, 0.98), rgba(9, 15, 14, 0.99)) !important;
+  box-shadow:
+    inset 0 0 16px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.45) !important;
+  color: var(--c7ph-chat-text) !important;
+}
+
+/* Subtle muted header rendered outside in the gap above the box */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip::before {
+  content: "— Детали броска и действия —" !important;
+  position: absolute !important;
+  top: -21px !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--c7ph-chat-text-muted) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+  text-shadow: none !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Part headers: "1 кость с десятками", "1 кость с единицами" */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip :is(.part-header, .dice-part header, h4) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 3px 0 5px !important;
+  margin-bottom: 4px !important;
+  border-bottom: 1px solid rgba(169, 146, 93, 0.2) !important;
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+/* Part total badge: [30], [7] */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip :is(.part-total, .part-header .total, .badge) {
+  padding: 2px 7px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 4px !important;
+  background: rgba(169, 146, 93, 0.18) !important;
+  color: var(--c7ph-chat-accent-bright) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* Die icon & rolls */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip .dice-rolls {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 4px 0 8px !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip .die {
+  border-radius: 4px !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 6px rgba(169, 146, 93, 0.35)) !important;
+}
+
+/* Outcome requirements text: "Провал, нужен обычный успех" */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip p,
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip :is(.coc7-tooltip-text, .result-text) {
+  margin: 8px 0 6px !important;
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+
+/* Action buttons inside the expanded tray */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip button {
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-height: 36px !important;
+  margin: 5px 0 !important;
+  padding: 6px 12px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 6px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(104, 132, 108, 0.16), transparent 75%),
+    linear-gradient(145deg, rgba(34, 43, 38, 0.95), rgba(16, 23, 20, 0.98)) !important;
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  cursor: pointer !important;
+  box-shadow: inset 0 1px 0 rgba(222, 208, 166, 0.06), 0 2px 5px rgba(0, 0, 0, 0.35) !important;
+  transition: all 120ms ease !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip button:hover {
+  border-color: var(--c7ph-chat-accent-bright) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(115, 140, 120, 0.28), transparent 75%),
+    linear-gradient(145deg, var(--c7ph-chat-surface-hover), rgba(28, 40, 34, 0.99)) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 0 10px rgba(169, 146, 93, 0.35),
+    inset 0 0 0 1px rgba(193, 170, 114, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message .dice-tooltip :is(.card-buttons, .coc7-card-buttons, .coc7-buttons, .buttons) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  width: 100% !important;
+  margin-top: 8px !important;
+}
+
+/* ==========================================================================
+   Action Buttons Outside Tooltip ("Закрыть карточку", "Форсировать бросок", etc.)
+   ========================================================================== */
+
+/* Remove any white container backgrounds */
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  .card-buttons,
+  .coc7-card-buttons,
+  .coc7-buttons,
+  .buttons,
+  .form-group,
+  footer,
+  .card-footer
+) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-top: 6px !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  button,
+  a.button,
+  .card-buttons button,
+  .coc7-card-buttons button
+) {
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  min-height: 38px !important;
+  margin: 4px 0 !important;
+  padding: 8px 14px !important;
+  border: 1px solid var(--c7ph-chat-border) !important;
+  border-radius: 7px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(104, 132, 108, 0.2), transparent 75%),
+    linear-gradient(145deg, rgba(38, 48, 41, 0.95), rgba(18, 25, 22, 0.98)) !important;
+  color: var(--c7ph-chat-text) !important;
+  font-family: var(--font-primary, "Signika", sans-serif) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(222, 208, 166, 0.08),
+    0 3px 8px rgba(0, 0, 0, 0.4) !important;
+  cursor: pointer !important;
+  transition: all 120ms ease !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  button,
+  a.button,
+  .card-buttons button,
+  .coc7-card-buttons button
+):hover {
+  border-color: var(--c7ph-chat-accent-bright) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(115, 140, 120, 0.3), transparent 75%),
+    linear-gradient(145deg, rgba(46, 58, 50, 0.98), rgba(28, 40, 34, 0.99)) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 0 12px rgba(169, 146, 93, 0.35),
+    inset 0 0 0 1px rgba(193, 170, 114, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  button,
+  a.button,
+  .card-buttons button,
+  .coc7-card-buttons button
+):active {
+  transform: translateY(0) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .chat-message :is(
+  button,
+  a.button,
+  .card-buttons button,
+  .coc7-card-buttons button
+):disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Button-specific highlights */
+body.ginzzzu-coc7-player-hud-style-chat-messages button.spend-luck,
+body.ginzzzu-coc7-player-hud-style-chat-messages button[data-action="spend-luck"],
+body.ginzzzu-coc7-player-hud-style-chat-messages .dice-tooltip button[data-action*="luck"],
+body.ginzzzu-coc7-player-hud-style-chat-messages .dice-tooltip button:has([class*="luck"]) {
+  border-color: rgba(193, 170, 114, 0.65) !important;
+  color: #ffe69c !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages button.push-roll,
+body.ginzzzu-coc7-player-hud-style-chat-messages button[data-action="push"],
+body.ginzzzu-coc7-player-hud-style-chat-messages .dice-tooltip button[data-action*="push"],
+body.ginzzzu-coc7-player-hud-style-chat-messages .dice-tooltip button:first-of-type {
+  border-color: rgba(165, 95, 88, 0.65) !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages button.mark-skill,
+body.ginzzzu-coc7-player-hud-style-chat-messages button[data-action="mark"] {
+  border-color: rgba(115, 140, 120, 0.6) !important;
+}
+
+/* ==========================================================================
+   Dice Formulas, Tooltips & Pools
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .dice-roll {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 6px 0 !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .dice-result {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 6px !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages :is(.chat-card, .message-content > *) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-dice-pool,
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-dice-breakdown {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 6px 0 !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-die-discarded,
+body.ginzzzu-coc7-player-hud-style-chat-messages .die.discarded {
+  opacity: 0.38 !important;
+  text-decoration: line-through !important;
+  filter: grayscale(0.8) !important;
+}
+
+/* Inline rolls */
+body.ginzzzu-coc7-player-hud-style-chat-messages a.inline-roll,
+body.ginzzzu-coc7-player-hud-style-chat-messages .inline-roll {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 2px 8px !important;
+  border: 1px solid var(--c7ph-chat-border-dim) !important;
+  border-radius: 5px !important;
+  background: rgba(169, 146, 93, 0.15) !important;
+  color: var(--c7ph-chat-accent-bright) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 120ms ease !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages a.inline-roll:hover,
+body.ginzzzu-coc7-player-hud-style-chat-messages .inline-roll:hover {
+  border-color: var(--c7ph-chat-accent) !important;
+  background: rgba(169, 146, 93, 0.28) !important;
+  color: #ffdf85 !important;
+  box-shadow: 0 0 10px rgba(169, 146, 93, 0.35) !important;
+}
+
+/* ==========================================================================
+   Combat, Weapons, Ammunition & Combined Checks
+   ========================================================================== */
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-combat-card,
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-ranged-card,
+body.ginzzzu-coc7-player-hud-style-chat-messages .c7ph-age-chat-results {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 4px 0 !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-ammo-status,
+body.ginzzzu-coc7-player-hud-style-chat-messages .ammo-counter {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--c7ph-chat-border-dim) !important;
+  background: rgba(4, 9, 8, 0.55) !important;
+  color: var(--c7ph-chat-accent-bright) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-combined-check,
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-combined-list {
+  display: grid !important;
+  gap: 7px !important;
+  margin: 6px 0 !important;
+}
+
+body.ginzzzu-coc7-player-hud-style-chat-messages .coc7-combined-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  border: 1px solid var(--c7ph-chat-border-dim) !important;
+  background: rgba(4, 9, 8, 0.45) !important;
+}

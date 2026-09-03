@@ -6,7 +6,8 @@ export const SYSTEM_ID = "CoC7";
 export const SETTINGS = Object.freeze({
   PREFERENCES: "preferences",
   STYLE_ROLL_DIALOGS: "styleRollDialogs",
-  STYLE_PAUSE_OVERLAY: "stylePauseOverlay"
+  STYLE_PAUSE_OVERLAY: "stylePauseOverlay",
+  STYLE_CHAT_MESSAGES: "styleChatMessages"
 });
 
 
@@ -120,6 +121,7 @@ export const BODY_CLASSES = Object.freeze({
   HIDE_CAMERAS: `${MODULE_ID}-hide-cameras`,
   STYLE_ROLL_DIALOGS: `${MODULE_ID}-style-roll-dialogs`,
   STYLE_PAUSE_OVERLAY: `${MODULE_ID}-style-pause-overlay`,
+  STYLE_CHAT_MESSAGES: `${MODULE_ID}-style-chat-messages`,
   PAUSE_OVERLAY: `${MODULE_ID}-pause-overlay`,
   PAUSE_OVERLAY_ACTIVE: `${MODULE_ID}-pause-overlay-active`
 });

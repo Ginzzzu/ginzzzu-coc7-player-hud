@@ -233,16 +233,7 @@
             {{#if hasChatMessages}}
               <div class="c7ph-chat-list">
                 {{#each chatMessages}}
-                  <article class="c7ph-chat-message chat-message message flexcol" data-message-id="{{id}}">
-                    <header class="c7ph-chat-message-header">
-                      <strong>{{speaker}}</strong>
-                      <time datetime="{{timestampIso}}">{{timeLabel}}</time>
-                    </header>
-                    {{#if hasFlavor}}
-                      <div class="c7ph-chat-message-flavor">{{{flavor}}}</div>
-                    {{/if}}
-                    <div class="c7ph-chat-message-content message-content">{{{content}}}</div>
-                  </article>
+                  <div class="c7ph-chat-message-slot" data-chat-message-slot="{{id}}"></div>
                 {{/each}}
               </div>
             {{else}}

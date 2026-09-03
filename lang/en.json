@@ -773,6 +773,10 @@
       }
     },
     "Settings": {
+      "ChatMessageStyle": {
+        "Hint": "Applies the HUD's dark eldritch styling to chat messages and CoC7 check cards with themed outcome badges and buttons. Disabling restores the default chat appearance.",
+        "Name": "Style CoC7 chat messages"
+      },
       "PauseOverlayStyle": {
         "Hint": "Replaces the wide system pause strip with a compact centered panel matching the HUD and displays “The moment stands still.” Foundry pause behavior is unchanged.",
         "Name": "Style the pause overlay"

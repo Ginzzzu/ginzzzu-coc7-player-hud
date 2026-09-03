@@ -32,7 +32,7 @@
   text-transform: uppercase;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-preview-title > i {
+#ginzzzu-coc7-player-hud-app .c7ph-chat-preview-title>i {
   color: var(--c7ph-eldritch);
 }
 
@@ -59,94 +59,119 @@
   scrollbar-width: thin;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message {
-  min-width: 0;
-  margin: 0;
-  padding: 7px;
-  border: 1px solid rgba(159, 143, 98, 0.34);
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 12% -18%, rgba(118, 104, 65, 0.08), transparent 52%),
-    linear-gradient(145deg, rgba(235, 232, 219, 0.98), rgba(207, 203, 188, 0.98));
-  color: #292922;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -12px 24px rgba(73, 66, 45, 0.045);
+#ginzzzu-coc7-player-hud-app .c7ph-chat-message-slot {
+  display: contents;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-header {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message, .chat-message) {
+  min-width: 0;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--c7ph-border-dim);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 18% -25%, rgba(104, 132, 108, 0.12), transparent 55%),
+    linear-gradient(145deg, rgba(32, 40, 35, 0.94), rgba(16, 22, 20, 0.97));
+  color: var(--c7ph-text);
+  box-shadow:
+    inset 0 1px 0 rgba(224, 211, 170, 0.04),
+    inset 0 -12px 24px rgba(0, 0, 0, 0.12);
+}
+
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-header, .message-header) {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   padding: 0 2px 5px;
-  border-bottom: 1px solid rgba(169, 146, 93, 0.14);
-  color: rgba(52, 52, 44, 0.62);
+  border-bottom: 1px solid rgba(169, 146, 93, 0.2);
+  color: var(--c7ph-text-muted);
   font-size: 10px;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-header > strong {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-header, .message-header)>strong,
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-header, .message-header) .message-sender {
   overflow: hidden;
-  color: #292922;
+  color: var(--c7ph-accent-bright);
   font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-header > time {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-header, .message-header)>time,
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-header, .message-header) .message-timestamp {
   flex: 0 0 auto;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-flavor {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-flavor, .flavor-text) {
   margin: 0 1px 6px;
-  color: #3e3d33;
+  color: var(--c7ph-accent);
   font-size: 12px;
+  font-weight: 500;
   line-height: 1.35;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-flavor > :first-child {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-flavor, .flavor-text)> :first-child {
   margin-top: 0;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-flavor > :last-child {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-flavor, .flavor-text)> :last-child {
   margin-bottom: 0;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-content {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content) {
+  width: 100%;
   min-width: 0;
   overflow-wrap: anywhere;
-  color: #292922;
+  color: var(--c7ph-text);
   font-size: 12px;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-content > :first-child {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content) :is(.chat-card, .dice-roll, .dice-result, .dice-total, .dice-tooltip, .coc7-result-banner, .result) {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content)> :first-child {
   margin-top: 0;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-content > :last-child {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content)> :last-child {
   margin-bottom: 0;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-content :is(
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content) :is(
+  a,
   button,
-  input,
-  select,
-  textarea,
-  .coc7-card-buttons,
-  .card-buttons,
-  .message-delete
+  [data-action],
+  [data-roll],
+  .inline-roll,
+  .content-link,
+  .dice-roll,
+  .dice-total,
+  .dice-result,
+  .dice-tooltip
 ) {
-  display: none !important;
+  pointer-events: auto;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-content :is(a, [data-action], [data-roll], .inline-roll, .content-link) {
-  pointer-events: none;
-  cursor: default;
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content) :is(
+  .dice-roll,
+  .dice-total,
+  .dice-result,
+  .dice-tooltip,
+  a,
+  button,
+  .content-link,
+  .inline-roll
+) {
+  cursor: pointer;
 }
 
-#ginzzzu-coc7-player-hud-app .c7ph-chat-message-content img {
+#ginzzzu-coc7-player-hud-app :is(.c7ph-chat-message-content, .message-content) img {
   max-width: 100%;
 }
 
