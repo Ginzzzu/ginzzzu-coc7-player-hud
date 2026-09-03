@@ -1,3 +1,6 @@
+# 0.7
+- Fixed dashboard chat action buttons in roll card.
+
 # 0.33.5
 
 - Strengthened incomplete occupation-decision cards with an amber border, inset marker, tinted background, and explicit localized “Required choice” badge so they are not visually lost above the numeric allocation table.
