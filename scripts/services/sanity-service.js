@@ -19,7 +19,17 @@ export class SanityService {
     if (value === current) return {changed: false, current, value};
 
     try {
-      await actor.update({"system.attribs.san.value": value});
+      if (typeof actor.setSan === "function") {
+        await actor.setSan(value);
+      } else {
+        const diff = value - current;
+        const updates = {"system.attribs.san.value": value};
+        if (diff < 0) {
+          const dailyLoss = (Number(actor?.system?.attribs?.san?.dailyLoss) || 0) + Math.abs(diff);
+          updates["system.attribs.san.dailyLoss"] = dailyLoss;
+        }
+        await actor.update(updates);
+      }
       return {changed: true, current, value};
     } catch (error) {
       console.error(`${MODULE_ID} | Failed to adjust Sanity`, error);

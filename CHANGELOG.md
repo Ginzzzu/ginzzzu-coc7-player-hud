@@ -1,3 +1,7 @@
+# 0.8
+- Fixed Sanity adjustments from Player HUD to properly update Daily Sanity Loss and trigger system insanity conditions via native `actor.setSan()`.
+- Switched Player HUD chat preview to native `ChatMessage.renderHTML()` and connected native ApplicationV2 `expandRoll` action delegation to Foundry VTT 14 ChatLog.
+
 # 0.7
 - Fixed dashboard chat action buttons in roll card.
 
